@@ -31,6 +31,7 @@
 </LinearLayout>
 
     <Button
+        android:id="@+id/getStarted"
         android:layout_width="@dimen/_280sdp"
         android:layout_height="@dimen/_45sdp"
         app:layout_constraintBottom_toBottomOf="parent"
