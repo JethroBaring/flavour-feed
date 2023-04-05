@@ -2,8 +2,46 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".WelcomePage">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
 
+<LinearLayout
+    android:id="@+id/logoContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintVertical_bias="0.5"
+    android:orientation="vertical"
+    >
+    <ImageView
+        android:layout_width="@dimen/_185sdp"
+        android:layout_height="@dimen/_185sdp"
+        android:src="@drawable/logo"/>
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FLAVOURFEED"
+        android:textAlignment="center"
+        android:fontFamily="@font/sfprodisplayblack"
+        android:textSize="@dimen/_24ssp"
+        />
+</LinearLayout>
+
+    <Button
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="@dimen/_45sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.901"
+        android:text="GET STARTED"
+        app:backgroundTint="@null"
+        android:background="@drawable/gradient_button"
+        android:fontFamily="@font/sfprodisplayregular"
+        android:textSize="@dimen/_12ssp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
