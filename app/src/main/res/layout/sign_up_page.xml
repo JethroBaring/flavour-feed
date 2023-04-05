@@ -51,41 +51,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.57"
-        >
+        app:layout_constraintVertical_bias="0.57">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/firstName"
+            android:id="@+id/signUpUsername"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_280sdp"
             android:layout_height="wrap_content"
-            android:hint="First Name"
+            android:hint="Username"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/_280sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:hint="Last Name"
-            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
-            app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink">
+            app:hintTextColor="@color/pink"
+            app:startIconDrawable="@drawable/usericon"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -98,14 +79,39 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_280sdp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
             android:hint="Email"
+            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+            app:boxCornerRadiusTopStart="@dimen/_8sdp"
+            app:boxStrokeColor="@color/pink"
+            app:hintTextColor="@color/pink"
+            app:startIconDrawable="@drawable/emailicon"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/signUpPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="@dimen/_280sdp"
+            android:layout_height="wrap_content"
+            android:hint="Password"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_15sdp"
             app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink">
+            app:hintTextColor="@color/pink"
+            app:startIconDrawable="@drawable/passwordicon"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -114,18 +120,20 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password"
+            android:id="@+id/signUpRepeatPassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_280sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
-            android:hint="Password"
+            android:hint="Repeat Password"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink">
+            app:hintTextColor="@color/pink"
+            app:startIconDrawable="@drawable/passwordicon"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -133,5 +141,43 @@
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/signUp"
+        android:layout_width="@dimen/_280sdp"
+        android:layout_height="@dimen/_45sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87"
+        android:text="SIGNUP"
+        app:backgroundTint="@null"
+        android:background="@drawable/gradient_button"
+        android:fontFamily="@font/sfprodisplayregular"
+        android:textSize="@dimen/_12ssp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/_15sdp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have account? "
+            android:fontFamily="@font/sfprodisplayregular"
+            />
+        <TextView
+            android:id="@+id/logInPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:fontFamily="@font/sfprodisplayblack"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
