@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "231783574301",
-    "project_id": "flavour-feed-bd5ab",
-    "storage_bucket": "flavour-feed-bd5ab.appspot.com"
+    "project_number": "599465245385",
+    "project_id": "flavour-feed-39786",
+    "storage_bucket": "flavour-feed-39786.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:231783574301:android:45bd1512ab1bcf20e14ff4",
+        "mobilesdk_app_id": "1:599465245385:android:0428aa6e9d9408a1df2b18",
         "android_client_info": {
           "package_name": "com.finalproject.flavourfeed"
         }
       },
       "oauth_client": [
         {
-          "client_id": "231783574301-l79b68onsabkl6m5gphbu65ragq5tr2l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.finalproject.flavourfeed",
-            "certificate_hash": "6ef1dccb001cba1831b47228cfd18f763d0b14a8"
-          }
-        },
-        {
-          "client_id": "231783574301-o68urefnhs7oei1ohirtvnlsoqf922i0.apps.googleusercontent.com",
+          "client_id": "599465245385-omh0j38h3hkfl7ics5jhuod763esoub6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDaxkmaD9_w8OPzW0moxoJCtEbWBTys25Q"
+          "current_key": "AIzaSyCuaprHurX3rjGXAo3mvhVhQSeUyOSct9g"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "231783574301-o68urefnhs7oei1ohirtvnlsoqf922i0.apps.googleusercontent.com",
+              "client_id": "599465245385-omh0j38h3hkfl7ics5jhuod763esoub6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
