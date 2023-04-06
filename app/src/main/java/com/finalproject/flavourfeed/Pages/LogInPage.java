@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Pages;
 
 import android.content.Intent;
 import android.view.View;
@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
+import com.finalproject.flavourfeed.GradientText;
+import com.finalproject.flavourfeed.R;
 
 public class LogInPage extends AppCompatActivity {
 
