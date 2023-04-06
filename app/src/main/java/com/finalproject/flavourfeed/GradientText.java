@@ -6,7 +6,7 @@ import android.text.TextPaint;
 import android.widget.TextView;
 
 public class GradientText {
-    public void setTextViewColor(TextView textView, int... color) {
+    public static void setTextViewColor(TextView textView, int... color) {
         TextPaint paint = textView.getPaint();
         float width = paint.measureText(textView.getText().toString());
 

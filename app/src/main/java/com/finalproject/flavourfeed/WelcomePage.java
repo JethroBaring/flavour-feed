@@ -1,13 +1,18 @@
 package com.finalproject.flavourfeed;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.core.content.ContextCompat;
 
 public class WelcomePage extends AppCompatActivity {
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,8 +20,7 @@ public class WelcomePage extends AppCompatActivity {
         setContentView(R.layout.welcome_page);
         TextView textView = findViewById(R.id.appName);
         Button getStarted = findViewById(R.id.getStarted);
-        GradientText gradientText = new GradientText();
-        gradientText.setTextViewColor(textView, getResources().getColor(R.color.red), getResources().getColor(R.color.pink));
+        GradientText.setTextViewColor(textView, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
 
         getStarted.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,5 +29,20 @@ public class WelcomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("myUserPrefs", Context.MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("newUser", false)) {
+            Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
+            startActivity(intent);
+        } else {
+            sharedPreferences = getSharedPreferences("myUserPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("newUser", true);
+            editor.apply();
+        }
     }
 }

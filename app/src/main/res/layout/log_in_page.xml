@@ -25,45 +25,44 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome back,"
             android:fontFamily="@font/sfprodisplaysemibold"
-            android:textSize="@dimen/_20ssp"
-            android:textColor="@color/white" />
+            android:text="Welcome back,"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20ssp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log In!"
-            android:fontFamily="@font/sfprodisplayblack"
-            android:textSize="@dimen/_40ssp"
             android:layout_marginTop="@dimen/_minus20sdp"
-            android:textColor="@color/white" />
+            android:fontFamily="@font/sfprodisplayblack"
+            android:text="Log In!"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_40ssp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/logInEmailUsername"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/_280sdp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
-            android:hint="Email/Username"
+            android:hint="Email"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:boxStrokeColor="@color/pink"
             app:hintTextColor="@color/pink"
-            app:startIconDrawable="@drawable/usericon"
-            >
+            app:startIconDrawable="@drawable/emailicon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -75,7 +74,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/_280sdp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:hint="Password"
@@ -85,8 +84,7 @@
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:boxStrokeColor="@color/pink"
             app:hintTextColor="@color/pink"
-            app:startIconDrawable="@drawable/passwordicon"
-            >
+            app:startIconDrawable="@drawable/passwordicon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -95,53 +93,57 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/forgotPassword"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Forgot password?"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:fontFamily="@font/sfprodisplayblack"
-            android:textAlignment="textEnd" />
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/sfprodisplayblack"
+                android:text="Forgot password?" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/logIn"
-        android:layout_width="@dimen/_280sdp"
+        android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/gradient_button"
+        android:fontFamily="@font/sfprodisplaybold"
+        android:text="LOGIN"
+        android:textSize="@dimen/_12ssp"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78"
-        android:text="LOGIN"
-        app:backgroundTint="@null"
-        android:background="@drawable/gradient_button"
-        android:fontFamily="@font/sfprodisplayregular"
-        android:textSize="@dimen/_12ssp" />
+        app:layout_constraintVertical_bias="0.78" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginBottom="@dimen/_15sdp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New user? "
             android:fontFamily="@font/sfprodisplayregular"
-            />
+            android:text="New user? " />
 
         <TextView
             android:id="@+id/signUpPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up"
-            android:fontFamily="@font/sfprodisplayblack" />
+            android:fontFamily="@font/sfprodisplayblack"
+            android:text="Sign up" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

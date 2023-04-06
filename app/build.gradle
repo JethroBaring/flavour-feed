@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -45,5 +46,8 @@ dependencies {
 
     //material design
     implementation 'com.google.android.material:material:1.8.0'
+
+    //firebase
+    implementation 'com.google.firebase:firebase-auth:21.2.0'
 
 }
