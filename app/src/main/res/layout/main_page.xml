@@ -18,8 +18,9 @@
             android:text="FLAVOURFEED"
             android:fontFamily="@font/sfprodisplayblack"
             android:gravity="center"
-            android:textSize="@dimen/_17ssp"
+            android:textSize="@dimen/_18ssp"
             android:layout_marginStart="@dimen/_10sdp"
+            
             />
         <View
             android:layout_width="0dp"
@@ -34,14 +35,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/searchicon"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/inboxicon"
-                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 />
+            <ImageView
+                android:id="@+id/lightmode"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/lightmodeicon"
+                android:layout_marginEnd="@dimen/_10sdp"/>
         </LinearLayout>
     </LinearLayout>
     <FrameLayout

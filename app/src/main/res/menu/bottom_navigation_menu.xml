@@ -12,6 +12,11 @@
         android:icon="@drawable/marketplaceicon"
         android:title="Market"/>
     <item
+        android:id="@+id/inboxPage"
+        android:enabled="true"
+        android:icon="@drawable/emailicon"
+        android:title="Inbox"/>
+    <item
         android:id="@+id/profilePage"
         android:enabled="true"
         android:icon="@drawable/usericon"
