@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pages.MainPage">
+    tools:context=".Pages.MainPage"
+    android:id="@+id/mainPageLayout"
+    >
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"

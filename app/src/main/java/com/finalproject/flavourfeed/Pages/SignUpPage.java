@@ -1,8 +1,11 @@
 package com.finalproject.flavourfeed.Pages;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,6 +30,13 @@ public class SignUpPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window window = SignUpPage.this.getWindow();
+        Drawable background = SignUpPage.this.getResources().getDrawable(R.drawable.gradientsignup);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+        window.setStatusBarColor(SignUpPage.this.getResources().getColor(android.R.color.transparent));
+        window.setBackgroundDrawable(background);
+
         setContentView(R.layout.sign_up_page);
         RelativeLayout relativeLayout = findViewById(R.id.relativeSignUp);
         TextView logInPage = findViewById(R.id.logInPage);
@@ -61,6 +71,10 @@ public class SignUpPage extends AppCompatActivity {
                 } else {
                     snackbar.setText("Account created successfully.");
                     EmailPassword.register(signUpEmail.getText().toString(), signUpPassword.getText().toString());
+                    Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                    intent.putExtra("redirectToProfile", true);
+                    startActivity(intent);
+                    finish();
                 }
                 snackbar.show();
             }

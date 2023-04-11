@@ -8,6 +8,7 @@ public class EmailPassword {
     public static void register(String email, String password) {
         mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email,password);
+
     }
 
 }

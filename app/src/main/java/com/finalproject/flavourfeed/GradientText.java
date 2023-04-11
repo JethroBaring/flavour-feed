@@ -1,8 +1,11 @@
 package com.finalproject.flavourfeed;
 
+import android.app.Activity;
 import android.graphics.LinearGradient;
+import android.graphics.Rect;
 import android.graphics.Shader;
 import android.text.TextPaint;
+import android.view.Window;
 import android.widget.TextView;
 
 public class GradientText {
