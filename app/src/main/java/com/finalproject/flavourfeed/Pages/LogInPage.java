@@ -6,16 +6,17 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 
 import com.finalproject.flavourfeed.GradientText;
 import com.finalproject.flavourfeed.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class LogInPage extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class LogInPage extends AppCompatActivity {
         window.setBackgroundDrawable(background);
         setContentView(R.layout.log_in_page);
 
-        TextView forgotPassword = findViewById(R.id.forgotPassword);
+        TextView forgotPassword = findViewById(R.id.lnkForgotPassword);
         int nightModeFlags =
                 getApplicationContext().getResources().getConfiguration().uiMode &
                         Configuration.UI_MODE_NIGHT_MASK;
@@ -43,7 +44,10 @@ public class LogInPage extends AppCompatActivity {
                 break;
         }
 
-        TextView signUp = findViewById(R.id.signUpPage);
+        TextView signUp = findViewById(R.id.lnkSignUpPage);
+        TextInputEditText email = findViewById(R.id.txtInptLogInEmail);
+        TextInputEditText password = findViewById(R.id.txtInptLogInPassword);
+        Button logIn = findViewById(R.id.btnLogIn);
         GradientText.setTextViewColor(forgotPassword, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
         GradientText.setTextViewColor(signUp, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
 
@@ -52,6 +56,13 @@ public class LogInPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
                 startActivity(intent);
+            }
+        });
+
+        logIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

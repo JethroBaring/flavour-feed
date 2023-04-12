@@ -13,15 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.finalproject.flavourfeed.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeFragment extends Fragment {
 
-
+    FirebaseUser user;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView textView = view.findViewById(R.id.testtext);
-        textView.setText("Hannah Gimena");
+        user = mAuth.getCurrentUser();
+        textView.setText(user.getEmail());
     }
 
     @Override

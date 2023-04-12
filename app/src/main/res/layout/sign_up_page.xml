@@ -65,7 +65,7 @@
             app:startIconDrawable="@drawable/emailicon">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signUpEmail"
+                android:id="@+id/txtInptSignUpEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress" />
@@ -87,7 +87,7 @@
             app:startIconDrawable="@drawable/passwordicon">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signUpPassword"
+                android:id="@+id/txtInptSignUpPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -109,7 +109,7 @@
             app:startIconDrawable="@drawable/passwordicon">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signUpRepeatPassword"
+                android:id="@+id/txtInptSignUpRepeatPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -118,7 +118,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/signUp"
+        android:id="@+id/btnSignUp"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_45sdp"
         android:background="@drawable/gradient_button"
@@ -146,7 +146,7 @@
             android:text="Already have account? " />
 
         <TextView
-            android:id="@+id/logInPage"
+            android:id="@+id/lnkLogInPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfprodisplayblack"
