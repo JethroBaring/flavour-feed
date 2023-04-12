@@ -26,8 +26,6 @@ public class SignUpPage extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-    private RelativeLayout relativeLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +41,7 @@ public class SignUpPage extends AppCompatActivity {
         TextInputEditText txtInptSignUpPassword = findViewById(R.id.txtInptSignUpPassword);
         TextInputEditText txtInptSignUpRepeatPassword = findViewById(R.id.txtInptSignUpRepeatPassword);
         Button btnSignUp = findViewById(R.id.btnSignUp);
-        relativeLayout = findViewById(R.id.relativeSignUp);
+        RelativeLayout relativeLayout = findViewById(R.id.layoutSignUp);
         mAuth = FirebaseAuth.getInstance();
 
         GradientText.setTextViewColor(lnkLogInPage, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
@@ -60,25 +58,29 @@ public class SignUpPage extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createUserWithEmailAndPassword(txtInptSignUpEmail.getText().toString(), txtInptSignUpPassword.getText().toString(), txtInptSignUpRepeatPassword.getText().toString());
+                String email = txtInptSignUpEmail.getText().toString();
+                String password = txtInptSignUpPassword.getText().toString();
+                String repeatPassword = txtInptSignUpRepeatPassword.getText().toString();
+                Snackbar snackbar = Snackbar.make(relativeLayout, null, Snackbar.LENGTH_SHORT);
+
+                if(password.equals(repeatPassword)) {
+                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                        if(task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                            intent.putExtra("fromSignUp", true);
+                            finish();
+                            startActivity(intent);
+                        } else {
+                            snackbar.setText(task.getException().getMessage());
+                        }
+                    });
+                } else {
+                    snackbar.setText("Password do not match.");
+                }
+                snackbar.show();
             }
         });
     }
 
-
-    public void createUserWithEmailAndPassword(String email, String password, String repeatPassword) {
-        Snackbar snackbar = Snackbar.make(relativeLayout, null, Snackbar.LENGTH_SHORT);
-        if(password.equals(repeatPassword)) {
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                if(task.isSuccessful()) {
-                    FirebaseUser user = mAuth.getCurrentUser();
-                } else {
-                    snackbar.setText(task.getException().getMessage());
-                }
-            });
-        } else {
-            snackbar.setText("Password do not match.");
-        }
-        snackbar.show();
-    }
 }

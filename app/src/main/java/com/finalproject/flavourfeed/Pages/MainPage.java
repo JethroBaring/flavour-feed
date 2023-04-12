@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -30,6 +31,8 @@ import com.finalproject.flavourfeed.GradientText;
 import com.finalproject.flavourfeed.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.zip.Inflater;
@@ -46,13 +49,16 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
-
         TextView mainPageAppName = findViewById(R.id.mainPageAppName);
         ImageView mode = findViewById(R.id.lightmode);
         GradientText.setTextViewColor(mainPageAppName, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
         bottomNavigationView = findViewById(R.id.bottomNav);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
-
+        if(getIntent().getBooleanExtra("fromSignUp", false)) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
+            bottomNavigationView.setSelectedItemId(R.id.profilePage);
+        } else {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, homeFragment).commit();
+        }
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
@@ -67,7 +73,7 @@ public class MainPage extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
                         break;
                     default:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, homeFragment).commit();
                         break;
                 }
                 return true;
