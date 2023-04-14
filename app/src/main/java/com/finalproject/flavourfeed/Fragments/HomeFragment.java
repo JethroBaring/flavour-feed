@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class HomeFragment extends Fragment {
 
     FirebaseAuth mAuth;
-    TextView textView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,9 +26,8 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
-        textView = view.findViewById(R.id.testtext);
         FirebaseUser user = mAuth.getCurrentUser();
-        textView.setText(user.getEmail());
+
         return view;
     }
 

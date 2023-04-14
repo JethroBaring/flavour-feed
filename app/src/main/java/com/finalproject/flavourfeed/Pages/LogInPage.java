@@ -3,6 +3,7 @@ package com.finalproject.flavourfeed.Pages;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,13 +29,7 @@ public class LogInPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window = LogInPage.this.getWindow();
-        Drawable background = LogInPage.this.getResources().getDrawable(R.drawable.gradient);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(LogInPage.this.getResources().getColor(android.R.color.transparent));
-        window.setBackgroundDrawable(background);
         setContentView(R.layout.log_in_page);
-
 
         int nightModeFlags =
                 getApplicationContext().getResources().getConfiguration().uiMode &
@@ -55,8 +50,7 @@ public class LogInPage extends AppCompatActivity {
         TextInputEditText txtInptLogInPassword = findViewById(R.id.txtInptLogInPassword);
         RelativeLayout relativeLayout = findViewById(R.id.layoutLogIn);
         Button btnLogIn = findViewById(R.id.btnLogIn);
-        GradientText.setTextViewColor(lnkForgotPassword, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
-        GradientText.setTextViewColor(lnkSignUp, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
+
 
         lnkSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,17 +67,32 @@ public class LogInPage extends AppCompatActivity {
                 String password = txtInptLogInPassword.getText().toString();
                 Snackbar snackbar = Snackbar.make(relativeLayout, null, Snackbar.LENGTH_SHORT);
 
-                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                    if(task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Intent intent = new Intent(getApplicationContext(), MainPage.class);
-                        startActivity(intent);
-                    } else {
-                        snackbar.setText(task.getException().getMessage());
-                    }
-                });
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                    snackbar.setText("Field/s cannot be empty.");
+                } else {
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                        if(task.isSuccessful()) {
+                            snackbar.setText("Logging in.");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                            startActivity(intent);
+                        } else {
+                            snackbar.setText(task.getException().getMessage());
+                        }
+                    });
+                }
                 snackbar.show();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null) {
+            Intent intent = new Intent(getApplicationContext(), MainPage.class);
+            startActivity(intent);
+        }
     }
 }

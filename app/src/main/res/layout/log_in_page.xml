@@ -5,53 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Pages.LogInPage"
-    android:background="@color/white"
     android:id="@+id/layoutLogIn"
     >
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_250sdp"
-        android:scaleType="fitXY"
-        android:src="@drawable/loginsignupdefault"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_30sdp"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_35sdp"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:src="@drawable/logoblue"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sfprodisplaysemibold"
-            android:text="Welcome back,"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_minus20sdp"
+            android:text="WELCOME BACK!"
+            android:textAlignment="center"
             android:fontFamily="@font/sfprodisplayblack"
-            android:text="Log In!"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_40ssp" />
+            android:textSize="@dimen/_20ssp"
+            />
+        <TextView
+            android:layout_marginTop="@dimen/_minus10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in to continue"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_centerInParent="true">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -59,19 +48,20 @@
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:hint="Email"
+            app:endIconMode="clear_text"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink"
-            app:startIconDrawable="@drawable/emailicon">
+            app:startIconDrawable="@drawable/emailicon"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptLogInEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,12 +71,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:hint="Password"
+            app:endIconMode="password_toggle"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink"
             app:startIconDrawable="@drawable/passwordicon">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -108,7 +97,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/sfprodisplayblack"
-                android:text="Forgot password?" />
+                android:text="Forgot password?"
+                android:textColor="@color/flutter_sky"
+                />
         </LinearLayout>
     </LinearLayout>
 
@@ -116,7 +107,7 @@
         android:id="@+id/btnLogIn"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_45sdp"
-        android:background="@drawable/gradient_button"
+        android:background="@drawable/roundeddefault"
         android:fontFamily="@font/sfprodisplaybold"
         android:text="LOGIN"
         android:textSize="@dimen/_12ssp"
@@ -148,6 +139,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfprodisplayblack"
-            android:text="Sign up" />
+            android:text="Sign up"
+            android:textColor="@color/flutter_sky"
+            />
     </LinearLayout>
 </RelativeLayout>

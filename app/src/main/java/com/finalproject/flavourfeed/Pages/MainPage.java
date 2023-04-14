@@ -49,9 +49,6 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
-        TextView mainPageAppName = findViewById(R.id.mainPageAppName);
-        ImageView mode = findViewById(R.id.lightmode);
-        GradientText.setTextViewColor(mainPageAppName, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
         bottomNavigationView = findViewById(R.id.bottomNav);
         if(getIntent().getBooleanExtra("fromSignUp", false)) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
@@ -80,23 +77,7 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
-        mode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade);
 
-                if (mode.getId() == R.id.lightmode) {
-                    mode.setImageResource(R.drawable.darkmodeicon);
-                    mode.setId(R.id.darkmode);
-                } else {
-                    mode.setImageResource(R.drawable.lightmodeicon);
-                    mode.setId(R.id.lightmode);
-
-                }
-                mode.startAnimation(animation);
-
-            }
-        });
 
     }
 }

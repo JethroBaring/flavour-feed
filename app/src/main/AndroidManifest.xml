@@ -14,8 +14,11 @@
         android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
+            android:name=".EditProfilePage"
+            android:exported="false" />
+        <activity
             android:name=".Pages.MainPage"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Pages.SignUpPage"
             android:exported="false" />

@@ -1,41 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".Pages.WelcomePage">
+    android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".Pages.WelcomePage"
+    android:background="@color/flutter_sky">
 
-<LinearLayout
-    android:id="@+id/logoContainer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<ImageView
+    android:id="@+id/logo"
+    android:layout_width="@dimen/_120sdp"
+    android:layout_height="@dimen/_120sdp"
+    android:src="@drawable/logowhite"
     android:layout_centerInParent="true"
-    android:orientation="vertical"
-    >
-    <ImageView
-        android:layout_width="@dimen/_185sdp"
-        android:layout_height="@dimen/_185sdp"
-        android:src="@drawable/logo"/>
-    <TextView
-        android:id="@+id/appName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="FLAVOURFEED"
-        android:textAlignment="center"
-        android:fontFamily="@font/sfprodisplayblack"
-        android:textSize="@dimen/_24ssp"
-        />
-</LinearLayout>
-
-    <Button
-        android:id="@+id/getStarted"
-        android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:text="GET STARTED"
-        app:backgroundTint="@null"
-        android:background="@drawable/gradient_button"
-        android:fontFamily="@font/sfprodisplaybold"
-        android:textSize="@dimen/_12ssp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/_40sdp"
-        />
+    />
 </RelativeLayout>

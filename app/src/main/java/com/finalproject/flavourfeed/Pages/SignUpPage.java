@@ -2,6 +2,7 @@ package com.finalproject.flavourfeed.Pages;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,11 +30,6 @@ public class SignUpPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Window window = SignUpPage.this.getWindow();
-        Drawable background = SignUpPage.this.getResources().getDrawable(R.drawable.gradientsignup);
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(SignUpPage.this.getResources().getColor(android.R.color.transparent));
-        window.setBackgroundDrawable(background);
         setContentView(R.layout.sign_up_page);
 
         TextView lnkLogInPage = findViewById(R.id.lnkLogInPage);
@@ -43,8 +39,6 @@ public class SignUpPage extends AppCompatActivity {
         Button btnSignUp = findViewById(R.id.btnSignUp);
         RelativeLayout relativeLayout = findViewById(R.id.layoutSignUp);
         mAuth = FirebaseAuth.getInstance();
-
-        GradientText.setTextViewColor(lnkLogInPage, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
 
 
         lnkLogInPage.setOnClickListener(new View.OnClickListener() {
@@ -63,9 +57,12 @@ public class SignUpPage extends AppCompatActivity {
                 String repeatPassword = txtInptSignUpRepeatPassword.getText().toString();
                 Snackbar snackbar = Snackbar.make(relativeLayout, null, Snackbar.LENGTH_SHORT);
 
-                if(password.equals(repeatPassword)) {
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(repeatPassword)) {
+                    snackbar.setText("Field/s cannot be empty.");
+                } else if(password.equals(repeatPassword)) {
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                         if(task.isSuccessful()) {
+                            snackbar.setText("Logging in.");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(getApplicationContext(), MainPage.class);
                             intent.putExtra("fromSignUp", true);

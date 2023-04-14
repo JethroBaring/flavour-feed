@@ -9,40 +9,33 @@
     android:background="@color/white"
     >
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_250sdp"
-        android:scaleType="fitXY"
-        android:scaleX="-1"
-        android:src="@drawable/loginsignupdefault"
-/>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_35sdp"
         android:orientation="vertical"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_marginEnd="@dimen/_30sdp"
+        android:gravity="center"
         >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sfprodisplaysemibold"
-            android:text="Welcome,"
-            android:textAlignment="textEnd"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_20ssp" />
-
+        <ImageView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:src="@drawable/logoblue"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_minus20sdp"
+            android:text="WELCOME!"
+            android:textAlignment="center"
             android:fontFamily="@font/sfprodisplayblack"
-            android:text="Sign Up!"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_40ssp" />
+            android:textSize="@dimen/_20ssp"
+            />
+        <TextView
+            android:layout_marginTop="@dimen/_minus10sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up to continue"/>
     </LinearLayout>
 
     <LinearLayout
@@ -56,12 +49,11 @@
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:hint="Email"
+            app:endIconMode="clear_text"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink"
             app:startIconDrawable="@drawable/emailicon">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -78,12 +70,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:hint="Password"
+            app:endIconMode="password_toggle"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink"
             app:startIconDrawable="@drawable/passwordicon">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -100,12 +91,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_15sdp"
             android:hint="Repeat Password"
+            app:endIconMode="password_toggle"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:boxStrokeColor="@color/pink"
-            app:hintTextColor="@color/pink"
             app:startIconDrawable="@drawable/passwordicon">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -121,7 +111,7 @@
         android:id="@+id/btnSignUp"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_45sdp"
-        android:background="@drawable/gradient_button"
+        android:background="@drawable/roundeddefault"
         android:fontFamily="@font/sfprodisplaybold"
         android:text="SIGNUP"
         android:textSize="@dimen/_12ssp"
@@ -150,6 +140,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/sfprodisplayblack"
-            android:text="Login" />
+            android:text="Login"
+            android:textColor="@color/flutter_sky"
+            />
     </LinearLayout>
 </RelativeLayout>

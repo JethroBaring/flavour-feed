@@ -3,8 +3,16 @@ package com.finalproject.flavourfeed.Pages;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,27 +29,25 @@ public class WelcomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
-        mAuth = FirebaseAuth.getInstance();
-        TextView textView = findViewById(R.id.appName);
-        Button getStarted = findViewById(R.id.getStarted);
-        GradientText.setTextViewColor(textView, ContextCompat.getColor(this, R.color.red), ContextCompat.getColor(this, R.color.pink));
 
-        getStarted.setOnClickListener(new View.OnClickListener() {
+        Window window = WelcomePage.this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.flutter_sky));
+        window.setNavigationBarColor(ContextCompat.getColor(this, R.color.flutter_sky));
+
+        ImageView logo = findViewById(R.id.logo);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade);
+        logo.startAnimation(animation);
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), LogInPage.class);
-                startActivity(intent);
+            public void run() {
+                startActivity(new Intent(getApplicationContext(), LogInPage.class));
             }
-        });
+        }, 2000);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(mAuth.getCurrentUser() != null) {
-            Intent intent = new Intent(getApplicationContext(), MainPage.class);
-            startActivity(intent);
-        }
         /*SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("myUserPrefs", Context.MODE_PRIVATE);
         if (sharedPreferences.getBoolean("newUser", false)) {
             Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
