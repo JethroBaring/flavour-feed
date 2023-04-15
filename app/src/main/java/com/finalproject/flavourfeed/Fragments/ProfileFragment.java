@@ -1,19 +1,18 @@
 package com.finalproject.flavourfeed.Fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.Button;
 import android.widget.ImageView;
-import androidx.annotation.NonNull;
+import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-import com.finalproject.flavourfeed.EditProfilePage;
-import com.finalproject.flavourfeed.Pages.LogInPage;
+import com.bumptech.glide.Glide;
+import com.finalproject.flavourfeed.Pages.EditProfilePage;
 import com.finalproject.flavourfeed.R;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import org.jetbrains.annotations.NotNull;
 
 
 public class ProfileFragment extends Fragment {
@@ -25,8 +24,26 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
-
+        FirebaseUser user = mAuth.getCurrentUser();
         Button btnEditProfile = view.findViewById(R.id.btnEditProfile);
+        TextView profileEmail = view.findViewById(R.id.profileEmail);
+        TextView profileDisplayName = view.findViewById(R.id.profileDisplayName);
+        ShapeableImageView profilePicture = view.findViewById(R.id.profilePicture);
+        ImageView logout = view.findViewById(R.id.icnSettings);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+            }
+        });
+
+        profileDisplayName.setText(user.getDisplayName());
+        profileEmail.setText(user.getEmail());
+
+        Glide.with(this)
+                        .load(user.getPhotoUrl())
+                                .into(profilePicture);
 
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override

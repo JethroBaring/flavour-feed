@@ -21,13 +21,10 @@ import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.finalproject.flavourfeed.Fragments.HomeFragment;
 import com.finalproject.flavourfeed.Fragments.MarketplaceFragment;
 import com.finalproject.flavourfeed.Fragments.ProfileFragment;
-import com.finalproject.flavourfeed.GradientText;
 import com.finalproject.flavourfeed.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 
-import com.finalproject.flavourfeed.GradientText;
 import com.finalproject.flavourfeed.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;

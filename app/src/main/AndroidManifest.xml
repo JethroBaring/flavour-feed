@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -14,7 +15,16 @@
         android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
-            android:name=".EditProfilePage"
+            android:name=".SettingsPage"
+            android:exported="false" />
+        <activity
+            android:name=".UploadPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.CreatePostPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.EditProfilePage"
             android:exported="false" />
         <activity
             android:name=".Pages.MainPage"

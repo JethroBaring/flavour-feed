@@ -9,14 +9,16 @@
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="@dimen/_30sdp"
         android:orientation="horizontal"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:gravity="center"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         >
         <EditText
-            android:layout_width="@dimen/_240sdp"
+            android:layout_width="@dimen/_250sdp"
             android:layout_height="@dimen/_28sdp"
             android:padding="@dimen/_5sdp"
             android:hint="Search"
@@ -31,12 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/carticon"
-            android:layout_marginEnd="@dimen/_10sdp"
             />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/settingsicon"/>
     </LinearLayout>
 
 </RelativeLayout>

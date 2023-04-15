@@ -7,9 +7,10 @@
     tools:context=".Fragments.ProfileFragment"
     android:id="@+id/profileFragment">
     <TextView
+        android:id="@+id/profileDisplayName"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
-        android:text="Displayname"
+        android:text="displayname"
         android:textAlignment="center"
         android:fontFamily="@font/sfprodisplaymedium"
         android:textSize="@dimen/_15ssp"
@@ -18,7 +19,7 @@
 
     <ImageView
         android:layout_marginEnd="@dimen/_10sdp"
-        android:id="@+id/icnLogOut"
+        android:id="@+id/icnSettings"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/settingsicon"
@@ -35,12 +36,14 @@
         android:gravity="center">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profilePicture"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:src="@color/flutter_dark"
             app:shapeAppearanceOverlay="@style/circular_image" />
 
         <TextView
+            android:id="@+id/profileEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"

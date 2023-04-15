@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.content.ContextCompat;
-import com.finalproject.flavourfeed.GradientText;
 import com.finalproject.flavourfeed.R;
 import com.google.firebase.auth.FirebaseAuth;
 
