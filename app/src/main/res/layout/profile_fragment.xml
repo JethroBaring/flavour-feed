@@ -40,6 +40,7 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:src="@color/flutter_dark"
+            android:scaleType="fitXY"
             app:shapeAppearanceOverlay="@style/circular_image" />
 
         <TextView

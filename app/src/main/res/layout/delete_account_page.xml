@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layoutSignUp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pages.SignUpPage">
-
+    tools:context=".DeleteAccountPage"
+    android:id="@+id/layoutDelete"
+    >
+    <ImageView
+        android:id="@+id/icnSettingsBack"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/backicon"
+        android:layout_marginStart="@dimen/_10sdp"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,46 +26,47 @@
         <ImageView
             android:layout_width="@dimen/_90sdp"
             android:layout_height="@dimen/_90sdp"
-            android:src="@drawable/logoblue"
+            android:src="@drawable/logored"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WELCOME!"
+            android:text="Delete Account"
             android:textAlignment="center"
-            android:fontFamily="@font/sfprodisplayblack"
+            android:fontFamily="@font/sfprodisplaybold"
             android:textSize="@dimen/_20ssp"
             />
         <TextView
             android:layout_marginTop="@dimen/_minus10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign up to continue"/>
+            android:text='Type "CONFIRM" to continue'/>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="CONFIRM"
             app:endIconMode="clear_text"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/emailicon">
+            app:startIconDrawable="@drawable/keyicon"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtInptSignUpEmail"
+                android:id="@+id/txtInptConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,80 +74,36 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
+            android:hint="Repeat CONFIRM"
+            app:endIconMode="clear_text"
             android:layout_marginTop="@dimen/_15sdp"
-            android:hint="Password"
-            app:endIconMode="password_toggle"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/passwordicon">
+            app:startIconDrawable="@drawable/keyicon"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtInptSignUpPassword"
+                android:id="@+id/txtInptRepeatConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textEmailAddress"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:hint="Repeat Password"
-            app:endIconMode="password_toggle"
-            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
-            app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/passwordicon">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtInptSignUpRepeatPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-
     <Button
-        android:id="@+id/btnSignUp"
+        android:id="@+id/btnDeleteAccount"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_45sdp"
-        android:background="@drawable/roundeddefault"
+        android:background="@drawable/deletebutton"
         android:fontFamily="@font/sfprodisplaybold"
-        android:text="SIGNUP"
+        android:text="CONFIRM"
         android:textSize="@dimen/_12ssp"
         app:backgroundTint="@null"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_100sdp"
-        />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_15sdp"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sfprodisplayregular"
-            android:text="Already have account? " />
-
-        <TextView
-            android:id="@+id/lnkLogInPage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sfprodisplayblack"
-            android:text="Login"
-            android:textColor="@color/flutter_sky"
-            />
-    </LinearLayout>
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

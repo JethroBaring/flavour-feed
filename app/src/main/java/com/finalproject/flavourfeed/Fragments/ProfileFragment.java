@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Pages.EditProfilePage;
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.SettingsPage;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,12 +30,12 @@ public class ProfileFragment extends Fragment {
         TextView profileEmail = view.findViewById(R.id.profileEmail);
         TextView profileDisplayName = view.findViewById(R.id.profileDisplayName);
         ShapeableImageView profilePicture = view.findViewById(R.id.profilePicture);
-        ImageView logout = view.findViewById(R.id.icnSettings);
+        ImageView icnSettings = view.findViewById(R.id.icnSettings);
 
-        logout.setOnClickListener(new View.OnClickListener() {
+        icnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signOut();
+                startActivity(new Intent(getContext(), SettingsPage.class));
             }
         });
 
