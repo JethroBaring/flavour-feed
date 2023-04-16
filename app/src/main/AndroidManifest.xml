@@ -15,16 +15,19 @@
         android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
-            android:name=".DeleteAccountPage"
+            android:name=".Pages.ThemePage"
             android:exported="false" />
         <activity
-            android:name=".ChangePasswordPage"
+            android:name=".Pages.DeleteAccountPage"
             android:exported="false" />
         <activity
-            android:name=".ChangeEmailPage"
+            android:name=".Pages.ChangePasswordPage"
             android:exported="false" />
         <activity
-            android:name=".SettingsPage"
+            android:name=".Pages.ChangeEmailPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.SettingsPage"
             android:exported="false" />
         <activity
             android:name=".UploadPage"

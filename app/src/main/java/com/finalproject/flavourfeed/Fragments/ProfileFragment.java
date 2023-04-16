@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Pages.EditProfilePage;
 import com.finalproject.flavourfeed.R;
-import com.finalproject.flavourfeed.SettingsPage;
+import com.finalproject.flavourfeed.Pages.SettingsPage;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

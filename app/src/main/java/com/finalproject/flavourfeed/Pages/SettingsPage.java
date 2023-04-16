@@ -1,13 +1,12 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Pages;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.finalproject.flavourfeed.Pages.LogInPage;
+import com.finalproject.flavourfeed.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingsPage extends AppCompatActivity {
@@ -19,8 +18,12 @@ public class SettingsPage extends AppCompatActivity {
         setContentView(R.layout.settings_page);
         mAuth = FirebaseAuth.getInstance();
         ImageView icnSettingsBack = findViewById(R.id.icnSettingsBack);
+        LinearLayout lnkChangeEmail = findViewById(R.id.lnkChangeEmail);
+        LinearLayout lnkChangePassword = findViewById(R.id.lnkChangePasword);
         LinearLayout lnkDeleteAccount = findViewById(R.id.lnkDeleteAccount);
+        LinearLayout lnkTheme = findViewById(R.id.lnkTheme);
         LinearLayout lnkLogOut = findViewById(R.id.lnkLogOut);
+
         icnSettingsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,20 +31,43 @@ public class SettingsPage extends AppCompatActivity {
             }
         });
 
+
+        lnkChangeEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goTo(ChangeEmailPage.class);
+            }
+        });
+
+        lnkChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goTo(ChangePasswordPage.class);
+            }
+        });
         lnkDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), DeleteAccountPage.class));
+                goTo(DeleteAccountPage.class);
             }
         });
 
+        lnkTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goTo(ThemePage.class);
+            }
+        });
         lnkLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mAuth.signOut();
-                startActivity(new Intent(getApplicationContext(), LogInPage.class));
+                goTo(LogInPage.class);
             }
         });
+    }
+
+    public void goTo(Class<?> destinationClass) {
+        startActivity(new Intent(getApplicationContext(), destinationClass));
     }
 }

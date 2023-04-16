@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DeleteAccountPage"
+    tools:context=".Pages.DeleteAccountPage"
     android:id="@+id/layoutDelete"
     >
     <ImageView
@@ -14,12 +14,20 @@
         android:src="@drawable/backicon"
         android:layout_marginStart="@dimen/_10sdp"
         />
+    <TextView
+        android:id="@+id/txtTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:text="Delete Account"
+        android:fontFamily="@font/sfprodisplaymedium"
+        android:textSize="@dimen/_15ssp"
+        android:layout_centerHorizontal="true" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_50sdp"
         android:orientation="vertical"
         android:gravity="center"
         >
@@ -28,16 +36,8 @@
             android:layout_height="@dimen/_90sdp"
             android:src="@drawable/logored"
             />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete Account"
-            android:textAlignment="center"
-            android:fontFamily="@font/sfprodisplaybold"
-            android:textSize="@dimen/_20ssp"
-            />
-        <TextView
-            android:layout_marginTop="@dimen/_minus10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='Type "CONFIRM" to continue'/>
@@ -47,7 +47,47 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+            app:boxCornerRadiusTopStart="@dimen/_8sdp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/emailicon">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtInptEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:hint="Password"
+            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+            app:boxCornerRadiusTopStart="@dimen/_8sdp"
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/passwordicon">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtInptPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
@@ -59,33 +99,11 @@
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:startIconDrawable="@drawable/keyicon"
+            android:layout_marginTop="@dimen/_15sdp"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptConfirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="wrap_content"
-            android:hint="Repeat CONFIRM"
-            app:endIconMode="clear_text"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
-            app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/keyicon"
-            >
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtInptRepeatConfirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"

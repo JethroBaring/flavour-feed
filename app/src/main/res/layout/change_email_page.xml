@@ -4,67 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChangeEmailPage">
+    tools:context=".Pages.ChangeEmailPage">
+
     <ImageView
         android:id="@+id/icnSettingsBack"
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/backicon"
-        android:layout_marginStart="@dimen/_10sdp"
-        />
+        android:layout_marginStart="@dimen/_10sdp" />
+
+    <TextView
+        android:id="@+id/txtTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:text="Change Email"
+        android:fontFamily="@font/sfprodisplaymedium"
+        android:textSize="@dimen/_15ssp"
+        android:layout_centerHorizontal="true" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_50sdp"
         android:orientation="vertical"
-        android:gravity="center"
-        >
+        android:gravity="center">
+
         <ImageView
             android:layout_width="@dimen/_90sdp"
             android:layout_height="@dimen/_90sdp"
-            android:src="@drawable/logoblue"
-            />
+            android:src="@drawable/logoblue" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change Email Address"
-            android:textAlignment="center"
-            android:fontFamily="@font/sfprodisplaybold"
-            android:textSize="@dimen/_20ssp"
-            />
-        <TextView
-            android:layout_marginTop="@dimen/_minus10sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fill in to continue"/>
+            android:text="Fill in to continue" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
-            android:hint="New email"
-            app:endIconMode="clear_text"
+            android:hint="Email"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/emailicon"
-            >
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/emailicon">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtInptEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:hint="New email"
+            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+            app:boxCornerRadiusTopStart="@dimen/_8sdp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/emailicon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptNewEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                />
+                android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,28 +93,27 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
-            android:hint="Repeat email"
-            app:endIconMode="clear_text"
             android:layout_marginTop="@dimen/_15sdp"
+            android:hint="Password"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/emailicon"
-            >
+            app:endIconMode="password_toggle"
+            app:startIconDrawable="@drawable/passwordicon">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtInptNewRepeatEmail"
+                android:id="@+id/txtInptPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                />
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
+
     <Button
-        android:id="@+id/btnLogIn"
+        android:id="@+id/btnChangeEmail"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_45sdp"
         android:background="@drawable/roundeddefault"

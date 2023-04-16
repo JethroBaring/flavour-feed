@@ -31,6 +31,7 @@
             android:layout_height="@dimen/_30sdp"
             android:src="@drawable/checkicon" />
     </LinearLayout>
+
     <RelativeLayout
         android:layout_below="@id/btnCloseSave"
         android:id="@+id/btnSelectPicture"
@@ -38,15 +39,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_50sdp"
-        >
+        android:layout_marginTop="@dimen/_50sdp">
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/testimage"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:src="@color/flutter_sky"
             android:scaleType="fitXY"
-            app:shapeAppearanceOverlay="@style/circular_image"/>
+            app:shapeAppearanceOverlay="@style/circular_image" />
 
         <ImageView
             android:layout_width="@dimen/_50sdp"
@@ -54,6 +55,7 @@
             android:layout_centerInParent="true"
             android:src="@drawable/cameraicon" />
     </RelativeLayout>
+
     <TextView
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_width="wrap_content"
@@ -61,8 +63,8 @@
         android:layout_below="@id/btnSelectPicture"
         android:text="Change photo"
         android:layout_centerHorizontal="true"
-        android:fontFamily="@font/sfprodisplayregular"
-        />
+        android:fontFamily="@font/sfprodisplayregular" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

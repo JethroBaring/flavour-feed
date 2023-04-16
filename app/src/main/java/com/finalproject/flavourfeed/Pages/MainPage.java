@@ -47,7 +47,7 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
         bottomNavigationView = findViewById(R.id.bottomNav);
-        if(getIntent().getBooleanExtra("fromSignUp", false)) {
+        if(getIntent().getBooleanExtra("fromSignUp", false) || getIntent().getBooleanExtra("fromUpdateProfile", false)) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
             bottomNavigationView.setSelectedItemId(R.id.profilePage);
         } else {
