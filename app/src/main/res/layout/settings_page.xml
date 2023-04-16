@@ -17,7 +17,7 @@
         android:layout_height="@dimen/_30sdp"
         android:text="Settings"
         android:fontFamily="@font/sfprodisplaymedium"
-        android:textSize="@dimen/_18ssp"
+        android:textSize="@dimen/_15ssp"
         android:layout_centerHorizontal="true"
         />
 <LinearLayout

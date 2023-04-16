@@ -19,7 +19,7 @@
         >
         <EditText
             android:layout_width="@dimen/_250sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_height="@dimen/_30sdp"
             android:padding="@dimen/_5sdp"
             android:hint="Search"
             android:drawableStart="@drawable/searchicon"
@@ -30,8 +30,8 @@
             android:layout_height="0dp"
             android:layout_weight="1"/>
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_30sdp"
             android:src="@drawable/carticon"
             />
     </LinearLayout>

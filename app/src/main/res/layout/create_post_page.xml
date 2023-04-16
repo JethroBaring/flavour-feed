@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/btnClose"
             android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="@dimen/_30sdp"
             android:src="@drawable/closeicon" />
 
         <View
@@ -27,7 +27,7 @@
         <ImageView
             android:id="@+id/btnSave"
             android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_height="@dimen/_30sdp"
             android:src="@drawable/checkicon" />
     </LinearLayout>
 </RelativeLayout>

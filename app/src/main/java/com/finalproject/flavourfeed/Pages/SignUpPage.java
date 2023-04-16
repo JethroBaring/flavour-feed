@@ -22,10 +22,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpPage extends AppCompatActivity {
 
@@ -77,6 +83,15 @@ public class SignUpPage extends AppCompatActivity {
                             user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    FirebaseApp.initializeApp(getApplicationContext());
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    Map<String, Object> newUser = new HashMap<>();
+                                    newUser.put("email", user.getEmail());
+                                    newUser.put("displayName", user.getDisplayName());
+                                    newUser.put("profilePicture", user.getPhotoUrl());
+
+// Add a new document with a generated ID
+                                    db.collection("user-information").document(user.getUid()).set(newUser);
                                     Intent intent = new Intent(getApplicationContext(), MainPage.class);
                                     intent.putExtra("fromSignUp", true);
                                     finish();
