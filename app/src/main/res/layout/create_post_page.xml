@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/btnClose"
-            android:layout_width="@dimen/_25sdp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:src="@drawable/closeicon" />
 
@@ -25,9 +25,9 @@
             android:layout_weight="1" />
 
         <ImageView
-            android:id="@+id/btnSave"
-            android:layout_width="@dimen/_25sdp"
+            android:id="@+id/btnUploadPost"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
-            android:src="@drawable/checkicon" />
+            android:src="@drawable/posticon" />
     </LinearLayout>
 </RelativeLayout>

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
+            android:name=".Pages.PostPage"
+            android:exported="false" />
+        <activity
             android:name=".Pages.ThemePage"
             android:exported="false" />
         <activity

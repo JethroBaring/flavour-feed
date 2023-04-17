@@ -7,7 +7,7 @@
     tools:context=".Pages.SettingsPage">
     <ImageView
         android:id="@+id/icnSettingsBack"
-        android:layout_width="@dimen/_25sdp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/backicon"
         android:layout_marginStart="@dimen/_10sdp"
@@ -37,7 +37,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/_25sdp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_5sdp"
@@ -61,7 +61,7 @@
 
         <ImageView
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_width="@dimen/_25sdp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:src="@drawable/passwordicon" />
@@ -85,7 +85,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/_25sdp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_5sdp"
@@ -109,7 +109,7 @@
 
         <ImageView
             android:layout_marginStart="@dimen/_5sdp"
-            android:layout_width="@dimen/_25sdp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:src="@drawable/themeicon" />
@@ -131,7 +131,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/_25sdp"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_5sdp"

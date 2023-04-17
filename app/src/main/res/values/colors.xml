@@ -14,4 +14,5 @@
     <color name="lightgray">#757575</color>
     <color name="flutter_sky">#027DFD</color>
     <color name="flutter_dark">#1F2233</color>
+    <color name="lightestgray">#F0F0F0</color>
 </resources>
