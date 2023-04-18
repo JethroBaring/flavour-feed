@@ -16,5 +16,5 @@
         <item name="android:navigationBarColor">@color/white</item>
         <item name="colorControlNormal">@color/flutter_sky</item>
     </style>
-    
+
 </resources>

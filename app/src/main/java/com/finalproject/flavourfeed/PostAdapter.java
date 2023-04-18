@@ -2,6 +2,7 @@ package com.finalproject.flavourfeed;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Pages.PostPage;
 
 import java.util.ArrayList;
@@ -19,21 +21,11 @@ import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
     Context context;
-    int[] test;
+    ArrayList<Post> posts;
 
-    public PostAdapter(Context context) {
+    public PostAdapter(Context context, ArrayList<Post> posts) {
         this.context = context;
-        test = new int[10];
-        test[0] = 1;
-        test[1] = 2;
-        test[2] = 3;
-        test[3] = 4;
-        test[4] = 5;
-        test[5] = 6;
-        test[6] = 7;
-        test[7] = 8;
-        test[8] = 9;
-        test[9] = 10;
+        this.posts = posts;
     }
 
     @NonNull
@@ -46,7 +38,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.MyViewHolder holder, int position) {
-        holder.postPicture.setOnClickListener(new View.OnClickListener() {
+
+        holder.displayName.setText(posts.get(position).getDisplayName());
+        holder.email.setText(posts.get(position).getEmail());
+        Glide.with(holder.itemView.getContext()).load(posts.get(position).getProfileUrl()).into(holder.profile);
+        Glide.with(holder.itemView.getContext()).load(posts.get(position).getPhotoUrl()).into(holder.postPhoto);
+        holder.caption.setText(posts.get(position).getCaption());
+        holder.postPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 view.getContext().startActivity(new Intent(view.getContext(), PostPage.class));
@@ -54,29 +52,41 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
         });
     }
 
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(ArrayList<Post> posts) {
+        this.posts = posts;
+    }
+
     @Override
     public int getItemCount() {
-        return 10;
+        return posts.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView postPicture;
-        ImageView userProfilePicture;
-        TextView userDisplayName;
-        TextView userEmail;
+        ImageView postPhoto;
+        ImageView profile;
+        TextView displayName;
+        TextView email;
+        TextView caption;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            postPicture = itemView.findViewById(R.id.postPicture);
-            userProfilePicture = itemView.findViewById(R.id.userProfilePicture);
-            userDisplayName = itemView.findViewById(R.id.userDisplayName);
-            userEmail = itemView.findViewById(R.id.userEmail);
-            postPicture.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
+            postPhoto = itemView.findViewById(R.id.postPhoto);
+            profile = itemView.findViewById(R.id.profile);
+            displayName = itemView.findViewById(R.id.displayName);
+            email = itemView.findViewById(R.id.email);
+            caption = itemView.findViewById(R.id.caption);
         }
     }
 }

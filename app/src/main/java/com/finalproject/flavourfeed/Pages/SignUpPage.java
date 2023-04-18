@@ -67,18 +67,34 @@ public class SignUpPage extends AppCompatActivity {
                 String repeatPassword = txtInptSignUpRepeatPassword.getText().toString();
                 Snackbar snackbar = Snackbar.make(relativeLayout, null, Snackbar.LENGTH_SHORT);
 
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(repeatPassword)) {
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(repeatPassword)) {
                     snackbar.setText("Field/s cannot be empty.");
-                } else if(password.equals(repeatPassword)) {
+                } else if (password.equals(repeatPassword)) {
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             String[] parts = email.split("@");
                             String tempName = parts[0];
                             FirebaseUser user = mAuth.getCurrentUser();
+                            String randomPhoto;
+                            int random = (int) Math.floor(Math.random() * (4 - 1 + 1) + 1);
+                            switch (random) {
+                                case 1:
+                                    randomPhoto = "https://firebasestorage.googleapis.com/v0/b/flavour-feed-39786.appspot.com/o/avatar%2FOne.jpg?alt=media&token=6cda9953-45ef-4e6d-9abb-d78081e6d401";
+                                    break;
+                                case 2:
+                                    randomPhoto = "https://firebasestorage.googleapis.com/v0/b/flavour-feed-39786.appspot.com/o/avatar%2FTwo.jpg?alt=media&token=09c06c74-fe2a-44d9-8e7e-3d40fa566d92";
+                                    break;
+                                case 3:
+                                    randomPhoto = "https://firebasestorage.googleapis.com/v0/b/flavour-feed-39786.appspot.com/o/avatar%2FThree.jpg?alt=media&token=8f43ac03-de3f-4f1b-8f94-64c68a5376d1";
+                                    break;
+                                default:
+                                    randomPhoto = "https://firebasestorage.googleapis.com/v0/b/flavour-feed-39786.appspot.com/o/avatar%2FFour.jpg?alt=media&token=0860feb1-72c3-49f5-a7b4-3a3c27edcbd2";
+                                    break;
+                            }
 
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                     .setDisplayName(tempName)
-                                    .setPhotoUri(Uri.parse("https://firebasestorage.googleapis.com/v0/b/flavour-feed-39786.appspot.com/o/images%2FLogo.png?alt=media&token=d704beb0-3163-4d84-8ea1-c95519bc8986"))
+                                    .setPhotoUri(Uri.parse(randomPhoto))
                                     .build();
                             user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -91,7 +107,7 @@ public class SignUpPage extends AppCompatActivity {
                                     newUser.put("profilePicture", user.getPhotoUrl());
 
 // Add a new document with a generated ID
-                                    db.collection("user-information").document(user.getUid()).set(newUser);
+                                    db.collection("userInformation").document(user.getUid()).set(newUser);
                                     Intent intent = new Intent(getApplicationContext(), MainPage.class);
                                     intent.putExtra("fromSignUp", true);
                                     finish();

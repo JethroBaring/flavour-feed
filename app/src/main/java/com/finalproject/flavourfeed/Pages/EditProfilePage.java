@@ -20,8 +20,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -32,7 +36,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 public class EditProfilePage extends AppCompatActivity {
@@ -78,7 +81,7 @@ public class EditProfilePage extends AppCompatActivity {
         findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                EditProfilePage.super.onBackPressed();
             }
         });
 
@@ -134,11 +137,23 @@ public class EditProfilePage extends AppCompatActivity {
                                                 db = FirebaseFirestore.getInstance();
                                                 userRef = db.collection("user-information").document(user.getUid());
                                                 Map<String, Object> updates = new HashMap<>();
-                                                updates.put("displayName",user.getDisplayName());
+                                                updates.put("displayName", user.getDisplayName());
                                                 updates.put("profilePicture", user.getPhotoUrl());
                                                 userRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
+                                                        CollectionReference postRef = db.collection("post");
+                                                        Query query = postRef.whereEqualTo("email", user.getEmail());
+                                                        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                            @Override
+                                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                                                    DocumentReference documentReference = db.collection("post").document(documentSnapshot.getId());
+                                                                    documentReference.update("profileUrl", user.getPhotoUrl());
+                                                                    documentReference.update("displayName", user.getDisplayName());
+                                                                }
+                                                            }
+                                                        });
                                                         Snackbar.make(findViewById(android.R.id.content), "User profile updated.", Snackbar.LENGTH_LONG).show();
                                                     }
                                                 });
@@ -178,6 +193,4 @@ public class EditProfilePage extends AppCompatActivity {
             });
         }
     }
-
-
 }

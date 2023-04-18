@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_5sdp"
         app:cardElevation="@dimen/_5sdp"
-        app:shapeAppearanceOverlay="@style/roundedcard"
-        >
+        app:shapeAppearanceOverlay="@style/roundedcard">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +19,7 @@
 
             <!-- Media -->
             <ImageView
-                android:id="@+id/postPicture"
+                android:id="@+id/postPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_200sdp"
                 android:scaleType="centerCrop"
@@ -34,10 +33,12 @@
 
                 <!-- Title, secondary and supporting text -->
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/userProfilePicture"
+                    android:id="@+id/profile"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
+                    android:scaleType="fitXY"
                     android:src="@color/black"
+
                     app:shapeAppearanceOverlay="@style/circular_image" />
 
                 <LinearLayout
@@ -53,7 +54,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/userDisplayName"
+                            android:id="@+id/displayName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/sfprodisplaysemibold"
@@ -61,7 +62,7 @@
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
-                            android:id="@+id/userEmail"
+                            android:id="@+id/email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_minus7sdp"
@@ -72,11 +73,15 @@
                 </LinearLayout>
 
             </LinearLayout>
+
             <TextView
+                android:id="@+id/caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="The following example shows an outlined card."
-                />
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="The following example shows an outlined card." />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,17 +94,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:text="Like"
                     android:fontFamily="@font/sfprodisplaysemibold"
-                    />
+                    android:text="Like" />
 
                 <com.google.android.material.button.MaterialButton
                     style="?attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Comment"
                     android:fontFamily="@font/sfprodisplaysemibold"
-                    />
+                    android:text="Comment" />
             </LinearLayout>
 
         </LinearLayout>

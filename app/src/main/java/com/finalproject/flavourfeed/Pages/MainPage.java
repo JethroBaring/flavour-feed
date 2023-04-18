@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.finalproject.flavourfeed.Fragments.HomeFragment;
+import com.finalproject.flavourfeed.Fragments.InboxFragment;
 import com.finalproject.flavourfeed.Fragments.MarketplaceFragment;
 import com.finalproject.flavourfeed.Fragments.ProfileFragment;
 import com.finalproject.flavourfeed.R;
@@ -40,6 +41,8 @@ public class MainPage extends AppCompatActivity {
     HomeFragment homeFragment = new HomeFragment();
     MarketplaceFragment marketplaceFragment = new MarketplaceFragment();
     ProfileFragment profileFragment = new ProfileFragment();
+
+    InboxFragment inboxFragment = new InboxFragment();
 
 
     @Override
@@ -65,6 +68,9 @@ public class MainPage extends AppCompatActivity {
                         break;
                     case R.id.profilePage:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
+                        break;
+                    case R.id.inboxPage:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, inboxFragment).commit();
                         break;
                     default:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, homeFragment).commit();
