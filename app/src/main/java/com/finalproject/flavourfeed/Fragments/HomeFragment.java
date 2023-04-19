@@ -37,7 +37,6 @@ public class HomeFragment extends Fragment {
 
     FirebaseAuth mAuth;
     FirebaseFirestore db;
-    PostAdapter adapter;
 
     ArrayList<Post> posts;
     RecyclerView postRecyclerView;
@@ -49,10 +48,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
         posts = new ArrayList<>();
-        CollectionReference postRef = db.collection("postInformation");
-        ArrayList<Post> posts = new ArrayList<>();
         FloatingActionButton btnCreatePost = view.findViewById(R.id.btnCreatePost);
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
         getAllData();
@@ -67,7 +63,6 @@ public class HomeFragment extends Fragment {
     }
 
     public void getAllData() {
-
         db.collection("postInformation").orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

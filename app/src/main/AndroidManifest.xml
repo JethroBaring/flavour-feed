@@ -12,11 +12,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FlavourFeedLight"
+        android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
-            android:name=".Pages.PostPage"
-            android:exported="false" />
+            android:name=".PostPage"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+        />
         <activity
             android:name=".Pages.ThemePage"
             android:exported="false" />

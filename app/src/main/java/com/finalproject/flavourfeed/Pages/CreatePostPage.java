@@ -138,15 +138,15 @@ public class CreatePostPage extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     db = FirebaseFirestore.getInstance();
                                     Map <String, Object>newPost = new HashMap<>();
-                                    newPost.put("displayName", user.getDisplayName());
-                                    newPost.put("email", user.getEmail());
-                                    newPost.put("profileUrl", user.getPhotoUrl());
                                     newPost.put("photoUrl", uri.toString());
                                     newPost.put("caption", caption.getText().toString());
                                     newPost.put("timestamp", FieldValue.serverTimestamp());
+                                    newPost.put("userId", user.getUid());
                                     db.collection("postInformation").add(newPost).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
+                                            String postId = documentReference.getId();
+                                            db.collection("postInformation").document(postId).update("postId",postId);
                                             Snackbar.make(findViewById(android.R.id.content), "Success", Snackbar.LENGTH_LONG).show();
                                             startActivity(new Intent(getApplicationContext(), MainPage.class));
                                         }

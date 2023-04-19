@@ -135,25 +135,13 @@ public class EditProfilePage extends AppCompatActivity {
                                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                                             if (task.isSuccessful()) {
                                                 db = FirebaseFirestore.getInstance();
-                                                userRef = db.collection("user-information").document(user.getUid());
+                                                userRef = db.collection("userInformation").document(user.getUid());
                                                 Map<String, Object> updates = new HashMap<>();
                                                 updates.put("displayName", user.getDisplayName());
                                                 updates.put("profilePicture", user.getPhotoUrl());
                                                 userRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                        CollectionReference postRef = db.collection("post");
-                                                        Query query = postRef.whereEqualTo("email", user.getEmail());
-                                                        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                                            @Override
-                                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                                                                    DocumentReference documentReference = db.collection("post").document(documentSnapshot.getId());
-                                                                    documentReference.update("profileUrl", user.getPhotoUrl());
-                                                                    documentReference.update("displayName", user.getDisplayName());
-                                                                }
-                                                            }
-                                                        });
                                                         Snackbar.make(findViewById(android.R.id.content), "User profile updated.", Snackbar.LENGTH_LONG).show();
                                                     }
                                                 });
@@ -170,7 +158,7 @@ public class EditProfilePage extends AppCompatActivity {
                             Snackbar.make(findViewById(android.R.id.content), "Error: " + e.getMessage(), Snackbar.LENGTH_LONG).show();
                         }
                     });
-        } else if (txtInptNewDisplayName.getText().toString() != user.getDisplayName()) {
+        } else if (!txtInptNewDisplayName.getText().toString().equals(user.getDisplayName())) {
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(txtInptNewDisplayName.getText().toString())
                     .build();
@@ -180,7 +168,7 @@ public class EditProfilePage extends AppCompatActivity {
                 public void onComplete(@NonNull @NotNull Task<Void> task) {
                     if (task.isSuccessful()) {
                         db = FirebaseFirestore.getInstance();
-                        userRef = db.collection("user-information").document(user.getUid());
+                        userRef = db.collection("userInformation").document(user.getUid());
                         userRef.update("displayName", user.getDisplayName()).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {

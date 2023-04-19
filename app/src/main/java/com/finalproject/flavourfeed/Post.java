@@ -1,50 +1,41 @@
 package com.finalproject.flavourfeed;
 
 
-import com.google.firebase.firestore.ServerTimestamp;
-
-import java.util.ArrayList;
 
 public class Post {
-    public String displayName;
-    public String email;
-    public String profileUrl;
     public String photoUrl;
     public String caption;
+    public String userId;
+    public String postId;
+
     public Post() {
     }
 
-    public String getProfileUrl() {
-        return profileUrl;
-    }
-
-    public void setProfileUrl(String profileUrl) {
-        this.profileUrl = profileUrl;
-    }
-
-    public Post(String displayName, String email, String profileUrl, String photoUrl, String caption) {
-        this.displayName = displayName;
-        this.email = email;
-        this.profileUrl = profileUrl;
+    public Post(String photoUrl, String caption, String postId, String userId) {
         this.photoUrl = photoUrl;
         this.caption = caption;
+        this.userId = userId;
+        this.postId = postId;
     }
 
-    public String getDisplayName() {
-        return displayName;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPostId() {
+        return postId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPostId(String postId) {
+        this.postId = postId;
     }
+
+
 
     public String getPhotoUrl() {
         return photoUrl;
