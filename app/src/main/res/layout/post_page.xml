@@ -75,7 +75,7 @@
 
         <EditText
             android:id="@+id/inptComment"
-            android:layout_width="@dimen/_275sdp"
+            android:layout_width="@dimen/_255sdp"
             android:layout_height="@dimen/_20sdp"
             android:background="@drawable/simplesearch"
             android:hint="test"

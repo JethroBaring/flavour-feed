@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,8 +21,62 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHolder> {
-    Context context;
+public class CommentAdapter extends ListAdapter<Comment, CommentAdapter.CommentViewHolder> {
+    CommentClickInterface commentClickInterface;
+    FirebaseFirestore db;
+    public CommentAdapter(@NonNull DiffUtil.ItemCallback<Comment> diffCallback, CommentClickInterface commentClickInterface) {
+        super(diffCallback);
+        this.commentClickInterface = commentClickInterface;
+    }
+
+    @NonNull
+    @Override
+    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new CommentViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_card, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
+        Comment comment = getItem(position);
+        holder.bind(comment);
+    }
+
+    class CommentViewHolder extends RecyclerView.ViewHolder {
+        ImageView commenterProfile;
+        TextView commenterDisplayName;
+        TextView commentText;
+        public CommentViewHolder(@NonNull View itemView) {
+            super(itemView);
+            commenterProfile = itemView.findViewById(R.id.commenterProfile);
+            commenterDisplayName = itemView.findViewById(R.id.commenterDisplayName);
+            commentText = itemView.findViewById(R.id.txtComment);
+        }
+
+        public void bind(Comment comment){
+            db = FirebaseFirestore.getInstance();
+            DocumentReference documentReference = db.collection("userInformation").document(comment.getUserId());
+            documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if(documentSnapshot.exists()) {
+                            commenterDisplayName.setText(documentSnapshot.getString("displayName"));
+                            Glide.with(itemView.getContext()).load(documentSnapshot.getString("profilePicture")).into(commenterProfile);
+                        }
+                    }
+                }
+            });
+            commentText.setText(comment.getComment());
+        }
+    }
+
+    interface CommentClickInterface {
+        public void onDelete(int pos);
+    }
+
+}
+/*Context context;
     ArrayList<Comment> comments;
     FirebaseFirestore db;
     public CommentAdapter(Context context, ArrayList<Comment> comments) {
@@ -72,6 +128,4 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.MyViewHo
             comment = itemView.findViewById(R.id.txtComment);
         }
     }
-
-
-}
+*/

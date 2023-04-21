@@ -1,6 +1,8 @@
 package com.finalproject.flavourfeed;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.Objects;
 
@@ -63,4 +65,19 @@ public class Comment {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public static DiffUtil.ItemCallback<Comment> itemCallback = new DiffUtil.ItemCallback<Comment>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Comment oldItem, @NonNull Comment newItem) {
+            if(oldItem == null || oldItem.getCommentId() == null || newItem == null || newItem.getCommentId() == null) {
+                return false;
+            }
+            return oldItem.getCommentId().equals(newItem.getCommentId());
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Comment oldItem, @NonNull Comment newItem) {
+            return false;
+        }
+    };
 }

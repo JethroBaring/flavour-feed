@@ -17,26 +17,21 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldValue;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PostPage extends AppCompatActivity {
+public class PostPage extends AppCompatActivity implements CommentAdapter.CommentClickInterface{
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     RecyclerView commentRecyclerView;
     ArrayList<Comment> comments;
-
     String postId;
+    CommentAdapter commentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +41,16 @@ public class PostPage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         ImageView btnClosePost = findViewById(R.id.btnClosePost);
-        comments = new ArrayList<>();
         commentRecyclerView = findViewById(R.id.commentRecyclerView);
         EditText inptComment = findViewById(R.id.inptComment);
         ImageView btnComment = findViewById(R.id.btnComment);
         postId = getIntent().getStringExtra("postId");
-        commentRecyclerView.setAdapter(new CommentAdapter(PostPage.this, comments));
-        getAllData();
+        commentAdapter = new CommentAdapter(Comment.itemCallback , this);
+        commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        commentRecyclerView.setAdapter(commentAdapter);
+        commentRecyclerView.setItemAnimator(new NoChangeAnimation());
+        //initializeData(postId);
+        getAllData(postId);
 
         btnClosePost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,20 +77,56 @@ public class PostPage extends AppCompatActivity {
             }
         });
     }
+    /*public void initializeData(String postId) {
+        db.collection("commentInformation").whereEqualTo("postId", postId).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    QuerySnapshot snapshot = task.getResult();
+                    List<Comment> comments = new ArrayList<>();
 
-    public void getAllData() {
-        db.collection("commentInformation").whereEqualTo("postId", postId)
+                    for(QueryDocumentSnapshot document : snapshot) {
+                        // Get the data from each comment document and create a Comment object
+                        String commentId = document.getId();
+                        String commentText = document.getString("commentText");
+                        String userId = document.getString("userId");
+                        Comment comment = new Comment(commentId, commentText,userId,postId);
+                        comments.add(comment);
+                        commentAdapter.submitList(comments);
+                    }
+                }
+            }
+        });
+    }
+    public void addItem(Comment comment) {
+        List<Comment> commentList = new ArrayList<>(commentAdapter.getCurrentList());
+        commentList.add(comment);
+        commentAdapter.submitList(commentList);
+    }*/
+    public void getAllData(String postId) {
+        db.collection("commentInformation")
+                .orderBy("timestamp")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error == null) {
-                            comments.clear();
                             List<Comment> data = value.toObjects(Comment.class);
-                            comments.addAll(data);
-                            commentRecyclerView.setLayoutManager(new LinearLayoutManager(PostPage.this));
-                            commentRecyclerView.setAdapter(new CommentAdapter(PostPage.this, comments));
+                            comments = new ArrayList<>();
+                            for (Comment comment : data) {
+                                if (comment.getPostId().equals(postId)) {
+                                    comments.add(comment);
+                                }
+                            }
+                            commentAdapter.submitList(comments);
+                            commentRecyclerView.scrollToPosition(commentAdapter.getItemCount()-1);
                         }
                     }
                 });
+    }
+
+
+    @Override
+    public void onDelete(int pos) {
+
     }
 }
