@@ -105,8 +105,7 @@ public class SignUpPage extends AppCompatActivity {
                                     newUser.put("email", user.getEmail());
                                     newUser.put("displayName", user.getDisplayName());
                                     newUser.put("profilePicture", user.getPhotoUrl());
-
-// Add a new document with a generated ID
+                                    newUser.put("userId", user.getUid());
                                     db.collection("userInformation").document(user.getUid()).set(newUser);
                                     Intent intent = new Intent(getApplicationContext(), MainPage.class);
                                     intent.putExtra("fromSignUp", true);

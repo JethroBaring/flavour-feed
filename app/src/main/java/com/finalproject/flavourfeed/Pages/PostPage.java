@@ -1,24 +1,25 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Pages;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.bumptech.glide.Glide;
+import com.finalproject.flavourfeed.Adapters.CommentAdapter;
+import com.finalproject.flavourfeed.Entity.CommentEntity;
+import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
+import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,35 +30,42 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     RecyclerView commentRecyclerView;
-    ArrayList<Comment> comments;
-    String postId;
+    ArrayList<CommentEntity> comments;
     CommentAdapter commentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.post_page);
+        setContentView(com.finalproject.flavourfeed.R.layout.post_page);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         ImageView btnClosePost = findViewById(R.id.btnClosePost);
+        ImageView postPicture = findViewById(R.id.postPicture);
         commentRecyclerView = findViewById(R.id.commentRecyclerView);
         EditText inptComment = findViewById(R.id.inptComment);
         ImageView btnComment = findViewById(R.id.btnComment);
-        postId = getIntent().getStringExtra("postId");
-        commentAdapter = new CommentAdapter(Comment.itemCallback , this);
+        String postId = getIntent().getStringExtra("postId");
+        commentAdapter = new CommentAdapter(CommentEntity.itemCallback , this);
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentRecyclerView.setAdapter(commentAdapter);
         commentRecyclerView.setItemAnimator(new NoChangeAnimation());
-        //initializeData(postId);
+        String photoUrl;
         getAllData(postId);
-
+        DocumentReference documentReference = db.collection("postInformation").document(postId);
+        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Glide.with(PostPage.this).load(documentSnapshot.getString("photoUrl")).into(postPicture);
+            }
+        });
         btnClosePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PostPage.super.onBackPressed();
             }
         });
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
 
         btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,37 +80,13 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
                     public void onSuccess(DocumentReference documentReference) {
                         String commentId = documentReference.getId();
                         db.collection("commentInformation").document(commentId).update("commentId", commentId);
+                        inptComment.setText("");
+                        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                     }
                 });
             }
         });
     }
-    /*public void initializeData(String postId) {
-        db.collection("commentInformation").whereEqualTo("postId", postId).orderBy("timestamp").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()) {
-                    QuerySnapshot snapshot = task.getResult();
-                    List<Comment> comments = new ArrayList<>();
-
-                    for(QueryDocumentSnapshot document : snapshot) {
-                        // Get the data from each comment document and create a Comment object
-                        String commentId = document.getId();
-                        String commentText = document.getString("commentText");
-                        String userId = document.getString("userId");
-                        Comment comment = new Comment(commentId, commentText,userId,postId);
-                        comments.add(comment);
-                        commentAdapter.submitList(comments);
-                    }
-                }
-            }
-        });
-    }
-    public void addItem(Comment comment) {
-        List<Comment> commentList = new ArrayList<>(commentAdapter.getCurrentList());
-        commentList.add(comment);
-        commentAdapter.submitList(commentList);
-    }*/
     public void getAllData(String postId) {
         db.collection("commentInformation")
                 .orderBy("timestamp")
@@ -110,9 +94,9 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error == null) {
-                            List<Comment> data = value.toObjects(Comment.class);
+                            List<CommentEntity> data = value.toObjects(CommentEntity.class);
                             comments = new ArrayList<>();
-                            for (Comment comment : data) {
+                            for (CommentEntity comment : data) {
                                 if (comment.getPostId().equals(postId)) {
                                     comments.add(comment);
                                 }

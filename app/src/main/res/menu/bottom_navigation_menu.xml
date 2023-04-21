@@ -9,13 +9,18 @@
     <item
         android:id="@+id/marketPage"
         android:enabled="true"
-        android:icon="@drawable/marketplaceicon"
-        android:title="Market"/>
+        android:icon="@drawable/storeicon"
+        android:title="Search"/>
     <item
-        android:id="@+id/inboxPage"
+        android:id="@+id/searchPage"
         android:enabled="true"
-        android:icon="@drawable/emailicon"
-        android:title="Inbox"/>
+        android:icon="@drawable/searchicon"
+        android:title="Search"/>
+    <item
+        android:id="@+id/notificationPage"
+        android:enabled="true"
+        android:icon="@drawable/notificationicon"
+        android:title="Notification"/>
     <item
         android:id="@+id/profilePage"
         android:enabled="true"

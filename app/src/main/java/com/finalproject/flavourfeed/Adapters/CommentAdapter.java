@@ -1,6 +1,5 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,18 +12,18 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.finalproject.flavourfeed.Entity.CommentEntity;
+import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-
-public class CommentAdapter extends ListAdapter<Comment, CommentAdapter.CommentViewHolder> {
+public class CommentAdapter extends ListAdapter<CommentEntity, CommentAdapter.CommentViewHolder> {
     CommentClickInterface commentClickInterface;
     FirebaseFirestore db;
-    public CommentAdapter(@NonNull DiffUtil.ItemCallback<Comment> diffCallback, CommentClickInterface commentClickInterface) {
+    public CommentAdapter(@NonNull DiffUtil.ItemCallback<CommentEntity> diffCallback, CommentClickInterface commentClickInterface) {
         super(diffCallback);
         this.commentClickInterface = commentClickInterface;
     }
@@ -37,7 +36,7 @@ public class CommentAdapter extends ListAdapter<Comment, CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        Comment comment = getItem(position);
+        CommentEntity comment = getItem(position);
         holder.bind(comment);
     }
 
@@ -52,7 +51,7 @@ public class CommentAdapter extends ListAdapter<Comment, CommentAdapter.CommentV
             commentText = itemView.findViewById(R.id.txtComment);
         }
 
-        public void bind(Comment comment){
+        public void bind(CommentEntity comment){
             db = FirebaseFirestore.getInstance();
             DocumentReference documentReference = db.collection("userInformation").document(comment.getUserId());
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -71,61 +70,8 @@ public class CommentAdapter extends ListAdapter<Comment, CommentAdapter.CommentV
         }
     }
 
-    interface CommentClickInterface {
+    public interface CommentClickInterface {
         public void onDelete(int pos);
     }
 
 }
-/*Context context;
-    ArrayList<Comment> comments;
-    FirebaseFirestore db;
-    public CommentAdapter(Context context, ArrayList<Comment> comments) {
-        this.context = context;
-        this.comments = comments;
-    }
-
-    @NonNull
-    @Override
-    public CommentAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.comment_card, parent, false);
-        return new CommentAdapter.MyViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull CommentAdapter.MyViewHolder holder, int position) {
-        Comment comment = comments.get(holder.getAdapterPosition());
-        db = FirebaseFirestore.getInstance();
-        DocumentReference documentReference = db.collection("userInformation").document(comment.getUserId());
-        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot.exists()) {
-                        holder.commenterDisplayName.setText(documentSnapshot.getString("displayName"));
-                        Glide.with(holder.itemView.getContext()).load(documentSnapshot.getString("profilePicture")).into(holder.commenterProfile);
-                    }
-                }
-            }
-        });
-        holder.comment.setText(comments.get(position).getComment());
-    }
-
-    @Override
-    public int getItemCount() {
-        return comments.size();
-    }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView commenterProfile;
-        TextView commenterDisplayName;
-        TextView comment;
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            commenterProfile = itemView.findViewById(R.id.commenterProfile);
-            commenterDisplayName = itemView.findViewById(R.id.commenterDisplayName);
-            comment = itemView.findViewById(R.id.txtComment);
-        }
-    }
-*/

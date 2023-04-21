@@ -11,23 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.finalproject.flavourfeed.Pages.CreatePostPage;
-import com.finalproject.flavourfeed.Post;
-import com.finalproject.flavourfeed.PostAdapter;
+import com.finalproject.flavourfeed.Entity.PostEntity;
+import com.finalproject.flavourfeed.Adapters.PostAdapter;
 import com.finalproject.flavourfeed.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -38,7 +32,7 @@ public class HomeFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
 
-    ArrayList<Post> posts;
+    ArrayList<PostEntity> posts;
     RecyclerView postRecyclerView;
 
     @Override
@@ -68,7 +62,7 @@ public class HomeFragment extends Fragment {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error == null) {
                     posts.clear();
-                    List<Post> data = value.toObjects(Post.class);
+                    List<PostEntity> data = value.toObjects(PostEntity.class);
                     posts.addAll(data);
                     postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     postRecyclerView.setAdapter(new PostAdapter(getContext(), posts));

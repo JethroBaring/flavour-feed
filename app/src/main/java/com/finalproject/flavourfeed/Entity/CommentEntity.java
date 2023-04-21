@@ -1,19 +1,18 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Entity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.Objects;
 
-public class Comment {
+public class CommentEntity {
     public String commentId;
     public String comment;
     public String postId;
     public String userId;
 
-    public Comment(){}
-    public Comment(String commentId, String comment, String postId, String userId) {
+    public CommentEntity(){}
+    public CommentEntity(String commentId, String comment, String postId, String userId) {
         this.commentId = commentId;
         this.comment = comment;
         this.postId = postId;
@@ -53,7 +52,7 @@ public class Comment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Comment comment1 = (Comment) o;
+        CommentEntity comment1 = (CommentEntity) o;
         return Objects.equals(commentId, comment1.commentId);
     }
 
@@ -66,9 +65,9 @@ public class Comment {
         this.userId = userId;
     }
 
-    public static DiffUtil.ItemCallback<Comment> itemCallback = new DiffUtil.ItemCallback<Comment>() {
+    public static DiffUtil.ItemCallback<CommentEntity> itemCallback = new DiffUtil.ItemCallback<CommentEntity>() {
         @Override
-        public boolean areItemsTheSame(@NonNull Comment oldItem, @NonNull Comment newItem) {
+        public boolean areItemsTheSame(@NonNull CommentEntity oldItem, @NonNull CommentEntity newItem) {
             if(oldItem == null || oldItem.getCommentId() == null || newItem == null || newItem.getCommentId() == null) {
                 return false;
             }
@@ -76,7 +75,7 @@ public class Comment {
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Comment oldItem, @NonNull Comment newItem) {
+        public boolean areContentsTheSame(@NonNull CommentEntity oldItem, @NonNull CommentEntity newItem) {
             return false;
         }
     };

@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.finalproject.flavourfeed.Entity.PostEntity;
+import com.finalproject.flavourfeed.Pages.PostPage;
+import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,9 +26,9 @@ import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> {
     Context context;
-    ArrayList<Post> posts;
+    ArrayList<PostEntity> posts;
     FirebaseFirestore db;
-    public PostAdapter(Context context, ArrayList<Post> posts) {
+    public PostAdapter(Context context, ArrayList<PostEntity> posts) {
         this.context = context;
         this.posts = posts;
     }
@@ -40,7 +43,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull PostAdapter.MyViewHolder holder, int position) {
-        Post post = posts.get(holder.getAdapterPosition());
+        PostEntity post = posts.get(holder.getAdapterPosition());
         db = FirebaseFirestore.getInstance();
         DocumentReference documentReference = db.collection("userInformation").document(posts.get(position).getUserId());
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

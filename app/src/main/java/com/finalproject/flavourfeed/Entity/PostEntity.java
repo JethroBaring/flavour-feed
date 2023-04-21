@@ -1,17 +1,17 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Entity;
 
 
 
-public class Post {
+public class PostEntity {
     public String photoUrl;
     public String caption;
     public String userId;
     public String postId;
 
-    public Post() {
+    public PostEntity() {
     }
 
-    public Post(String photoUrl, String caption, String postId, String userId) {
+    public PostEntity(String photoUrl, String caption, String postId, String userId) {
         this.photoUrl = photoUrl;
         this.caption = caption;
         this.userId = userId;

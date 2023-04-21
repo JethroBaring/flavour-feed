@@ -1,39 +1,21 @@
 package com.finalproject.flavourfeed.Pages;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
 import com.finalproject.flavourfeed.Fragments.HomeFragment;
-import com.finalproject.flavourfeed.Fragments.InboxFragment;
+import com.finalproject.flavourfeed.Fragments.NotificationFragment;
 import com.finalproject.flavourfeed.Fragments.MarketplaceFragment;
 import com.finalproject.flavourfeed.Fragments.ProfileFragment;
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.Fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.zip.Inflater;
 
 public class MainPage extends AppCompatActivity {
 
@@ -42,7 +24,9 @@ public class MainPage extends AppCompatActivity {
     MarketplaceFragment marketplaceFragment = new MarketplaceFragment();
     ProfileFragment profileFragment = new ProfileFragment();
 
-    InboxFragment inboxFragment = new InboxFragment();
+    NotificationFragment notificationFragment = new NotificationFragment();
+
+    SearchFragment searchFragment = new SearchFragment();
 
 
     @Override
@@ -50,7 +34,7 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
         bottomNavigationView = findViewById(R.id.bottomNav);
-        if(getIntent().getBooleanExtra("fromSignUp", false) || getIntent().getBooleanExtra("fromUpdateProfile", false)) {
+        if (getIntent().getBooleanExtra("fromSignUp", false) || getIntent().getBooleanExtra("fromUpdateProfile", false)) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
             bottomNavigationView.setSelectedItemId(R.id.profilePage);
         } else {
@@ -66,11 +50,14 @@ public class MainPage extends AppCompatActivity {
                     case R.id.marketPage:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, marketplaceFragment).commit();
                         break;
+                    case R.id.searchPage:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, searchFragment).commit();
+                        break;
+                    case R.id.notificationPage:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, notificationFragment).commit();
+                        break;
                     case R.id.profilePage:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
-                        break;
-                    case R.id.inboxPage:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, inboxFragment).commit();
                         break;
                     default:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, homeFragment).commit();
@@ -79,7 +66,6 @@ public class MainPage extends AppCompatActivity {
                 return true;
             }
         });
-
 
 
     }
