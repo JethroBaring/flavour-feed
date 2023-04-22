@@ -1,5 +1,6 @@
 package com.finalproject.flavourfeed.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -7,14 +8,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.finalproject.flavourfeed.Adapters.NotificationAdapter;
+import com.finalproject.flavourfeed.Adapters.SearchAdapter;
 import com.finalproject.flavourfeed.Entity.CommentEntity;
 import com.finalproject.flavourfeed.Entity.NotificationEntity;
+import com.finalproject.flavourfeed.Pages.LogInPage;
+import com.finalproject.flavourfeed.Pages.PostPage;
 import com.finalproject.flavourfeed.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,6 +44,7 @@ public class NotificationFragment extends Fragment implements NotificationAdapte
     NotificationAdapter notificationAdapter;
     FirebaseFirestore db;
     FirebaseUser user;
+    ProfileFragment profileFragment = new ProfileFragment();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,35 +63,36 @@ public class NotificationFragment extends Fragment implements NotificationAdapte
     public void getAllData() {
         db.collection("notificationInformation").orderBy("timestamp")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error == null) {
-                    List<NotificationEntity> data = value.toObjects(NotificationEntity.class);
-                    notifications = new ArrayList<>();
-                    for (NotificationEntity notification : data) {
-                        if (notification.getToUserId().equals(user.getUid()))
-                            notifications.add(notification);
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error == null) {
+                            List<NotificationEntity> data = value.toObjects(NotificationEntity.class);
+                            notifications = new ArrayList<>();
+                            for (NotificationEntity notification : data) {
+                                if (notification.getToUserId().equals(user.getUid()))
+                                    notifications.add(notification);
+                            }
+                            notificationAdapter.submitList(notifications);
+                            notificationRecyclerView.scrollToPosition(notificationAdapter.getItemCount() - 1);
+                        }
                     }
-                    notificationAdapter.submitList(notifications);
-                    notificationRecyclerView.scrollToPosition(notificationAdapter.getItemCount() - 1);
-                }
-            }
-        });
+                });
     }
 
-    public void addDummyData() {
-        Map<String, Object> newNotification = new HashMap<>();
-        newNotification.put("notificationId", UUID.randomUUID().toString());
-        newNotification.put("toUserId", "yXLUGG6MXeRBnGtUaMIMh6tu8nt1");
-        newNotification.put("fromUserId", "yXLUGG6MXeRBnGtUaMIMh6tu8nt1");
-        newNotification.put("notificationType", 0);
-        newNotification.put("postId", UUID.randomUUID().toString());
-        newNotification.put("timestamp", FieldValue.serverTimestamp());
-        db.collection("notificationInformation").add(newNotification);
-    }
 
     @Override
     public void onDelete(int pos) {
 
+    }
+
+    @Override
+    public void onNotificationClick(NotificationEntity notification) {
+        if (notification.getNotificationType() == NotificationEntity.FRIEND_REQUEST_NOTIFICATION) {
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
+        } else {
+            Intent intent = new Intent(getContext(), PostPage.class);
+            intent.putExtra("postId", notification.getPostId());
+            startActivity(intent);
+        }
     }
 }

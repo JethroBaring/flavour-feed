@@ -54,7 +54,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.MyViewHolder> 
                     if(documentSnapshot.exists()) {
                         holder.displayName.setText(documentSnapshot.getString("displayName"));
                         holder.email.setText(documentSnapshot.getString("email"));
-                        Glide.with(holder.itemView.getContext()).load(documentSnapshot.getString("profilePicture")).into(holder.profile);
+                        Glide.with(holder.itemView.getContext()).load(documentSnapshot.getString("profileUrl")).into(holder.profile);
                     }
                  }
             }

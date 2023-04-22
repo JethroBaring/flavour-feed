@@ -61,7 +61,7 @@ public class CommentAdapter extends ListAdapter<CommentEntity, CommentAdapter.Co
                         DocumentSnapshot documentSnapshot = task.getResult();
                         if(documentSnapshot.exists()) {
                             commenterDisplayName.setText(documentSnapshot.getString("displayName"));
-                            Glide.with(itemView.getContext()).load(documentSnapshot.getString("profilePicture")).into(commenterProfile);
+                            Glide.with(itemView.getContext()).load(documentSnapshot.getString("profileUrl")).into(commenterProfile);
                         }
                     }
                 }

@@ -138,7 +138,7 @@ public class EditProfilePage extends AppCompatActivity {
                                                 userRef = db.collection("userInformation").document(user.getUid());
                                                 Map<String, Object> updates = new HashMap<>();
                                                 updates.put("displayName", user.getDisplayName());
-                                                updates.put("profilePicture", user.getPhotoUrl());
+                                                updates.put("profileUrl", user.getPhotoUrl());
                                                 userRef.update(updates).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {

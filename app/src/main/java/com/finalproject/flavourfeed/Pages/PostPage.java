@@ -1,5 +1,6 @@
 package com.finalproject.flavourfeed.Pages;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,9 +15,12 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Adapters.CommentAdapter;
 import com.finalproject.flavourfeed.Entity.CommentEntity;
+import com.finalproject.flavourfeed.Entity.NotificationEntity;
 import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.finalproject.flavourfeed.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.*;
@@ -84,6 +88,32 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
                         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                     }
                 });
+
+                db.collection("postInformation").document(postId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()) {
+                            DocumentSnapshot documentSnapshot = task.getResult();
+                            String postUserId = documentSnapshot.getString("userId");
+                            if(postUserId != user.getUid()) {
+                                Map<String, Object> newNotification = new HashMap<>();
+                                newNotification.put("toUserId", postUserId);
+                                newNotification.put("fromUserId", user.getUid());
+                                newNotification.put("notificationType", NotificationEntity.COMMENT_NOTIFICATION);
+                                newNotification.put("postId", postId);
+                                newNotification.put("timestamp", FieldValue.serverTimestamp());
+                                db.collection("notificationInformation").add(newNotification).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        String notificationId = documentReference.getId();
+                                        db.collection("notificationInformation").document(notificationId).update("notificationId", notificationId);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+
             }
         });
     }

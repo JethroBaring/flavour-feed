@@ -104,7 +104,7 @@ public class SignUpPage extends AppCompatActivity {
                                     Map<String, Object> newUser = new HashMap<>();
                                     newUser.put("email", user.getEmail());
                                     newUser.put("displayName", user.getDisplayName());
-                                    newUser.put("profilePicture", user.getPhotoUrl());
+                                    newUser.put("profileUrl", user.getPhotoUrl());
                                     newUser.put("userId", user.getUid());
                                     db.collection("userInformation").document(user.getUid()).set(newUser);
                                     Intent intent = new Intent(getApplicationContext(), MainPage.class);
