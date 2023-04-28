@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.finalproject.flavourfeed.Entity.ChatEntity;
+import com.finalproject.flavourfeed.Models.ChatModel;
 
-public class ChatAdapter extends ListAdapter<ChatEntity, ChatAdapter.ChatViewHolder> {
+public class ChatAdapter extends ListAdapter<ChatModel, ChatAdapter.ChatViewHolder> {
     public ChatAdapter(@NonNull DiffUtil.ItemCallback diffCallback) {
         super(diffCallback);
     }

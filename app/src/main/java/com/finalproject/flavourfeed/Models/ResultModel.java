@@ -1,9 +1,9 @@
-package com.finalproject.flavourfeed.Entity;
+package com.finalproject.flavourfeed.Models;
 
-public class ResultEntity {
+public class ResultModel {
     public String userId;
 
-    public ResultEntity(String userId) {
+    public ResultModel(String userId) {
         this.userId = userId;
     }
 

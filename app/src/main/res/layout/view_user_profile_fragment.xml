@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.ViewUserProfileFragment">
+    <TextView
+        android:id="@+id/profileDisplayName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:text="displayname"
+        android:textAlignment="center"
+        android:fontFamily="@font/sfprodisplaymedium"
+        android:textSize="@dimen/_15ssp"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:id="@+id/profileInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@color/flutter_dark"
+            android:scaleType="fitXY"
+            app:shapeAppearanceOverlay="@style/circular_image" />
+
+        <TextView
+            android:id="@+id/profileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="name@gmail.com"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/sfprodisplayregular"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Silver Member"
+            android:textSize="@dimen/_10ssp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/profileStatistics"
+        android:layout_below="@id/profileInformation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/_10sdp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:fontFamily="@font/sfprodisplaybold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friends"
+                android:fontFamily="@font/sfprodisplayregular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/_10sdp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:fontFamily="@font/sfprodisplaybold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Posts"
+                android:fontFamily="@font/sfprodisplayregular" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/_10sdp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:fontFamily="@font/sfprodisplaybold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Likes"
+                android:fontFamily="@font/sfprodisplayregular" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/profileButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileStatistics"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAddFriend"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/roundeddefault"
+            android:fontFamily="@font/sfprodisplayregular"
+            android:text="Add Friend"
+            android:textSize="@dimen/_10ssp"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/btnActivityLog"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:background="@drawable/roundeddefault"
+            android:fontFamily="@font/sfprodisplayregular"
+            android:text="View Friends"
+            android:textSize="@dimen/_10ssp"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
+
+</RelativeLayout>

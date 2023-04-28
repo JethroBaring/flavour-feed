@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
 import com.finalproject.flavourfeed.R;
 import com.google.firebase.auth.FirebaseAuth;
 

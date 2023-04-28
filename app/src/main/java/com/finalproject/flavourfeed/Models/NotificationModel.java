@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed.Entity;
+package com.finalproject.flavourfeed.Models;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.Objects;
 
-public class NotificationEntity {
+public class NotificationModel {
 
     public String notificationId;
     public String toUserId;
@@ -18,22 +18,31 @@ public class NotificationEntity {
     public static final int COMMENT_NOTIFICATION = 2;
     public static final int LIKE_NOTIFICATION = 3;
 
-    public NotificationEntity() {
+    public static final int ACCEPTED_NOTIFICATION = 4;
+    public static final int REJECTED_NOTIFICATION = 5;
+
+    public static final String SENT_FRIEND_REQUEST = "sentFriendRequest";
+
+    public static final String RECEIVED_FRIEND_REQUEST = "receivedFriendRequest";
+    public NotificationModel() {
     }
 
-    public NotificationEntity(String toUserId, String fromUserId, int notificationType, String postId) {
+
+
+    public NotificationModel(String toUserId, String fromUserId, int notificationType, String postId) {
         this.toUserId = toUserId;
         this.fromUserId = fromUserId;
         this.notificationType = notificationType;
         this.postId = postId;
     }
 
-    public NotificationEntity(String toUserId, String fromUserId, int notificationType) {
+    public NotificationModel(String toUserId, String fromUserId, int notificationType) {
         this.toUserId = toUserId;
         this.fromUserId = fromUserId;
         this.notificationType = notificationType;
         this.postId = null;
     }
+
 
     public String getToUserId() {
         return toUserId;
@@ -84,18 +93,21 @@ public class NotificationEntity {
     public boolean equals(@Nullable Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        NotificationEntity notification = (NotificationEntity) obj;
+        NotificationModel notification = (NotificationModel) obj;
         return Objects.equals(notificationId, notification.getNotificationId());
     }
 
-    public static DiffUtil.ItemCallback<NotificationEntity> itemCallback = new DiffUtil.ItemCallback<NotificationEntity>() {
+    public static DiffUtil.ItemCallback<NotificationModel> itemCallback = new DiffUtil.ItemCallback<NotificationModel>() {
         @Override
-        public boolean areItemsTheSame(@NonNull NotificationEntity oldItem, @NonNull NotificationEntity newItem) {
+        public boolean areItemsTheSame(@NonNull NotificationModel oldItem, @NonNull NotificationModel newItem) {
+            if(oldItem == null || oldItem.getNotificationId() == null || newItem == null || newItem.getNotificationId() == null) {
+                return false;
+            }
             return oldItem.getNotificationId().equals(newItem.notificationId);
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull NotificationEntity oldItem, @NonNull NotificationEntity newItem) {
+        public boolean areContentsTheSame(@NonNull NotificationModel oldItem, @NonNull NotificationModel newItem) {
             return oldItem.getNotificationId().equals(newItem.notificationId);
         }
     };

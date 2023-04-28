@@ -8,44 +8,32 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.finalproject.flavourfeed.Adapters.NotificationAdapter;
-import com.finalproject.flavourfeed.Adapters.SearchAdapter;
-import com.finalproject.flavourfeed.Entity.CommentEntity;
-import com.finalproject.flavourfeed.Entity.NotificationEntity;
-import com.finalproject.flavourfeed.Pages.LogInPage;
+import com.finalproject.flavourfeed.Models.NotificationModel;
 import com.finalproject.flavourfeed.Pages.PostPage;
 import com.finalproject.flavourfeed.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 public class NotificationFragment extends Fragment implements NotificationAdapter.NotificationClickInterface {
     RecyclerView notificationRecyclerView;
-    ArrayList<NotificationEntity> notifications;
+    ArrayList<NotificationModel> notifications;
     NotificationAdapter notificationAdapter;
     FirebaseFirestore db;
     FirebaseUser user;
-    ProfileFragment profileFragment = new ProfileFragment();
 
+    ViewUserProfileFragment viewUserProfileFragment = new ViewUserProfileFragment();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,7 +41,7 @@ public class NotificationFragment extends Fragment implements NotificationAdapte
         notificationRecyclerView = view.findViewById(R.id.notificationRecyclerView);
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        notificationAdapter = new NotificationAdapter(NotificationEntity.itemCallback, this);
+        notificationAdapter = new NotificationAdapter(NotificationModel.itemCallback, this);
         notificationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         notificationRecyclerView.setAdapter(notificationAdapter);
         getAllData();
@@ -66,9 +54,9 @@ public class NotificationFragment extends Fragment implements NotificationAdapte
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error == null) {
-                            List<NotificationEntity> data = value.toObjects(NotificationEntity.class);
+                            List<NotificationModel> data = value.toObjects(NotificationModel.class);
                             notifications = new ArrayList<>();
-                            for (NotificationEntity notification : data) {
+                            for (NotificationModel notification : data) {
                                 if (notification.getToUserId().equals(user.getUid()))
                                     notifications.add(notification);
                             }
@@ -86,9 +74,12 @@ public class NotificationFragment extends Fragment implements NotificationAdapte
     }
 
     @Override
-    public void onNotificationClick(NotificationEntity notification) {
-        if (notification.getNotificationType() == NotificationEntity.FRIEND_REQUEST_NOTIFICATION) {
-            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, profileFragment).commit();
+    public void onNotificationClick(NotificationModel notification) {
+        if (notification.getNotificationType() != NotificationModel.COMMENT_NOTIFICATION && notification.getNotificationType() != NotificationModel.LIKE_NOTIFICATION) {
+            Bundle bundle = new Bundle();
+            bundle.putString("fromUserId",notification.getFromUserId());
+            viewUserProfileFragment.setArguments(bundle);
+            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, viewUserProfileFragment).commit();
         } else {
             Intent intent = new Intent(getContext(), PostPage.class);
             intent.putExtra("postId", notification.getPostId());

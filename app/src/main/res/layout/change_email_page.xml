@@ -10,26 +10,26 @@
         android:id="@+id/icnSettingsBack"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/backicon"
-        android:layout_marginStart="@dimen/_10sdp" />
+        android:layout_marginStart="@dimen/_10sdp"
+        android:src="@drawable/backicon" />
 
     <TextView
         android:id="@+id/txtTheme"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
-        android:text="Change Email"
+        android:layout_centerHorizontal="true"
         android:fontFamily="@font/sfprodisplaymedium"
-        android:textSize="@dimen/_15ssp"
-        android:layout_centerHorizontal="true" />
+        android:text="Change Email"
+        android:textSize="@dimen/_15ssp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_50sdp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="@dimen/_90sdp"
@@ -116,12 +116,12 @@
         android:id="@+id/btnChangeEmail"
         android:layout_width="@dimen/_250sdp"
         android:layout_height="@dimen/_45sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_100sdp"
         android:background="@drawable/roundeddefault"
         android:fontFamily="@font/sfprodisplaybold"
         android:text="CONFIRM"
         android:textSize="@dimen/_12ssp"
-        app:backgroundTint="@null"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_100sdp"
-        android:layout_centerHorizontal="true" />
+        app:backgroundTint="@null" />
 </RelativeLayout>

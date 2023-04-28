@@ -15,6 +15,15 @@
         android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
+            android:name=".ChatRoomPage"
+            android:exported="false" />
+        <activity
+            android:name=".ChatSearchPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.ChatPage"
+            android:exported="false" />
+        <activity
             android:name=".Pages.PostPage"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />

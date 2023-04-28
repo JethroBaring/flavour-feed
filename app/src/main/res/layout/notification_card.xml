@@ -55,12 +55,14 @@
             <LinearLayout
                 android:id="@+id/requestButtons"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
+                android:layout_height="wrap_content"
+                >
                 <LinearLayout
+                    android:id="@+id/acceptRequest"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_10sdp">
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -68,6 +70,7 @@
                         android:src="@drawable/checkicon" />
 
                     <TextView
+                        android:id="@+id/txtAccept"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -75,8 +78,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/rejectRequest"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+
+                    >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -84,10 +90,11 @@
                         android:src="@drawable/closeicon" />
 
                     <TextView
+                        android:id="@+id/txtReject"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:text="Deny" />
+                        android:text="Reject" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.finalproject.flavourfeed.Pages.ChatPage;
 import com.finalproject.flavourfeed.Pages.CreatePostPage;
-import com.finalproject.flavourfeed.Entity.PostEntity;
+import com.finalproject.flavourfeed.Models.PostModel;
 import com.finalproject.flavourfeed.Adapters.PostAdapter;
 import com.finalproject.flavourfeed.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,7 +34,7 @@ public class HomeFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
 
-    ArrayList<PostEntity> posts;
+    ArrayList<PostModel> posts;
     RecyclerView postRecyclerView;
 
     @Override
@@ -46,6 +48,14 @@ public class HomeFragment extends Fragment {
         FloatingActionButton btnCreatePost = view.findViewById(R.id.btnCreatePost);
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
         getAllData();
+        ImageView btnChat = view.findViewById(R.id.btnChat);
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ChatPage.class));
+            }
+        });
 
         btnCreatePost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +72,7 @@ public class HomeFragment extends Fragment {
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error == null) {
                     posts.clear();
-                    List<PostEntity> data = value.toObjects(PostEntity.class);
+                    List<PostModel> data = value.toObjects(PostModel.class);
                     posts.addAll(data);
                     postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                     postRecyclerView.setAdapter(new PostAdapter(getContext(), posts));

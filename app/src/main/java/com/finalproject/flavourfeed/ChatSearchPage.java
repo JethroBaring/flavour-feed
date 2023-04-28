@@ -1,17 +1,14 @@
-package com.finalproject.flavourfeed.Fragments;
-
-import android.content.Context;
-import android.os.Bundle;
+package com.finalproject.flavourfeed;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -19,9 +16,10 @@ import android.widget.TextView;
 
 import com.finalproject.flavourfeed.Adapters.SearchAdapter;
 import com.finalproject.flavourfeed.Models.ResultModel;
-import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -31,30 +29,32 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchFragment extends Fragment{
+public class ChatSearchPage extends AppCompatActivity {
+
     FirebaseFirestore db;
+    FirebaseUser user;
     List<ResultModel> results;
 
-    ViewUserProfileFragment viewUserProfileFragment = new ViewUserProfileFragment();
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.search_fragment, container, false);
-        EditText search = view.findViewById(R.id.search);
-        RecyclerView searchRecyclerView = view.findViewById(R.id.searchRecyclerView);
-        TextView notFound = view.findViewById(R.id.notFound);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.chat_search_page);
+        EditText search = findViewById(R.id.search);
+        RecyclerView searchRecyclerView = findViewById(R.id.searchRecyclerView);
+        TextView notFound = findViewById(R.id.notFound);
         db = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         results = new ArrayList<>();
         CollectionReference usersRef = db.collection("userInformation");
-        InputMethodManager inputMethodManager = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH  || keyEvent.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
-                    inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+                if (i == EditorInfo.IME_ACTION_SEARCH || keyEvent.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
+                    inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                     String toBeSearch = search.getText().toString();
-                    if(!toBeSearch.isEmpty()) {
+                    if (!toBeSearch.isEmpty()) {
 
                         Query query = usersRef.orderBy("displayName").startAt(toBeSearch).endAt(toBeSearch + "\uf8ff").limit(10);
                         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -64,19 +64,12 @@ public class SearchFragment extends Fragment{
                                     results.clear();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         String userId = document.getString("userId");
-                                        results.add(new ResultModel(userId));
+                                        if(!userId.equals(user.getUid()))
+                                            results.add(new ResultModel(userId));
                                     }
                                     search.setText("");
-                                    searchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                                    searchRecyclerView.setAdapter(new SearchAdapter(getContext(), results, new SearchAdapter.SearchResultClickInterface() {
-                                        @Override
-                                        public void viewUserProfile(String fromUserId) {
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString("fromUserId",fromUserId);
-                                            viewUserProfileFragment.setArguments(bundle);
-                                            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, viewUserProfileFragment).commit();
-                                        }
-                                    }));
+                                    searchRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                                    searchRecyclerView.setAdapter(new ChatSearchAdapter(getApplicationContext(), results));
                                 } else {
                                     notFound.setVisibility(View.VISIBLE);
                                 }
@@ -87,6 +80,5 @@ public class SearchFragment extends Fragment{
                 return false;
             }
         });
-        return view;
     }
 }

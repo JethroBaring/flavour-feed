@@ -14,8 +14,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Adapters.CommentAdapter;
-import com.finalproject.flavourfeed.Entity.CommentEntity;
-import com.finalproject.flavourfeed.Entity.NotificationEntity;
+import com.finalproject.flavourfeed.Firebase.FirebaseOperations;
+import com.finalproject.flavourfeed.Models.CommentModel;
+import com.finalproject.flavourfeed.Models.NotificationModel;
 import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,11 +31,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PostPage extends AppCompatActivity implements CommentAdapter.CommentClickInterface{
+public class PostPage extends AppCompatActivity implements CommentAdapter.CommentClickInterface {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     RecyclerView commentRecyclerView;
-    ArrayList<CommentEntity> comments;
+    ArrayList<CommentModel> comments;
     CommentAdapter commentAdapter;
 
     @Override
@@ -50,7 +51,7 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
         EditText inptComment = findViewById(R.id.inptComment);
         ImageView btnComment = findViewById(R.id.btnComment);
         String postId = getIntent().getStringExtra("postId");
-        commentAdapter = new CommentAdapter(CommentEntity.itemCallback , this);
+        commentAdapter = new CommentAdapter(CommentModel.itemCallback, this);
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentRecyclerView.setAdapter(commentAdapter);
         commentRecyclerView.setItemAnimator(new NoChangeAnimation());
@@ -92,23 +93,12 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
                 db.collection("postInformation").document(postId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             DocumentSnapshot documentSnapshot = task.getResult();
                             String postUserId = documentSnapshot.getString("userId");
-                            if(postUserId != user.getUid()) {
-                                Map<String, Object> newNotification = new HashMap<>();
-                                newNotification.put("toUserId", postUserId);
-                                newNotification.put("fromUserId", user.getUid());
-                                newNotification.put("notificationType", NotificationEntity.COMMENT_NOTIFICATION);
-                                newNotification.put("postId", postId);
-                                newNotification.put("timestamp", FieldValue.serverTimestamp());
-                                db.collection("notificationInformation").add(newNotification).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        String notificationId = documentReference.getId();
-                                        db.collection("notificationInformation").document(notificationId).update("notificationId", notificationId);
-                                    }
-                                });
+                            if (postUserId != user.getUid()) {
+                                NotificationModel newNotification = new NotificationModel(postUserId, user.getUid(), NotificationModel.COMMENT_NOTIFICATION, postId);
+                                FirebaseOperations.addNotification(newNotification, db);
                             }
                         }
                     }
@@ -117,6 +107,7 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
             }
         });
     }
+
     public void getAllData(String postId) {
         db.collection("commentInformation")
                 .orderBy("timestamp")
@@ -124,15 +115,15 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error == null) {
-                            List<CommentEntity> data = value.toObjects(CommentEntity.class);
+                            List<CommentModel> data = value.toObjects(CommentModel.class);
                             comments = new ArrayList<>();
-                            for (CommentEntity comment : data) {
+                            for (CommentModel comment : data) {
                                 if (comment.getPostId().equals(postId)) {
                                     comments.add(comment);
                                 }
                             }
                             commentAdapter.submitList(comments);
-                            commentRecyclerView.scrollToPosition(commentAdapter.getItemCount()-1);
+                            commentRecyclerView.scrollToPosition(commentAdapter.getItemCount() - 1);
                         }
                     }
                 });

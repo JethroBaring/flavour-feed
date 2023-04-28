@@ -23,9 +23,7 @@ public class MainPage extends AppCompatActivity {
     HomeFragment homeFragment = new HomeFragment();
     MarketplaceFragment marketplaceFragment = new MarketplaceFragment();
     ProfileFragment profileFragment = new ProfileFragment();
-
     NotificationFragment notificationFragment = new NotificationFragment();
-
     SearchFragment searchFragment = new SearchFragment();
 
 

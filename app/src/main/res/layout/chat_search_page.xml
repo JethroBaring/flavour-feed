@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.MarketplaceFragment">
-
+    tools:context=".ChatSearchPage">
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -18,32 +17,36 @@
         android:orientation="horizontal">
 
         <EditText
-            android:layout_width="@dimen/_265sdp"
+            android:id="@+id/search"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
             android:background="@drawable/simplesearch"
             android:drawableStart="@drawable/searchicon"
             android:hint="Search"
             android:padding="0dp"
             android:paddingStart="@dimen/_5sdp"
-            android:textSize="@dimen/_12ssp" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_30sdp"
-            android:src="@drawable/carticon" />
+            android:textSize="@dimen/_12ssp"
+            android:maxLength="30"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/productRecyclerView"
+        android:id="@+id/searchRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/topBar"
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginEnd="@dimen/_5sdp" />
+    <TextView
+        android:id="@+id/notFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topBar"
+        android:layout_centerHorizontal="true"
+        android:text="Not found."
+        android:visibility="invisible"
+        />
 
 </RelativeLayout>

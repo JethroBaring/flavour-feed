@@ -1,12 +1,9 @@
 package com.finalproject.flavourfeed.Pages;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+import com.finalproject.flavourfeed.Pages.LogInPage;
+import com.finalproject.flavourfeed.Pages.MainPage;
 import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

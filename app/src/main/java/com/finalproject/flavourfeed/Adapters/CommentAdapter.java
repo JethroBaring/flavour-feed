@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.finalproject.flavourfeed.Entity.CommentEntity;
+import com.finalproject.flavourfeed.Models.CommentModel;
 import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,10 +20,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class CommentAdapter extends ListAdapter<CommentEntity, CommentAdapter.CommentViewHolder> {
+public class CommentAdapter extends ListAdapter<CommentModel, CommentAdapter.CommentViewHolder> {
     CommentClickInterface commentClickInterface;
     FirebaseFirestore db;
-    public CommentAdapter(@NonNull DiffUtil.ItemCallback<CommentEntity> diffCallback, CommentClickInterface commentClickInterface) {
+    public CommentAdapter(@NonNull DiffUtil.ItemCallback<CommentModel> diffCallback, CommentClickInterface commentClickInterface) {
         super(diffCallback);
         this.commentClickInterface = commentClickInterface;
     }
@@ -36,7 +36,7 @@ public class CommentAdapter extends ListAdapter<CommentEntity, CommentAdapter.Co
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        CommentEntity comment = getItem(position);
+        CommentModel comment = getItem(position);
         holder.bind(comment);
     }
 
@@ -51,7 +51,7 @@ public class CommentAdapter extends ListAdapter<CommentEntity, CommentAdapter.Co
             commentText = itemView.findViewById(R.id.txtComment);
         }
 
-        public void bind(CommentEntity comment){
+        public void bind(CommentModel comment){
             db = FirebaseFirestore.getInstance();
             DocumentReference documentReference = db.collection("userInformation").document(comment.getUserId());
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

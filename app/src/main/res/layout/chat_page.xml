@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Pages.ChatPage">
+
+    <ImageView
+        android:id="@+id/icnSettingsBack"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/backicon"
+        android:layout_marginStart="@dimen/_10sdp" />
+    <ImageView
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:id="@+id/icnSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:src="@drawable/searchicon"
+        android:layout_alignParentEnd="true"
+        />
+    <TextView
+        android:id="@+id/txtChats"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_30sdp"
+        android:text="Chats"
+        android:fontFamily="@font/sfprodisplaymedium"
+        android:textSize="@dimen/_15ssp"
+        android:layout_centerHorizontal="true" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@id/txtChats"
+        android:id="@+id/chatListRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

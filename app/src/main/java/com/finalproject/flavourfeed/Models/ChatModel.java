@@ -1,16 +1,16 @@
-package com.finalproject.flavourfeed.Entity;
+package com.finalproject.flavourfeed.Models;
 
 import androidx.annotation.Nullable;
 
-public class ChatEntity {
+public class ChatModel {
     public String chatId;
     public String senderId;
     public String recieverId;
     public String chatMessage;
 
-    public ChatEntity() {}
+    public ChatModel() {}
 
-    public ChatEntity(String chatId, String senderId, String recieverId, String chatMessage) {
+    public ChatModel(String chatId, String senderId, String recieverId, String chatMessage) {
         this.chatId = chatId;
         this.senderId = senderId;
         this.recieverId = recieverId;

@@ -1,18 +1,18 @@
-package com.finalproject.flavourfeed.Entity;
+package com.finalproject.flavourfeed.Models;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
 import java.util.Objects;
 
-public class CommentEntity {
+public class CommentModel {
     public String commentId;
     public String comment;
     public String postId;
     public String userId;
 
-    public CommentEntity(){}
-    public CommentEntity(String commentId, String comment, String postId, String userId) {
+    public CommentModel(){}
+    public CommentModel(String commentId, String comment, String postId, String userId) {
         this.commentId = commentId;
         this.comment = comment;
         this.postId = postId;
@@ -52,7 +52,7 @@ public class CommentEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CommentEntity comment1 = (CommentEntity) o;
+        CommentModel comment1 = (CommentModel) o;
         return Objects.equals(commentId, comment1.commentId);
     }
 
@@ -65,9 +65,9 @@ public class CommentEntity {
         this.userId = userId;
     }
 
-    public static DiffUtil.ItemCallback<CommentEntity> itemCallback = new DiffUtil.ItemCallback<CommentEntity>() {
+    public static DiffUtil.ItemCallback<CommentModel> itemCallback = new DiffUtil.ItemCallback<CommentModel>() {
         @Override
-        public boolean areItemsTheSame(@NonNull CommentEntity oldItem, @NonNull CommentEntity newItem) {
+        public boolean areItemsTheSame(@NonNull CommentModel oldItem, @NonNull CommentModel newItem) {
             if(oldItem == null || oldItem.getCommentId() == null || newItem == null || newItem.getCommentId() == null) {
                 return false;
             }
@@ -75,7 +75,7 @@ public class CommentEntity {
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull CommentEntity oldItem, @NonNull CommentEntity newItem) {
+        public boolean areContentsTheSame(@NonNull CommentModel oldItem, @NonNull CommentModel newItem) {
             return false;
         }
     };
