@@ -1,16 +1,18 @@
 package com.finalproject.flavourfeed.Models;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DiffUtil;
 
-public class ChatModel {
+public class MessageModel {
     public String chatId;
     public String senderId;
     public String recieverId;
     public String chatMessage;
 
-    public ChatModel() {}
+    public MessageModel() {}
 
-    public ChatModel(String chatId, String senderId, String recieverId, String chatMessage) {
+    public MessageModel(String chatId, String senderId, String recieverId, String chatMessage) {
         this.chatId = chatId;
         this.senderId = senderId;
         this.recieverId = recieverId;
@@ -58,4 +60,15 @@ public class ChatModel {
     public boolean equals(@Nullable Object obj) {
         return super.equals(obj);
     }
+    public static DiffUtil.ItemCallback<MessageModel> itemCallback = new DiffUtil.ItemCallback<MessageModel>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull MessageModel oldItem, @NonNull MessageModel newItem) {
+            return false;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull MessageModel oldItem, @NonNull MessageModel newItem) {
+            return false;
+        }
+    };
 }

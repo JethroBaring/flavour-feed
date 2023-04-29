@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.finalproject.flavourfeed.Pages.ChatPage;
+import com.finalproject.flavourfeed.Pages.ChatRoomPage;
 import com.finalproject.flavourfeed.Pages.CreatePostPage;
 import com.finalproject.flavourfeed.Models.PostModel;
 import com.finalproject.flavourfeed.Adapters.PostAdapter;
@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ChatPage.class));
+                startActivity(new Intent(getActivity(), ChatRoomPage.class));
             }
         });
 

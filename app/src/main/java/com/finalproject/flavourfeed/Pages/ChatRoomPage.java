@@ -10,11 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.finalproject.flavourfeed.Adapters.CommentAdapter;
 import com.finalproject.flavourfeed.ChatRoomAdapter;
 import com.finalproject.flavourfeed.ChatRoomModel;
 import com.finalproject.flavourfeed.ChatSearchPage;
-import com.finalproject.flavourfeed.Models.CommentModel;
 import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatPage extends AppCompatActivity {
+public class ChatRoomPage extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseUser user;
     RecyclerView chatListRecyclerView;
@@ -37,7 +35,7 @@ public class ChatPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_page);
+        setContentView(R.layout.message_page);
         db = FirebaseFirestore.getInstance();
         chatListRecyclerView = findViewById(R.id.chatListRecyclerView);
         user = FirebaseAuth.getInstance().getCurrentUser();

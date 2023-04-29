@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.finalproject.flavourfeed.Adapters.CommentAdapter;
 
 public class ChatRoomAdapter extends ListAdapter<ChatRoomModel, ChatRoomAdapter.ChatRoomViewHolder> {
 
@@ -29,6 +28,7 @@ public class ChatRoomAdapter extends ListAdapter<ChatRoomModel, ChatRoomAdapter.
         ChatRoomModel chatRoomModel = getItem(position);
         holder.bind(chatRoomModel);
     }
+
 
     class ChatRoomViewHolder extends RecyclerView.ViewHolder {
         public ChatRoomViewHolder(@NonNull View itemView) {
