@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,8 +18,8 @@ import com.finalproject.flavourfeed.Adapters.CommentAdapter;
 import com.finalproject.flavourfeed.Firebase.FirebaseOperations;
 import com.finalproject.flavourfeed.Models.CommentModel;
 import com.finalproject.flavourfeed.Models.NotificationModel;
-import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

@@ -68,7 +68,7 @@ public class MessageModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         MessageModel message = (MessageModel) o;
-        return Objects.equals(messageId, message.messageId);
+        return messageId.equals(((MessageModel) o).getMessageId()) && senderId.equals(((MessageModel) o).getSenderId()) && receiverId.equals(((MessageModel) o).getReceiverId()) && message.equals(((MessageModel) o).getMessage());
     }
     public static DiffUtil.ItemCallback<MessageModel> itemCallback = new DiffUtil.ItemCallback<MessageModel>() {
         @Override

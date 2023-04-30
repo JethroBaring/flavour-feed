@@ -25,9 +25,11 @@
         android:layout_below="@id/txtDisplayName"
         android:id="@+id/messageRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/messageContainer"
+        />
     <LinearLayout
-        android:id="@+id/topBar"
+        android:id="@+id/messageContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
         android:layout_alignParentStart="true"

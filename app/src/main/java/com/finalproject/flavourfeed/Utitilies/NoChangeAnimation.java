@@ -14,4 +14,11 @@ public class NoChangeAnimation extends DefaultItemAnimator {
     public boolean animateChange(@NonNull RecyclerView.ViewHolder oldHolder, @NonNull RecyclerView.ViewHolder newHolder, @NonNull ItemHolderInfo preInfo, @NonNull ItemHolderInfo postInfo) {
         return false;
     }
+
+    @Override
+    public boolean animateAdd(RecyclerView.ViewHolder holder) {
+        dispatchAddStarting(holder);
+        dispatchAddFinished(holder);
+        return false;
+    }
 }
