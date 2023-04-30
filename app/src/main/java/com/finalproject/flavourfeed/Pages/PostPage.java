@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PostPage extends AppCompatActivity implements CommentAdapter.CommentClickInterface {
+public class PostPage extends AppCompatActivity{
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     RecyclerView commentRecyclerView;
@@ -51,7 +51,7 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
         EditText inptComment = findViewById(R.id.inptComment);
         ImageView btnComment = findViewById(R.id.btnComment);
         String postId = getIntent().getStringExtra("postId");
-        commentAdapter = new CommentAdapter(CommentModel.itemCallback, this);
+        commentAdapter = new CommentAdapter(CommentModel.itemCallback);
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentRecyclerView.setAdapter(commentAdapter);
         commentRecyclerView.setItemAnimator(new NoChangeAnimation());
@@ -129,9 +129,4 @@ public class PostPage extends AppCompatActivity implements CommentAdapter.Commen
                 });
     }
 
-
-    @Override
-    public void onDelete(int pos) {
-
-    }
 }

@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Pages;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,8 +15,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.finalproject.flavourfeed.Adapters.SearchAdapter;
+import com.finalproject.flavourfeed.Adapters.ChatSearchAdapter;
 import com.finalproject.flavourfeed.Models.ResultModel;
+import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +47,7 @@ public class ChatSearchPage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         results = new ArrayList<>();
-        CollectionReference usersRef = db.collection("userInformation");
+        CollectionReference usersRef = db.collection("userInformation").document(user.getUid()).collection("friends");
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -69,7 +71,14 @@ public class ChatSearchPage extends AppCompatActivity {
                                     }
                                     search.setText("");
                                     searchRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                                    searchRecyclerView.setAdapter(new ChatSearchAdapter(getApplicationContext(), results));
+                                    searchRecyclerView.setAdapter(new ChatSearchAdapter(getApplicationContext(), results, new ChatSearchAdapter.ChatSearchClickInterface() {
+                                        @Override
+                                        public void onSearchResultClick(String otherUserId) {
+                                            Intent intent = new Intent(getApplicationContext(), MessagePage.class);
+                                            intent.putExtra("otherUserId", otherUserId);
+                                            startActivity(intent);
+                                        }
+                                    }));
                                 } else {
                                     notFound.setVisibility(View.VISIBLE);
                                 }

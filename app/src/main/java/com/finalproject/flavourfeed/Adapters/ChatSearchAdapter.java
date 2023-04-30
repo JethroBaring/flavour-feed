@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,12 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.finalproject.flavourfeed.Fragments.ViewUserProfileFragment;
 import com.finalproject.flavourfeed.Models.ResultModel;
+import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,10 +28,11 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
     Context context;
     List<ResultModel> results;
 
-
-    public ChatSearchAdapter(Context context, List<ResultModel> results) {
+    ChatSearchClickInterface chatSearchClickInterface;
+    public ChatSearchAdapter(Context context, List<ResultModel> results, ChatSearchClickInterface chatSearchClickInterface) {
         this.context = context;
         this.results = results;
+        this.chatSearchClickInterface = chatSearchClickInterface;
     }
 
     @NonNull
@@ -63,6 +62,12 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
             }
         });
         holder.sendRequest.setVisibility(View.INVISIBLE);
+        holder.searchCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chatSearchClickInterface.onSearchResultClick(results.get(position).getUserId());
+            }
+        });
     }
 
     @Override
@@ -75,7 +80,6 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
         ImageView sendRequest;
         TextView searchDisplayName;
         TextView searchEmail;
-
         RelativeLayout searchCard;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,6 +89,10 @@ public class ChatSearchAdapter extends RecyclerView.Adapter<ChatSearchAdapter.My
             sendRequest = itemView.findViewById(R.id.sendRequest);
             searchCard = itemView.findViewById(R.id.searchCard);
         }
+    }
+    
+    public interface ChatSearchClickInterface {
+        public void onSearchResultClick(String otherUserId);
     }
 
 }

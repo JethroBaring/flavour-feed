@@ -21,11 +21,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class CommentAdapter extends ListAdapter<CommentModel, CommentAdapter.CommentViewHolder> {
-    CommentClickInterface commentClickInterface;
     FirebaseFirestore db;
-    public CommentAdapter(@NonNull DiffUtil.ItemCallback<CommentModel> diffCallback, CommentClickInterface commentClickInterface) {
+    public CommentAdapter(@NonNull DiffUtil.ItemCallback<CommentModel> diffCallback) {
         super(diffCallback);
-        this.commentClickInterface = commentClickInterface;
     }
 
     @NonNull
@@ -69,9 +67,4 @@ public class CommentAdapter extends ListAdapter<CommentModel, CommentAdapter.Com
             commentText.setText(comment.getComment());
         }
     }
-
-    public interface CommentClickInterface {
-        public void onDelete(int pos);
-    }
-
 }

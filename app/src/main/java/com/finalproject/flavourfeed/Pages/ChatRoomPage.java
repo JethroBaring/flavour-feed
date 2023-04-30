@@ -10,9 +10,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.finalproject.flavourfeed.ChatRoomAdapter;
-import com.finalproject.flavourfeed.ChatRoomModel;
-import com.finalproject.flavourfeed.ChatSearchPage;
+import com.finalproject.flavourfeed.Adapters.ChatRoomAdapter;
+import com.finalproject.flavourfeed.Models.ChatRoomModel;
 import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +34,7 @@ public class ChatRoomPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.message_page);
+        setContentView(R.layout.chat_room_page);
         db = FirebaseFirestore.getInstance();
         chatListRecyclerView = findViewById(R.id.chatListRecyclerView);
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -55,16 +54,14 @@ public class ChatRoomPage extends AppCompatActivity {
 
     public void getAllData() {
         db.collection("userInformation")
-                .document(user.getUid()).collection("chats")
+                .document(user.getUid()).collection("chatRoom")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error == null) {
                             List<ChatRoomModel> data = value.toObjects(ChatRoomModel.class);
                             chats = new ArrayList<>();
-                            for (ChatRoomModel chatRoomModel : data) {
-                                chats.add(chatRoomModel);
-                            }
+                            chats.addAll(data);
                             chatRoomAdapter.submitList(chats);
                             chatListRecyclerView.scrollToPosition(chatRoomAdapter.getItemCount() - 1);
                         }

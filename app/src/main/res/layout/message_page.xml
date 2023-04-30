@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pages.ChatRoomPage">
+    tools:context=".Pages.MessagePage">
 
     <ImageView
         android:id="@+id/icnSettingsBack"
@@ -12,26 +12,43 @@
         android:layout_height="@dimen/_30sdp"
         android:src="@drawable/backicon"
         android:layout_marginStart="@dimen/_10sdp" />
-    <ImageView
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:id="@+id/icnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/searchicon"
-        android:layout_alignParentEnd="true"
-        />
     <TextView
-        android:id="@+id/txtChats"
+        android:id="@+id/txtDisplayName"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
-        android:text="Chats"
+        android:text="Display Name"
         android:fontFamily="@font/sfprodisplaymedium"
         android:textSize="@dimen/_15ssp"
         android:layout_centerHorizontal="true" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/txtChats"
-        android:id="@+id/chatListRecyclerView"
+        android:layout_below="@id/txtDisplayName"
+        android:id="@+id/messageRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/simplesearch"
+            android:hint="Message"
+            android:padding="0dp"
+            android:paddingStart="@dimen/_5sdp"
+            android:textSize="@dimen/_12ssp"
+            android:maxLength="30"
+            android:imeOptions="actionSend"
+            android:inputType="text"
+            />
+    </LinearLayout>
 </RelativeLayout>

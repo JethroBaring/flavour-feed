@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.finalproject.flavourfeed.Models.ChatRoomModel;
+import com.finalproject.flavourfeed.R;
 
 
 public class ChatRoomAdapter extends ListAdapter<ChatRoomModel, ChatRoomAdapter.ChatRoomViewHolder> {

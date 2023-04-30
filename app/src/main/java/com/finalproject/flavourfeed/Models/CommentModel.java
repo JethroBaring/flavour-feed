@@ -3,6 +3,9 @@ package com.finalproject.flavourfeed.Models;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
 import java.util.Objects;
 
 public class CommentModel {
@@ -68,7 +71,7 @@ public class CommentModel {
     public static DiffUtil.ItemCallback<CommentModel> itemCallback = new DiffUtil.ItemCallback<CommentModel>() {
         @Override
         public boolean areItemsTheSame(@NonNull CommentModel oldItem, @NonNull CommentModel newItem) {
-            if(oldItem == null || oldItem.getCommentId() == null || newItem == null || newItem.getCommentId() == null) {
+            if(oldItem.getCommentId() == null || newItem.getCommentId() == null) {
                 return false;
             }
             return oldItem.getCommentId().equals(newItem.getCommentId());
@@ -76,7 +79,7 @@ public class CommentModel {
 
         @Override
         public boolean areContentsTheSame(@NonNull CommentModel oldItem, @NonNull CommentModel newItem) {
-            return false;
+            return oldItem.equals(newItem);
         }
     };
 }

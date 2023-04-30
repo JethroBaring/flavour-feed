@@ -36,13 +36,14 @@ public class MessageAdapter extends ListAdapter<MessageModel, MessageAdapter.Cha
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-
+        MessageModel messageModel = getItem(position);
+        holder.bind(messageModel);
     }
 
     @Override
     public int getItemViewType(int position) {
         user = FirebaseAuth.getInstance().getCurrentUser();
-        if (getItem(position).getSenderId() == user.getUid()) {
+        if (getItem(position).getSenderId().equals(user.getUid())) {
             return MESSAGE_RIGHT;
         }
         return MESSAGE_LEFT;
@@ -55,6 +56,10 @@ public class MessageAdapter extends ListAdapter<MessageModel, MessageAdapter.Cha
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
             txtMessage = itemView.findViewById(R.id.txtMessage);
+        }
+
+        public void bind(MessageModel message) {
+            txtMessage.setText(message.getMessage());
         }
     }
 }

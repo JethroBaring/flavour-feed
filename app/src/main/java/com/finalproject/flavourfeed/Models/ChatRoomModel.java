@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Models;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,16 +8,14 @@ import java.util.Objects;
 
 public class ChatRoomModel {
     public String chatRoomId;
-    public String userOneId;
-    public String userTwoId;
+    public String otherUser;
 
     public ChatRoomModel() {
     }
 
-    public ChatRoomModel(String chatRoomId, String userOneId, String userTwoId) {
+    public ChatRoomModel(String chatRoomId, String otherUser) {
         this.chatRoomId = chatRoomId;
-        this.userOneId = userOneId;
-        this.userTwoId = userTwoId;
+        this.otherUser = otherUser;
     }
 
     public String getChatRoomId() {
@@ -28,20 +26,12 @@ public class ChatRoomModel {
         this.chatRoomId = chatRoomId;
     }
 
-    public String getUserOneId() {
-        return userOneId;
+    public String getOtherUser() {
+        return otherUser;
     }
 
-    public void setUserOneId(String userOneId) {
-        this.userOneId = userOneId;
-    }
-
-    public String getUserTwoId() {
-        return userTwoId;
-    }
-
-    public void setUserTwoId(String userTwoId) {
-        this.userTwoId = userTwoId;
+    public void setOtherUser(String otherUser) {
+        this.otherUser = otherUser;
     }
 
     @Override

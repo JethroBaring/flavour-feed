@@ -4,27 +4,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
+import java.util.Objects;
+
 public class MessageModel {
-    public String chatId;
+    public String messageId;
     public String senderId;
-    public String recieverId;
-    public String chatMessage;
+    public String receiverId;
+    public String message;
+
+
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
+
 
     public MessageModel() {}
 
-    public MessageModel(String chatId, String senderId, String recieverId, String chatMessage) {
-        this.chatId = chatId;
+    public MessageModel(String messageId, String senderId, String receiverId, String message) {
+        this.messageId = messageId;
         this.senderId = senderId;
-        this.recieverId = recieverId;
-        this.chatMessage = chatMessage;
-    }
-
-    public String getChatId() {
-        return chatId;
-    }
-
-    public void setChatId(String chatId) {
-        this.chatId = chatId;
+        this.receiverId = receiverId;
+        this.message = message;
     }
 
     public String getSenderId() {
@@ -35,20 +42,20 @@ public class MessageModel {
         this.senderId = senderId;
     }
 
-    public String getRecieverId() {
-        return recieverId;
+    public String getReceiverId() {
+        return receiverId;
     }
 
-    public void setRecieverId(String recieverId) {
-        this.recieverId = recieverId;
+    public void setReceiverId(String recieverId) {
+        this.receiverId = recieverId;
     }
 
-    public String getChatMessage() {
-        return chatMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setChatMessage(String chatMessage) {
-        this.chatMessage = chatMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
@@ -57,18 +64,25 @@ public class MessageModel {
     }
 
     @Override
-    public boolean equals(@Nullable Object obj) {
-        return super.equals(obj);
+    public boolean equals(@Nullable Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MessageModel message = (MessageModel) o;
+        return Objects.equals(messageId, message.messageId);
     }
     public static DiffUtil.ItemCallback<MessageModel> itemCallback = new DiffUtil.ItemCallback<MessageModel>() {
         @Override
         public boolean areItemsTheSame(@NonNull MessageModel oldItem, @NonNull MessageModel newItem) {
-            return false;
+
+            if(oldItem.getMessageId() == null || newItem.getMessageId() == null) {
+                return false;
+            }
+            return oldItem.getMessageId().equals(newItem.getMessageId());
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull MessageModel oldItem, @NonNull MessageModel newItem) {
-            return false;
+            return oldItem.equals(newItem);
         }
     };
 }
