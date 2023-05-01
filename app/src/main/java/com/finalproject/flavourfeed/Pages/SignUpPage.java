@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,10 +18,12 @@ import android.os.Bundle;
 import com.finalproject.flavourfeed.Pages.LogInPage;
 import com.finalproject.flavourfeed.Pages.MainPage;
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.Utitilies.PasswordToggle;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,8 +51,12 @@ public class SignUpPage extends AppCompatActivity {
         Button btnSignUp = findViewById(R.id.btnSignUp);
         RelativeLayout relativeLayout = findViewById(R.id.layoutSignUp);
         mAuth = FirebaseAuth.getInstance();
-
-
+        final TextInputLayout passwordTextInputLayout = findViewById(R.id.txtInptLayoutPassword);
+        final EditText passwordEditText = passwordTextInputLayout.getEditText();
+        final TextInputLayout repeatPasswordTextInputLayout = findViewById(R.id.txtInptLayoutRepeatPassword);
+        final EditText repeatPasswordEditText = repeatPasswordTextInputLayout.getEditText();
+        PasswordToggle.changeToggleIcon(this, passwordTextInputLayout, passwordEditText);
+        PasswordToggle.changeToggleIcon(this, repeatPasswordTextInputLayout, repeatPasswordEditText);
         lnkLogInPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

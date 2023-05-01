@@ -57,18 +57,21 @@
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:endIconMode="clear_text"
-            app:startIconDrawable="@drawable/emailicon">
+            app:startIconDrawable="@drawable/newemailicon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textSize="@dimen/_15ssp"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInptLayoutPassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
@@ -79,13 +82,15 @@
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:endIconMode="password_toggle"
-            app:startIconDrawable="@drawable/passwordicon">
+            app:startIconDrawable="@drawable/newpasswordicon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="@dimen/_15ssp"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -94,11 +99,12 @@
             android:layout_height="wrap_content"
             android:hint="CONFIRM"
             app:endIconMode="clear_text"
+            app:endIconDrawable="@drawable/newcrossicon"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/keyicon"
+            app:startIconDrawable="@drawable/newkeyicon"
             android:layout_marginTop="@dimen/_15sdp"
             >
 
@@ -107,6 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:textSize="@dimen/_15ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>

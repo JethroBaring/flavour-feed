@@ -4,15 +4,18 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.Utitilies.PasswordToggle;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +35,9 @@ public class ChangeEmailPage extends AppCompatActivity {
         TextInputEditText txtInptNewEmail = findViewById(R.id.txtInptNewEmail);
         TextInputEditText txtInptPassword = findViewById(R.id.txtInptPassword);
         Button btnChangeEmail = findViewById(R.id.btnChangeEmail);
+        final TextInputLayout passwordTextInputLayout = findViewById(R.id.txtInptLayoutPassword);
+        final EditText passwordEditText = passwordTextInputLayout.getEditText();
+        PasswordToggle.changeToggleIcon(this, passwordTextInputLayout, passwordEditText);
 
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override

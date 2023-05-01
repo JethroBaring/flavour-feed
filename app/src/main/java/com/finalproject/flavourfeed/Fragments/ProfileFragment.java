@@ -27,8 +27,6 @@ public class ProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         Button btnEditProfile = view.findViewById(R.id.btnEditProfile);
-        TextView profileEmail = view.findViewById(R.id.profileEmail);
-        TextView profileDisplayName = view.findViewById(R.id.profileDisplayName);
         ShapeableImageView profilePicture = view.findViewById(R.id.profilePicture);
         ImageView icnSettings = view.findViewById(R.id.icnSettings);
 
@@ -38,9 +36,6 @@ public class ProfileFragment extends Fragment {
                 startActivity(new Intent(getContext(), SettingsPage.class));
             }
         });
-
-        profileDisplayName.setText(user.getDisplayName());
-        profileEmail.setText(user.getEmail());
 
         Glide.with(this)
                         .load(user.getPhotoUrl())

@@ -53,7 +53,8 @@
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/emailicon"
+            app:startIconDrawable="@drawable/newemailicon"
+            app:endIconDrawable="@drawable/newcrossicon"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -61,11 +62,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:textSize="@dimen/_15ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInptLayoutPassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
@@ -76,13 +79,16 @@
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/passwordicon">
+            app:startIconDrawable="@drawable/newpasswordicon"
+            >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptLogInPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="@dimen/_15ssp"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,15 +112,16 @@
     <Button
         android:id="@+id/btnLogIn"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="@dimen/_46sdp"
         android:background="@drawable/roundeddefault"
         android:fontFamily="@font/sfprodisplaybold"
         android:text="LOGIN"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="@dimen/_15ssp"
         app:backgroundTint="@null"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_100sdp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"

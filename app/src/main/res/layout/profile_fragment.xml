@@ -2,140 +2,91 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ProfileFragment"
-    android:id="@+id/profileFragment">
-    <TextView
-        android:id="@+id/profileDisplayName"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_30sdp"
-        android:text="displayname"
-        android:textAlignment="center"
-        android:fontFamily="@font/sfprodisplaymedium"
-        android:textSize="@dimen/_15ssp"
-        android:gravity="center"
-        />
+    tools:context=".Fragments.ProfileFragment">
 
-    <ImageView
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:id="@+id/icnSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/settingsicon"
-        android:layout_alignParentEnd="true"
-        />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:shapeAppearanceOverlay="@style/roundedcard"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Profile"
+                android:textSize="@dimen/_15ssp" />
+
+            <ImageView
+                android:id="@+id/icnSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/newsettingsicon" />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <LinearLayout
         android:id="@+id/profileInformation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_below="@id/topBar"
         android:layout_centerHorizontal="true"
-        android:gravity="center">
+        android:layout_marginTop="@dimen/_10sdp"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profilePicture"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
-            android:src="@color/flutter_dark"
             android:scaleType="fitXY"
+            android:src="@color/flutter_dark"
             app:shapeAppearanceOverlay="@style/circular_image" />
+
+        <TextView
+            android:id="@+id/profileDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/sfprodisplayregular"
+            android:text="Display Name"
+            android:textSize="@dimen/_14ssp" />
 
         <TextView
             android:id="@+id/profileEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="name@gmail.com"
-            android:textSize="@dimen/_14ssp"
+            android:layout_marginTop="@dimen/_minus5sdp"
             android:fontFamily="@font/sfprodisplayregular"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Silver Member"
-            android:textSize="@dimen/_10ssp"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/profileStatistics"
-        android:layout_below="@id/profileInformation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <LinearLayout
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/_10sdp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:fontFamily="@font/sfprodisplaybold"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Friends"
-                android:fontFamily="@font/sfprodisplayregular" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/_10sdp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:fontFamily="@font/sfprodisplaybold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Posts"
-                android:fontFamily="@font/sfprodisplayregular" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/_10sdp"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:fontFamily="@font/sfprodisplaybold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Likes"
-                android:fontFamily="@font/sfprodisplayregular" />
-        </LinearLayout>
+            android:text="name@gmail.com"
+            android:textSize="@dimen/_13ssp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/profileButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profileStatistics"
+        android:layout_below="@id/profileInformation"
+        android:layout_marginTop="@dimen/_5sdp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -150,17 +101,180 @@
             android:textSize="@dimen/_10ssp"
             app:backgroundTint="@null" />
 
-        <Button
-            android:id="@+id/btnActivityLog"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:background="@drawable/roundeddefault"
-            android:fontFamily="@font/sfprodisplayregular"
-            android:text="Activity Log"
-            android:textSize="@dimen/_10ssp"
-            app:backgroundTint="@null" />
     </LinearLayout>
+
+    <GridLayout
+        android:layout_below="@id/profileButton"
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        >
+
+        <LinearLayout
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@drawable/simplesearch"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/thrifty_background"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/newsavvyspendericon"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thrifty"
+                android:fontFamily="@font/sfproroundedbold"
+                android:textSize="@dimen/_20ssp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spender"
+                android:fontFamily="@font/sfproroundedregular"
+                android:textSize="@dimen/_10ssp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@drawable/simplesearch"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/followers_background"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/newfollowericon"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:fontFamily="@font/sfproroundedbold"
+                android:textSize="@dimen/_20ssp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Followers"
+                android:fontFamily="@font/sfproroundedregular"
+                android:textSize="@dimen/_10ssp"
+                />
+            <!-- Add views for the second cell here -->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@drawable/simplesearch"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/thrifty_background"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/newposticon"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:fontFamily="@font/sfproroundedbold"
+                android:textSize="@dimen/_20ssp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Posts"
+                android:fontFamily="@font/sfproroundedregular"
+                android:textSize="@dimen/_10ssp"
+                />
+            <!-- Add views for the third cell here -->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:background="@drawable/simplesearch"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+
+            <LinearLayout
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:background="@drawable/likes_background"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/newlikedicon"/>
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:fontFamily="@font/sfproroundedbold"
+                android:textSize="@dimen/_20ssp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Likes"
+                android:fontFamily="@font/sfproroundedregular"
+                android:textSize="@dimen/_10ssp"
+                />
+            <!-- Add views for the fourth cell here -->
+
+        </LinearLayout>
+
+    </GridLayout>
 
 
 </RelativeLayout>

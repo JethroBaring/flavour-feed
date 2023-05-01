@@ -8,38 +8,50 @@
     android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
 
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:orientation="horizontal"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:shapeAppearanceOverlay="@style/roundedcard"
 
         >
-
-        <TextView
-            android:id="@+id/mainPageAppName"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_30sdp"
-            android:fontFamily="@font/sfprodisplayblack"
-            android:gravity="center"
-            android:text="FLAVOURFEED"
-            android:textColor="@color/flutter_sky"
-            android:textSize="@dimen/_18ssp" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/homeProfilePicture"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@color/flutter_sky"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:shapeAppearanceOverlay="@style/circular_image"
+                android:scaleType="fitXY"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Home"
+                android:textSize="@dimen/_15ssp" />
 
             <ImageView
-                android:id="@+id/btnChat"
+                android:id="@+id/btnMessageRoom"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/messageicon" />
-    </LinearLayout>
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:src="@drawable/newmessageicon" />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postRecyclerView"

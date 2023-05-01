@@ -15,4 +15,8 @@
     <color name="flutter_sky">#027DFD</color>
     <color name="flutter_dark">#1F2233</color>
     <color name="lightestgray">#F0F0F0</color>
+    <color name="bronze">#CD7F32</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="gold">#FFD700</color>
+    <color name="hotpink">#FF69B4</color>
 </resources>

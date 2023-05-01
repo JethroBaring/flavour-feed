@@ -48,21 +48,25 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             app:endIconMode="clear_text"
+            app:endIconDrawable="@drawable/newcrossicon"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/emailicon">
+            app:startIconDrawable="@drawable/newemailicon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptSignUpEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textSize="@dimen/_15ssp"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInptLayoutPassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
@@ -73,17 +77,20 @@
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/passwordicon">
+            app:startIconDrawable="@drawable/newpasswordicon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptSignUpPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="@dimen/_15ssp"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInptLayoutRepeatPassword"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
@@ -94,13 +101,15 @@
             app:boxCornerRadiusBottomStart="@dimen/_8sdp"
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
-            app:startIconDrawable="@drawable/passwordicon">
+            app:startIconDrawable="@drawable/newpasswordicon">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtInptSignUpRepeatPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="@dimen/_15ssp"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

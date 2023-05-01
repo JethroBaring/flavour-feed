@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Pages.ChatRoomPage;
 import com.finalproject.flavourfeed.Pages.CreatePostPage;
 import com.finalproject.flavourfeed.Models.PostModel;
@@ -20,6 +21,7 @@ import com.finalproject.flavourfeed.Adapters.PostAdapter;
 import com.finalproject.flavourfeed.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -33,7 +35,7 @@ public class HomeFragment extends Fragment {
 
     FirebaseAuth mAuth;
     FirebaseFirestore db;
-
+    FirebaseUser user;
     ArrayList<PostModel> posts;
     RecyclerView postRecyclerView;
 
@@ -44,11 +46,15 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        user = mAuth.getCurrentUser();
         posts = new ArrayList<>();
+        ImageView homeProfileFragment = view.findViewById(R.id.homeProfilePicture);
         FloatingActionButton btnCreatePost = view.findViewById(R.id.btnCreatePost);
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
         getAllData();
-        ImageView btnChat = view.findViewById(R.id.btnChat);
+        ImageView btnChat = view.findViewById(R.id.btnMessageRoom);
+
+        Glide.with(this).load(user.getPhotoUrl()).into(homeProfileFragment);
 
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override

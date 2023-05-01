@@ -17,17 +17,26 @@
         android:id="@+id/icnSearch"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/searchicon"
+        android:src="@drawable/newsearchicon"
         android:layout_alignParentEnd="true"
         />
-    <TextView
+    <LinearLayout
         android:id="@+id/txtChats"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_30sdp"
-        android:text="Chats"
-        android:fontFamily="@font/sfprodisplaymedium"
-        android:textSize="@dimen/_15ssp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chats"
+            android:fontFamily="@font/sfprodisplayregular"
+            android:textSize="@dimen/_18ssp"
+            android:layout_centerHorizontal="true"
+            />
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_below="@id/txtChats"

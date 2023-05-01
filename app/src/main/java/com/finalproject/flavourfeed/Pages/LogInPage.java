@@ -2,9 +2,15 @@ package com.finalproject.flavourfeed.Pages;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,14 +19,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.Utitilies.PasswordToggle;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LogInPage extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +55,9 @@ public class LogInPage extends AppCompatActivity {
         RelativeLayout relativeLayout = findViewById(R.id.layoutLogIn);
         Button btnLogIn = findViewById(R.id.btnLogIn);
 
+        final TextInputLayout passwordTextInputLayout = findViewById(R.id.txtInptLayoutPassword);
+        final EditText passwordEditText = passwordTextInputLayout.getEditText();
+        PasswordToggle.changeToggleIcon(this, passwordTextInputLayout, passwordEditText);
 
         lnkSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,11 +74,11 @@ public class LogInPage extends AppCompatActivity {
                 String password = txtInptLogInPassword.getText().toString();
                 Snackbar snackbar = Snackbar.make(relativeLayout, null, Snackbar.LENGTH_SHORT);
 
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
                     snackbar.setText("Field/s cannot be empty.");
                 } else {
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                        if(task.isSuccessful()) {
+                        if (task.isSuccessful()) {
                             snackbar.setText("Logging in.");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent = new Intent(getApplicationContext(), MainPage.class);
@@ -85,7 +97,7 @@ public class LogInPage extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user != null) {
+        if (user != null) {
             Intent intent = new Intent(getApplicationContext(), MainPage.class);
             startActivity(intent);
         }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -11,10 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.Utitilies.PasswordToggle;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +38,9 @@ public class DeleteAccountPage extends AppCompatActivity {
         TextInputEditText txtInptPassword = findViewById(R.id.txtInptPassword);
         TextInputEditText txtInptConfirm = findViewById(R.id.txtInptConfirm);
         Button btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
+        final TextInputLayout passwordTextInputLayout = findViewById(R.id.txtInptLayoutPassword);
+        final EditText passwordEditText = passwordTextInputLayout.getEditText();
+        PasswordToggle.changeToggleIcon(this, passwordTextInputLayout, passwordEditText);
         btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
