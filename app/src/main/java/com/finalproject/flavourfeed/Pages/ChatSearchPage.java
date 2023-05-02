@@ -47,7 +47,7 @@ public class ChatSearchPage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         results = new ArrayList<>();
-        CollectionReference usersRef = db.collection("userInformation").document(user.getUid()).collection("friends");
+        CollectionReference usersRef = db.collection("userInformation");
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {

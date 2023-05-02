@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FirebaseOperations {
-    public static void addFriendRequest(String toUserId, String fromUserId, String displayName, String type, FirebaseFirestore firebaseFirestore) {
+    public static void addFollow(String toUserId, String fromUserId, String displayName, String type, FirebaseFirestore firebaseFirestore) {
         Map<String, Object> newFriendRequest = new HashMap<>();
         newFriendRequest.put("userId", fromUserId);
         newFriendRequest.put("displayName", displayName);

@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -73,20 +74,57 @@ public class MessagePage extends AppCompatActivity {
                     newMessage.put("message", toBeSend);
                     newMessage.put("timestamp", FieldValue.serverTimestamp());
                     message.setText("");
-                    db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                @Override
-                                public void onSuccess(DocumentReference documentReference) {
-                                    String messageId = documentReference.getId();
-                                    db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
-                                }
-                            });
-                    db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+
+                    db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
-                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                            if (task.isSuccessful()) {
-                                DocumentReference documentReference = task.getResult();
-                                String messageId = documentReference.getId();
-                                db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if(document.exists()) {
+                                    db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            String messageId = documentReference.getId();
+                                            db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
+                                        }
+                                    });
+                                    db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentReference documentReference = task.getResult();
+                                                String messageId = documentReference.getId();
+                                                db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    Map<String, Object> newChatRoom = new HashMap<>();
+                                    newChatRoom.put("userOne", user.getUid());
+                                    newChatRoom.put("userTwo", otherUserId);
+                                    newChatRoom.put("chatRoomId", chatRoomId);
+                                    db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).set(newChatRoom);
+                                    db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).set(newChatRoom);
+
+                                    // Add the new message to the newly created chat room
+                                    db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            String messageId = documentReference.getId();
+                                            db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
+                                        }
+                                    });
+                                    db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentReference documentReference = task.getResult();
+                                                String messageId = documentReference.getId();
+                                                db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         }
                     });

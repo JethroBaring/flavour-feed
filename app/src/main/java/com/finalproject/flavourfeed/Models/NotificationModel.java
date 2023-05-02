@@ -14,16 +14,18 @@ public class NotificationModel {
     public int notificationType;
     public String postId;
 
-    public static final int FRIEND_REQUEST_NOTIFICATION = 1;
+    public static final int FOLLOW_NOTIFICATION = 1;
     public static final int COMMENT_NOTIFICATION = 2;
     public static final int LIKE_NOTIFICATION = 3;
 
     public static final int ACCEPTED_NOTIFICATION = 4;
     public static final int REJECTED_NOTIFICATION = 5;
 
-    public static final String SENT_FRIEND_REQUEST = "sentFriendRequest";
+    public static final int FOLLOWED_BACK_NOTIFICATION = 6;
 
-    public static final String RECEIVED_FRIEND_REQUEST = "receivedFriendRequest";
+    public static final String FOLLOWINGS = "followings";
+
+    public static final String FOLLOWERS = "followers";
     public NotificationModel() {
     }
 

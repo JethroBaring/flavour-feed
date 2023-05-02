@@ -89,8 +89,8 @@ public class NotificationAdapter extends ListAdapter<NotificationModel, Notifica
                 }
             });
 
-            if (notification.getNotificationType() == NotificationModel.FRIEND_REQUEST_NOTIFICATION) {
-                notificationText.setText(" sent you a friend request.");
+            if (notification.getNotificationType() == NotificationModel.FOLLOW_NOTIFICATION) {
+                notificationText.setText(" is following you.");
             } else if (notification.getNotificationType() == NotificationModel.COMMENT_NOTIFICATION) {
                 notificationText.setText(" commented on your post.");
                 requestButtons.setVisibility(View.INVISIBLE);
@@ -99,23 +99,40 @@ public class NotificationAdapter extends ListAdapter<NotificationModel, Notifica
                 requestButtons.setVisibility(View.INVISIBLE);
             } else if (notification.getNotificationType() == NotificationModel.ACCEPTED_NOTIFICATION) {
                 rejectRequest.setVisibility(View.GONE);
-                txtAccept.setText("Accepted");
-            } else {
+                txtAccept.setText("Followed");
+            } else if(notification.getNotificationType() == NotificationModel.REJECTED_NOTIFICATION){
                 acceptRequest.setVisibility(View.GONE);
-                txtReject.setText("Rejected");
+                txtReject.setText("Ignored");
+            } else {
+                notificationText.setText(" followed you back.");
+                acceptRequest.setVisibility(View.GONE);
+                rejectRequest.setVisibility(View.GONE);
             }
 
             acceptRequest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //update notification to accepted
-                    FirebaseOperations.updateNotification(notification.getNotificationId(), NotificationModel.ACCEPTED_NOTIFICATION, db);
-                    rejectRequest.setVisibility(View.GONE);
-                    txtAccept.setText("Accepted");
-                    //add sender to current users friends
-                    FirebaseOperations.addToFriendsList(user.getUid(),notification.getFromUserId(),db);
-                    //add current user to sender's friends
-                    FirebaseOperations.addToFriendsList(notification.getFromUserId(),user.getUid(),db);
+                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot documentSnapshot = task.getResult();
+                                //update notification to accepted
+                                FirebaseOperations.updateNotification(notification.getNotificationId(), NotificationModel.ACCEPTED_NOTIFICATION, db);
+                                rejectRequest.setVisibility(View.GONE);
+                                txtAccept.setText("Followed");
+                                //add sender to current users following
+                                FirebaseOperations.addFollow(user.getUid(), notification.getFromUserId(), documentSnapshot.getString("displayName"), NotificationModel.FOLLOWINGS, db);
+                                //add current user to senders follower
+                                FirebaseOperations.addFollow(notification.getFromUserId(), user.getUid(), user.getDisplayName(), NotificationModel.FOLLOWERS, db);
+
+                                //add followed back notification to sender
+                                NotificationModel newNotification = new NotificationModel(notification.getFromUserId(), user.getUid(), NotificationModel.FOLLOWED_BACK_NOTIFICATION);
+                                FirebaseOperations.addNotification(newNotification,db);
+                            }
+                        }
+                    });
+
                 }
             });
 
@@ -125,11 +142,7 @@ public class NotificationAdapter extends ListAdapter<NotificationModel, Notifica
                     //update notification to rejected
                     FirebaseOperations.updateNotification(notification.getNotificationId(), NotificationModel.REJECTED_NOTIFICATION, db);
                     acceptRequest.setVisibility(View.GONE);
-                    txtReject.setText("Rejected");
-                    //delete current users received friend request
-                    FirebaseOperations.deleteFriendRequest(user.getUid(), notification.getFromUserId(), NotificationModel.RECEIVED_FRIEND_REQUEST, db);
-                    //delete other users sent friend request
-                    FirebaseOperations.deleteFriendRequest(notification.getFromUserId(), user.getUid(), NotificationModel.SENT_FRIEND_REQUEST, db);
+                    txtReject.setText("Ignored");
                 }
             });
 

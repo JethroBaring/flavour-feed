@@ -112,14 +112,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
             @Override
             public void onClick(View view) {
                 holder.sendRequest.setImageResource(R.drawable.pendingicon);
-                //add sent friend request to current user
-                FirebaseOperations.addFriendRequest(user.getUid(), results.get(position).getUserId(), holder.searchDisplayName.getText().toString(), NotificationModel.SENT_FRIEND_REQUEST, db);
+                //add following to current user
+                FirebaseOperations.addFollow(user.getUid(), results.get(position).getUserId(), holder.searchDisplayName.getText().toString(), NotificationModel.FOLLOWINGS, db);
 
-                //add received friend request to receiver
-                FirebaseOperations.addFriendRequest(results.get(position).getUserId(), user.getUid(), user.getDisplayName(), NotificationModel.RECEIVED_FRIEND_REQUEST, db);
+                //add follower to receiver
+                FirebaseOperations.addFollow(results.get(position).getUserId(), user.getUid(), user.getDisplayName(), NotificationModel.FOLLOWERS, db);
 
-                //add friend request notification to receiver
-                NotificationModel newNotification = new NotificationModel(results.get(position).getUserId(), user.getUid(), NotificationModel.FRIEND_REQUEST_NOTIFICATION);
+                //add follow notification to receiver
+                NotificationModel newNotification = new NotificationModel(results.get(position).getUserId(), user.getUid(), NotificationModel.FOLLOW_NOTIFICATION);
                 FirebaseOperations.addNotification(newNotification, db);
             }
         });

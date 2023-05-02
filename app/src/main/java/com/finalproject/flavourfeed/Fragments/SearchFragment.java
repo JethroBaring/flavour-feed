@@ -22,6 +22,8 @@ import com.finalproject.flavourfeed.Models.ResultModel;
 import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -34,6 +36,7 @@ import java.util.List;
 public class SearchFragment extends Fragment{
     FirebaseFirestore db;
     List<ResultModel> results;
+    FirebaseUser user;
 
     ViewUserProfileFragment viewUserProfileFragment = new ViewUserProfileFragment();
     @Override
@@ -44,6 +47,7 @@ public class SearchFragment extends Fragment{
         RecyclerView searchRecyclerView = view.findViewById(R.id.searchRecyclerView);
         TextView notFound = view.findViewById(R.id.notFound);
         db = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         results = new ArrayList<>();
         CollectionReference usersRef = db.collection("userInformation");
         InputMethodManager inputMethodManager = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -64,7 +68,8 @@ public class SearchFragment extends Fragment{
                                     results.clear();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         String userId = document.getString("userId");
-                                        results.add(new ResultModel(userId));
+                                        if(!userId.equals(user.getUid()))
+                                            results.add(new ResultModel(userId));
                                     }
                                     search.setText("");
                                     searchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
