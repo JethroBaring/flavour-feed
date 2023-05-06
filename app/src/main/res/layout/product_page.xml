@@ -6,4 +6,224 @@
     android:layout_height="match_parent"
     tools:context=".ProductPage">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardBackgroundColor="?attr/colorOnPrimary"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:shapeAppearanceOverlay="@style/roundedcard">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/btnClosePost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:src="@drawable/newbackicon" />
+
+            <TextView
+                android:id="@+id/postDisplayName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Display name's post"
+                android:textSize="@dimen/_15ssp" />
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/productPicture"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_below="@id/topBar"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:src="@color/flutter_sky"
+        android:scaleType="fitXY"
+        />
+
+    <LinearLayout
+        android:id="@+id/storeInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/productPicture"
+        android:layout_margin="@dimen/_5sdp"
+        android:orientation="horizontal"
+
+        >
+
+        <!-- Title, secondary and supporting text -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/sellerProfile"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:scaleType="fitXY"
+            android:src="@color/black"
+
+            app:shapeAppearanceOverlay="@style/circular_image" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/storeName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplaysemibold"
+                    android:text="Display name"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    android:id="@+id/notificationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfprodisplayregular"
+                    android:text="'s store"
+                    android:textSize="@dimen/_12ssp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/storeInformation"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="product name" />
+
+        <TextView
+            android:id="@+id/productCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="price" />
+
+        <TextView
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="price" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:id="@+id/decrementQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/addicon"/>
+            <EditText
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:text="1"/>
+            <ImageView
+                android:id="@+id/incrementQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/addicon"/>
+        </LinearLayout>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            >
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btnAddToCart"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="@integer/material_motion_duration_long_1"
+                app:cardBackgroundColor="?attr/colorOnPrimary"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:cardElevation="@dimen/_2sdp"
+                app:shapeAppearanceOverlay="@style/roundedcard"
+                android:clickable="true"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:src="@drawable/newaddtocarticon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Add to cart"
+                        android:textSize="@dimen/_15ssp" />
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="@integer/material_motion_duration_long_1"
+                app:cardBackgroundColor="?attr/colorOnPrimary"
+                app:cardCornerRadius="@dimen/_8sdp"
+                app:cardElevation="@dimen/_2sdp"
+                app:shapeAppearanceOverlay="@style/roundedcard"
+                android:clickable="true"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:src="@drawable/newcheckouticon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Check out"
+                        android:textSize="@dimen/_15ssp" />
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 </RelativeLayout>

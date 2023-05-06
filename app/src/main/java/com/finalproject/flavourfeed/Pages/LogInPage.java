@@ -82,15 +82,15 @@ public class LogInPage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             snackbar.setText("Logging in.");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
-                            startActivity(intent);
-                            /*if(user.getEmail().equals("admin@gmail.com")) {
+                            /*Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                            startActivity(intent);*/
+                            if(user.getEmail().equals("admin@gmail.com")) {
                                 Intent intent = new Intent(getApplicationContext(), AdminDashboardPage.class);
                                 startActivity(intent);
                             } else {
                                 Intent intent = new Intent(getApplicationContext(), MainPage.class);
                                 startActivity(intent);
-                            }*/
+                            }
                         } else {
                             snackbar.setText(task.getException().getMessage());
                         }

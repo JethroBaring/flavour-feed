@@ -20,6 +20,7 @@ import com.finalproject.flavourfeed.CartPage;
 import com.finalproject.flavourfeed.MyProductAdapter;
 import com.finalproject.flavourfeed.MyStorePage;
 import com.finalproject.flavourfeed.ProductModel;
+import com.finalproject.flavourfeed.ProductPage;
 import com.finalproject.flavourfeed.R;
 import com.google.android.gms.common.data.DataBufferObserver;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MarketplaceFragment extends Fragment {
+public class MarketplaceFragment extends Fragment implements ProductAdapter.ProductClickInterface {
 
     ImageView btnOption;
     FirebaseAuth mAuth;
@@ -47,7 +48,7 @@ public class MarketplaceFragment extends Fragment {
     ArrayList<ProductModel> allProducts;
     RecyclerView productRecyclerView;
 
-    MyProductAdapter productAdapter;
+    ProductAdapter productAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,7 +56,7 @@ public class MarketplaceFragment extends Fragment {
         View view = inflater.inflate(R.layout.marketplace_fragment, container, false);
 
         productRecyclerView = view.findViewById(R.id.productRecyclerView);
-        productAdapter = new MyProductAdapter(ProductModel.itemCallback);
+        productAdapter = new ProductAdapter(ProductModel.itemCallback, this);
         productRecyclerView.setAdapter(productAdapter);
         productRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
         mAuth = FirebaseAuth.getInstance();
@@ -107,4 +108,12 @@ public class MarketplaceFragment extends Fragment {
         });
     }
 
+
+    @Override
+    public void onProductClick(String sellerId, String productId) {
+        Intent intent = new Intent(getActivity(), ProductPage.class);
+        intent.putExtra("productId", productId);
+        intent.putExtra("sellerId", sellerId);
+        startActivity(intent);
+    }
 }

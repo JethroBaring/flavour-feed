@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 public class OrderModel {
     final static int PENDING = 1;
-    final static int CONFIRMED = 2;
-    final static int IN_PROGRESS = 3;
-    final static int ON_THE_WAY = 4;
-    final static int DELIVERED = 5;
+    final static int IN_PROGRESS = 2;
+    final static int COMPLETED = 3;
     public String orderId;
     public int status;
 
-    public ArrayList<ProductModel> items;
 }

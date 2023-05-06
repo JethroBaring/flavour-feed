@@ -135,6 +135,7 @@ public class AddProductPage extends AppCompatActivity {
                                     newProduct.put("price", Integer.parseInt(productPrice.getText().toString()));
                                     newProduct.put("timestamp", FieldValue.serverTimestamp());
                                     newProduct.put("category", productCategory.getSelectedItem());
+                                    newProduct.put("sellerId", user.getUid());
                                     db.collection("storeInformation").document(user.getUid()).collection("products").add(newProduct).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
