@@ -4,18 +4,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
+import java.util.Date;
 import java.util.Objects;
 
 public class ChatRoomModel {
     public String chatRoomId;
-    public String otherUser;
+    public String otherUserId;
 
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    @ServerTimestamp
+    public Date lastModified;
     public ChatRoomModel() {
     }
 
     public ChatRoomModel(String chatRoomId, String otherUser) {
         this.chatRoomId = chatRoomId;
-        this.otherUser = otherUser;
+        this.otherUserId = otherUser;
     }
 
     public String getChatRoomId() {
@@ -26,12 +39,12 @@ public class ChatRoomModel {
         this.chatRoomId = chatRoomId;
     }
 
-    public String getOtherUser() {
-        return otherUser;
+    public String getOtherUserId() {
+        return otherUserId;
     }
 
-    public void setOtherUser(String otherUser) {
-        this.otherUser = otherUser;
+    public void setOtherUserId(String otherUserId) {
+        this.otherUserId = otherUserId;
     }
 
     @Override
@@ -59,7 +72,7 @@ public class ChatRoomModel {
 
         @Override
         public boolean areContentsTheSame(@NonNull ChatRoomModel oldItem, @NonNull ChatRoomModel newItem) {
-            return false;
+            return oldItem.equals(newItem);
         }
     };
 }

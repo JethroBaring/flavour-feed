@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Adapters.CommentAdapter;
@@ -26,6 +27,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.*;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,6 +59,9 @@ public class PostPage extends AppCompatActivity{
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentRecyclerView.setAdapter(commentAdapter);
         commentRecyclerView.setItemAnimator(new NoChangeAnimation());
+        TextView numberOfLikes = findViewById(R.id.numberOfLikes);
+        TextView postDisplayName = findViewById(R.id.postDisplayName);
+        ImageView postPageLike = findViewById(R.id.postPageLike);
         String photoUrl;
         getAllData(postId);
         DocumentReference documentReference = db.collection("postInformation").document(postId);
@@ -63,8 +69,80 @@ public class PostPage extends AppCompatActivity{
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Glide.with(PostPage.this).load(documentSnapshot.getString("photoUrl")).into(postPicture);
+                numberOfLikes.setText(Integer.toString(documentSnapshot.getLong("likes").intValue()));
+                db.collection("userInformation").document(documentSnapshot.getString("userId")).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        postDisplayName.setText(documentSnapshot.getString("displayName")+"'s post");
+                    }
+                });
             }
         });
+
+        postPageLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CollectionReference collectionReference = db.collection("userInformation").document(user.getUid()).collection("likedPosts");
+                Query query = collectionReference.whereEqualTo("postId", postId);
+                query.get().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot snapshot = task.getResult();
+                        if (snapshot != null && !snapshot.isEmpty()) {
+                            // The post exists in the collection
+                            db.collection("userInformation").document(user.getUid()).collection("likedPosts").document(postId).delete();
+
+                            DocumentReference docRef = db.collection("postInformation").document(postId);
+
+                            docRef.get().addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    DocumentSnapshot document = task1.getResult();
+                                    if (document.exists()) {
+                                        int likes = document.getLong("likes").intValue();
+                                        // Document exists
+                                        db.collection("postInformation").document(postId).update("likes", likes - 1);
+                                    }
+                                }
+                            });
+
+                            postPageLike.setImageResource(R.drawable.newlikeicon);
+                        } else {
+                            // The post does not exist in the collection
+                            Map<String, Object> likedPost = new HashMap<>();
+                            likedPost.put("postId", postId);
+                            db.collection("userInformation").document(user.getUid()).collection("likedPosts").document(postId).set(likedPost);
+                            postPageLike.setImageResource(R.drawable.newlikedicon);
+                            DocumentReference docRef = db.collection("postInformation").document(postId);
+
+                            docRef.get().addOnCompleteListener(task1 -> {
+                                if (task1.isSuccessful()) {
+                                    DocumentSnapshot document = task1.getResult();
+                                    if (document.exists()) {
+                                        int likes = document.getLong("likes").intValue();
+                                        // Document exists
+                                        db.collection("postInformation").document(postId).update("likes", likes + 1);
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+                });
+            }
+        });
+
+        CollectionReference collectionReference = db.collection("userInformation").document(user.getUid()).collection("likedPosts");
+        Query query = collectionReference.whereEqualTo("postId", postId);
+
+        query.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                QuerySnapshot querySnapshot = task.getResult();
+                if (querySnapshot != null && !querySnapshot.isEmpty()) {
+                    postPageLike.setImageResource(R.drawable.newlikedicon);
+                }
+            }
+        });
+
+
         btnClosePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -14,16 +14,15 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 
 import com.finalproject.flavourfeed.R;
-import com.google.firebase.auth.FirebaseAuth;
+
 
 public class WelcomePage extends AppCompatActivity {
 
-    SharedPreferences sharedPreferences;
-    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
+
 
 
         Window window = WelcomePage.this.getWindow();
@@ -44,15 +43,5 @@ public class WelcomePage extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /*SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("myUserPrefs", Context.MODE_PRIVATE);
-        if (sharedPreferences.getBoolean("newUser", false)) {
-            Intent intent = new Intent(getApplicationContext(), SignUpPage.class);
-            startActivity(intent);
-        } else {
-            sharedPreferences = getSharedPreferences("myUserPrefs", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("newUser", true);
-            editor.apply();
-        }*/
     }
 }

@@ -78,9 +78,11 @@ public class MessagePage extends AppCompatActivity {
                     db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if(task.isSuccessful()) {
+                            if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
-                                if(document.exists()) {
+
+                                if (document.exists()) {
+                                    //check if chatRoom exists
                                     db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
@@ -98,13 +100,19 @@ public class MessagePage extends AppCompatActivity {
                                             }
                                         }
                                     });
+                                    db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).update("lastModified", FieldValue.serverTimestamp());
+                                    db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).update("lastModified", FieldValue.serverTimestamp());
                                 } else {
+                                    //create new chatroom
                                     Map<String, Object> newChatRoom = new HashMap<>();
-                                    newChatRoom.put("userOne", user.getUid());
-                                    newChatRoom.put("userTwo", otherUserId);
+                                    newChatRoom.put("otherUserId", otherUserId);
                                     newChatRoom.put("chatRoomId", chatRoomId);
                                     db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).set(newChatRoom);
-                                    db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).set(newChatRoom);
+
+                                    Map<String, Object> newChatRoom1 = new HashMap<>();
+                                    newChatRoom1.put("otherUserId", user.getUid());
+                                    newChatRoom1.put("chatRoomId", chatRoomId);
+                                    db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).set(newChatRoom1);
 
                                     // Add the new message to the newly created chat room
                                     db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -112,8 +120,10 @@ public class MessagePage extends AppCompatActivity {
                                         public void onSuccess(DocumentReference documentReference) {
                                             String messageId = documentReference.getId();
                                             db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
+                                            db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).update("lastModified", FieldValue.serverTimestamp());
                                         }
                                     });
+
                                     db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").add(newMessage).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                                         @Override
                                         public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -121,6 +131,8 @@ public class MessagePage extends AppCompatActivity {
                                                 DocumentReference documentReference = task.getResult();
                                                 String messageId = documentReference.getId();
                                                 db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
+                                                db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).update("lastModified", FieldValue.serverTimestamp());
+
                                             }
                                         }
                                     });

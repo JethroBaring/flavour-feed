@@ -15,10 +15,11 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Pages.ChatRoomPage;
-import com.finalproject.flavourfeed.Pages.CreatePostPage;
+import com.finalproject.flavourfeed.Pages.AddPostPage;
 import com.finalproject.flavourfeed.Models.PostModel;
 import com.finalproject.flavourfeed.Adapters.PostAdapter;
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,6 +39,7 @@ public class HomeFragment extends Fragment {
     FirebaseUser user;
     ArrayList<PostModel> posts;
     RecyclerView postRecyclerView;
+    PostAdapter postAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +53,12 @@ public class HomeFragment extends Fragment {
         ImageView homeProfileFragment = view.findViewById(R.id.homeProfilePicture);
         FloatingActionButton btnCreatePost = view.findViewById(R.id.btnCreatePost);
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
+
+        postRecyclerView = view.findViewById(R.id.postRecyclerView);
+        postAdapter = new PostAdapter(PostModel.itemCallback);
+        postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        postRecyclerView.setAdapter(postAdapter);
+        postRecyclerView.setItemAnimator(new NoChangeAnimation());
         getAllData();
         ImageView btnChat = view.findViewById(R.id.btnMessageRoom);
 
@@ -66,24 +74,24 @@ public class HomeFragment extends Fragment {
         btnCreatePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), CreatePostPage.class));
+                startActivity(new Intent(getActivity(), AddPostPage.class));
             }
         });
         return view;
     }
 
     public void getAllData() {
+
         db.collection("postInformation").orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error == null) {
-                    posts.clear();
                     List<PostModel> data = value.toObjects(PostModel.class);
                     posts.addAll(data);
-                    postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    postRecyclerView.setAdapter(new PostAdapter(getContext(), posts));
+                    postAdapter.submitList(posts);
                 }
             }
         });
+
     }
 }

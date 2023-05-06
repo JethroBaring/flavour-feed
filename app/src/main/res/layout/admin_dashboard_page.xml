@@ -2,110 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/profileFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ProfileFragment">
-
+    tools:context=".AdminDashboardPage">
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:layout_margin="@dimen/_5sdp"
+        app:cardBackgroundColor="?attr/colorOnPrimary"
         app:cardCornerRadius="@dimen/_8sdp"
         app:cardElevation="@dimen/_2sdp"
-        app:cardBackgroundColor="?attr/colorOnPrimary"
+        app:shapeAppearanceOverlay="@style/roundedcard"
+
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="@dimen/_35sdp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Profile"
+                android:text="Dashboard"
                 android:textSize="@dimen/_15ssp" />
-
-            <ImageView
-                android:id="@+id/icnSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/newsettingsicon"
-                />
         </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
-    <LinearLayout
-        android:id="@+id/profileInformation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/topBar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/profilePicture"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-            android:scaleType="fitXY"
-            android:src="@color/flutter_dark"
-            app:shapeAppearanceOverlay="@style/circular_image" />
-
-        <TextView
-            android:id="@+id/profileDisplayName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:fontFamily="@font/sfprodisplayregular"
-            android:text="Display Name"
-            android:textSize="@dimen/_14ssp" />
-
-        <TextView
-            android:id="@+id/profileEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_minus5sdp"
-            android:fontFamily="@font/sfprodisplayregular"
-            android:text="name@gmail.com"
-            android:textSize="@dimen/_13ssp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/profileButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profileInformation"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnEditProfile"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:background="@drawable/roundeddefault"
-            android:fontFamily="@font/sfprodisplayregular"
-            android:text="Edit Profile"
-            android:textSize="@dimen/_10ssp"
-            app:backgroundTint="@null" />
-
-    </LinearLayout>
 
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/profileButton"
+        android:layout_below="@id/topBar"
+        android:layout_above="@id/bottomNav"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
@@ -148,14 +79,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfproroundedbold"
-                    android:text="Lavish"
+                    android:text="0"
                     android:textSize="@dimen/_20ssp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfproroundedregular"
-                    android:text="Spender"
+                    android:text="Users"
                     android:textSize="@dimen/_10ssp" />
             </LinearLayout>
 
@@ -203,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfproroundedregular"
-                    android:text="Followers"
+                    android:text="Banned Users"
                     android:textSize="@dimen/_10ssp" />
             </LinearLayout>
 
@@ -307,6 +238,12 @@
 
 
     </GridLayout>
-
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_alignParentBottom="true"
+        style="@style/MyBottomNavigationView"
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        />
 </RelativeLayout>

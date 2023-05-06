@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/storeDashboard"
+        android:enabled="true"
+        android:icon="@drawable/newdashboardicon"
+        android:title="Dashboard"
+        />
+    <item
+        android:id="@+id/storeProducts"
+        android:enabled="true"
+        android:icon="@drawable/newproducticon"
+        android:title="Products"/>
+    <item
+        android:id="@+id/storeOrders"
+        android:enabled="true"
+        android:icon="@drawable/newordericon"
+        android:title="Orders"/>
+</menu>

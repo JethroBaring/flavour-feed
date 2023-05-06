@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class CreatePostPage extends AppCompatActivity {
+public class AddPostPage extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     Uri imageUri;
@@ -53,7 +53,7 @@ public class CreatePostPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_post_page);
+        setContentView(R.layout.add_post_page);
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -61,7 +61,7 @@ public class CreatePostPage extends AppCompatActivity {
         ImageView profileImage = findViewById(R.id.userProfilePicture);
         TextView userDisplayName = findViewById(R.id.userDisplayName);
         TextView userEmail = findViewById(R.id.userEmail);
-        ImageView btnUploadPost = findViewById(R.id.btnUploadPost);
+        ImageView btnUploadPost = findViewById(R.id.btnAddProduct);
         RelativeLayout postPictureContainer = findViewById(R.id.postPictureContainer);
         cameraIcon = findViewById(R.id.cameraIcon);
         caption = findViewById(R.id.caption);
@@ -82,7 +82,7 @@ public class CreatePostPage extends AppCompatActivity {
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CreatePostPage.super.onBackPressed();
+                AddPostPage.super.onBackPressed();
             }
         });
 
@@ -133,6 +133,7 @@ public class CreatePostPage extends AppCompatActivity {
                                     newPost.put("caption", caption.getText().toString());
                                     newPost.put("timestamp", FieldValue.serverTimestamp());
                                     newPost.put("userId", user.getUid());
+                                    newPost.put("likes", 0);
                                     db.collection("postInformation").add(newPost).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {

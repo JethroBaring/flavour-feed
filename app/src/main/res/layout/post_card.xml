@@ -11,7 +11,10 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         app:cardElevation="@dimen/_3sdp"
-        app:cardCornerRadius="@dimen/_8sdp">
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="?attr/colorOnPrimary"
+        android:layout_margin="@dimen/_5sdp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,27 +87,59 @@
                 android:text="The following example shows an outlined card." />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/_10sdp"
                 android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/likeButton"
-                    style="?attr/borderlessButtonStyle"
+                <LinearLayout
+                    android:id="@+id/likeContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:id="@+id/likeIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/newlikeicon"/>
+                    <TextView
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Like"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/newcommenticon"/>
+                    <TextView
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Comment"/>
+                </LinearLayout><LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_weight="1"
+                android:gravity="center_vertical">
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:fontFamily="@font/sfprodisplaysemibold"
-                    android:text="Like" />
-
-                <com.google.android.material.button.MaterialButton
-                    style="?attr/borderlessButtonStyle"
+                    android:src="@drawable/newreporticon"/>
+                <TextView
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfprodisplaysemibold"
-                    android:text="Comment" />
+                    android:text="Report"/>
             </LinearLayout>
+            </LinearLayout>
+
 
         </LinearLayout>
 

@@ -20,12 +20,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatRoomPage extends AppCompatActivity {
+public class ChatRoomPage extends AppCompatActivity implements ChatRoomAdapter.ChatRoomInterface {
     FirebaseFirestore db;
     FirebaseUser user;
     RecyclerView chatListRecyclerView;
@@ -39,7 +40,7 @@ public class ChatRoomPage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         chatListRecyclerView = findViewById(R.id.chatListRecyclerView);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        chatRoomAdapter = new ChatRoomAdapter(ChatRoomModel.itemCallback);
+        chatRoomAdapter = new ChatRoomAdapter(ChatRoomModel.itemCallback, this);
         chatListRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         chatListRecyclerView.setAdapter(chatRoomAdapter);
         chatListRecyclerView.setItemAnimator(new SimpleItemAnimator() {
@@ -95,7 +96,7 @@ public class ChatRoomPage extends AppCompatActivity {
 
     public void getAllData() {
         db.collection("userInformation")
-                .document(user.getUid()).collection("chatRoom")
+                .document(user.getUid()).collection("chatRoom").orderBy("lastModified", Query.Direction.DESCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -108,5 +109,12 @@ public class ChatRoomPage extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onChatClick(String otherUserId) {
+        Intent intent = new Intent(getApplicationContext(), MessagePage.class);
+        intent.putExtra("otherUserId", otherUserId);
+        startActivity(intent);
     }
 }

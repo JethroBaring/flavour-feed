@@ -12,43 +12,46 @@
         app:cardElevation="@dimen/_5sdp"
         app:shapeAppearanceOverlay="@style/roundedcard"
         >
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!-- Media -->
+            android:layout_height="@dimen/_150sdp"
+            >
+
             <ImageView
-                android:id="@+id/postPicture"
+                android:id="@+id/productPicture"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
                 android:scaleType="centerCrop"
-                android:src="@color/black" />
+                android:src="@color/flutter_sky"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="@dimen/_10sdp">
-
-                <!-- Title, secondary and supporting text -->
+                android:padding="@dimen/_10sdp"
+                android:layout_alignParentBottom="true"
+                >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal">
 
 
                     <TextView
-                        android:id="@+id/userDisplayName"
+                        android:id="@+id/productName"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/sfprodisplaysemibold"
                         android:text="Display name"
-                        android:textSize="@dimen/_12ssp" />
+                        android:textSize="@dimen/_12ssp"
+                        android:textColor="?attr/colorOnPrimary"
+                        />
 
                     <Button
+                        android:id="@+id/productPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -56,8 +59,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
-        </LinearLayout>
-
+        </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>
