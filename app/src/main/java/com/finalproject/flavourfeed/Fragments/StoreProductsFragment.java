@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,15 +6,16 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.finalproject.flavourfeed.Adapters.PostAdapter;
-import com.finalproject.flavourfeed.Models.PostModel;
+import com.finalproject.flavourfeed.Adapters.MyProductAdapter;
+import com.finalproject.flavourfeed.Models.ProductModel;
+import com.finalproject.flavourfeed.Pages.AddProductPage;
+import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,7 +65,7 @@ public class StoreProductsFragment extends Fragment {
 
     public void getAllData() {
 
-        db.collection("storeInformation").document(user.getUid()).collection("products").orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("allProducts").orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if(error == null) {

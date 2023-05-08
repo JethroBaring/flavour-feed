@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.finalproject.flavourfeed.Models.ProductModel;
+import com.finalproject.flavourfeed.R;
 
 public class MyProductAdapter extends ListAdapter<ProductModel, MyProductAdapter.MyProductViewHolder> {
 

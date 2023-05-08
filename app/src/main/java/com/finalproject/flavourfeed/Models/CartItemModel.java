@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -14,18 +14,27 @@ public class CartItemModel implements Parcelable {
     public String cartItemId;
     public String productId;
     public int quantity;
+    public int price;
 
 
     public CartItemModel() {
     }
 
-    public CartItemModel(String sellerId, String cartItemId, String productId, int quantity) {
+    public CartItemModel(String sellerId, String cartItemId, String productId, int quantity, int price) {
         this.sellerId = sellerId;
         this.cartItemId = cartItemId;
         this.productId = productId;
         this.quantity = quantity;
+        this.price = price;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public String getSellerId() {
         return sellerId;
@@ -105,6 +114,7 @@ public class CartItemModel implements Parcelable {
         cartItemId = in.readString();
         productId = in.readString();
         quantity = in.readInt();
+        price = in.readInt();
     }
 
     @Override
@@ -118,5 +128,6 @@ public class CartItemModel implements Parcelable {
         dest.writeString(cartItemId);
         dest.writeString(productId);
         dest.writeInt(quantity);
+        dest.writeInt(price);
     }
 }

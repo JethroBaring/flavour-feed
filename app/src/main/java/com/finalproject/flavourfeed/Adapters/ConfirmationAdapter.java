@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.finalproject.flavourfeed.Adapters.SearchAdapter;
+import com.finalproject.flavourfeed.Models.CartItemModel;
+import com.finalproject.flavourfeed.R;
 
 import java.util.ArrayList;
 

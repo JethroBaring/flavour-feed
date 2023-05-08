@@ -15,25 +15,25 @@
         android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
-            android:name=".ConfirmationPage"
+            android:name=".Pages.ConfirmationPage"
             android:exported="false" />
         <activity
-            android:name=".ProductPage"
+            android:name=".Pages.ProductPage"
             android:exported="false" />
         <activity
-            android:name=".AddProductPage"
+            android:name=".Pages.AddProductPage"
             android:exported="false" />
         <activity
-            android:name=".MyStorePage"
+            android:name=".Pages.MyStorePage"
             android:exported="false" />
         <activity
-            android:name=".AdminDashboardPage"
+            android:name=".Pages.AdminDashboardPage"
             android:exported="false" />
         <activity
-            android:name=".MarketSettingsPage"
+            android:name=".Pages.UserOrderPage"
             android:exported="false" />
         <activity
-            android:name=".CartPage"
+            android:name=".Pages.CartPage"
             android:exported="false" />
         <activity
             android:name=".Pages.MessagePage"

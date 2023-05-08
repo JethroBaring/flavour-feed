@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Pages;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
+import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -136,15 +137,14 @@ public class AddProductPage extends AppCompatActivity {
                                     newProduct.put("timestamp", FieldValue.serverTimestamp());
                                     newProduct.put("category", productCategory.getSelectedItem());
                                     newProduct.put("sellerId", user.getUid());
-                                    db.collection("storeInformation").document(user.getUid()).collection("products").add(newProduct).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    db.collection("allProducts").add(newProduct).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
                                             String productId = documentReference.getId();
-                                            db.collection("storeInformation").document(user.getUid()).collection("products").document(productId).update("productId",productId);
+                                            db.collection("allProducts").document(productId).update("productId",productId);
                                             Snackbar.make(findViewById(android.R.id.content), "Success", Snackbar.LENGTH_LONG).show();
                                             startActivity(new Intent(getApplicationContext(), MyStorePage.class));
                                             newProduct.put("productId", productId);
-                                            db.collection("allProducts").document(productId).set(newProduct);
                                         }
                                     });
                                 }

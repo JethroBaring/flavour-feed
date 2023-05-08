@@ -2,5 +2,7 @@
     <string name="app_name">FlavourFeed</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <item name="darkmode" type="id" />
+    <string name="open">Open Navigation Drawer</string>
+    <string name="close">Close Navigation Drawer</string>
+    <item name="btnUp" type="id" />
 </resources>

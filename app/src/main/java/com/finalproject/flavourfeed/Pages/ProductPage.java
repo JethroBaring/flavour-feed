@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Pages;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
@@ -30,6 +31,7 @@ public class ProductPage extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +56,8 @@ public class ProductPage extends AppCompatActivity {
         decrementQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newQuantity = Integer.parseInt(quantity.getText().toString())-1;
-                if(newQuantity >= 1)
+                int newQuantity = Integer.parseInt(quantity.getText().toString()) - 1;
+                if (newQuantity >= 1)
                     quantity.setText(Integer.toString(newQuantity));
             }
         });
@@ -63,9 +65,9 @@ public class ProductPage extends AppCompatActivity {
         incrementQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int newQuantity = Integer.parseInt(quantity.getText().toString())+1;
+                int newQuantity = Integer.parseInt(quantity.getText().toString()) + 1;
 
-                    quantity.setText(Integer.toString(newQuantity));
+                quantity.setText(Integer.toString(newQuantity));
 
             }
         });
@@ -83,7 +85,16 @@ public class ProductPage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentReference documentReference = task.getResult();
                             String cartItemId = documentReference.getId();
-                            db.collection("userInformation").document(user.getUid()).collection("cart").document(cartItemId).update("cartItemId",cartItemId);
+                            db.collection("allProducts").document(productId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot snapshot = task.getResult();
+                                        db.collection("userInformation").document(user.getUid()).collection("cart").document(cartItemId).update("price", snapshot.getLong("price").intValue());
+                                    }
+                                }
+                            });
+                            db.collection("userInformation").document(user.getUid()).collection("cart").document(cartItemId).update("cartItemId", cartItemId);
                             Toast.makeText(getApplicationContext(), "Added to cart.", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -91,10 +102,10 @@ public class ProductPage extends AppCompatActivity {
             }
         });
 
-        db.collection("storeInformation").document(sellerId).collection("products").document(productId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        db.collection("allProducts").document(productId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     Glide.with(getApplicationContext()).load(documentSnapshot.getString("photoUrl")).into(productPicture);
                     productName.setText(documentSnapshot.getString("name"));
@@ -107,7 +118,7 @@ public class ProductPage extends AppCompatActivity {
         db.collection("userInformation").document(sellerId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     Glide.with(getApplicationContext()).load(documentSnapshot.getString("profileUrl")).into(sellerProfile);
                     storeName.setText(documentSnapshot.getString("displayName"));

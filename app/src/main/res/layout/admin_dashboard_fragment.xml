@@ -4,51 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.StoreDashboardFragment">
-    <TextView
-        android:layout_marginStart="@dimen/_5sdp"
-        android:id="@+id/topProducts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Top Products"/>
-    <LinearLayout
-        android:id="@+id/topProductsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_200sdp"
-        android:orientation="horizontal"
-        android:layout_below="@id/topProducts"
-        android:layout_margin="@dimen/_5sdp"
-        >
-        <LinearLayout
-            android:layout_margin="@dimen/_5sdp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/flutter_dark">
+    tools:context=".AdminDashboardFragment">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_margin="@dimen/_5sdp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/flutter_sky">
-
-        </LinearLayout>
-    </LinearLayout>
-    <TextView
-        android:layout_marginStart="@dimen/_5sdp"
-        android:id="@+id/storeMetrics"
-        android:layout_below="@id/topProductsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Store Metrics"/>
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNav"
-        android:layout_below="@id/storeMetrics"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
@@ -64,8 +25,8 @@
             android:layout_margin="@dimen/_10sdp"
             android:elevation="@dimen/_3sdp"
             android:orientation="vertical"
-            app:cardBackgroundColor="?attr/colorOnPrimary"
             app:cardCornerRadius="@dimen/_8sdp"
+            app:cardBackgroundColor="?attr/colorOnPrimary"
 
             >
 
@@ -91,14 +52,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfproroundedbold"
-                    android:text="Lavish"
+                    android:text="0"
                     android:textSize="@dimen/_20ssp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfproroundedregular"
-                    android:text="Store Rating"
+                    android:text="Users"
                     android:textSize="@dimen/_10ssp" />
             </LinearLayout>
 
@@ -112,104 +73,8 @@
             android:layout_margin="@dimen/_10sdp"
             android:elevation="@dimen/_3sdp"
             android:orientation="vertical"
-            app:cardBackgroundColor="?attr/colorOnPrimary"
             app:cardCornerRadius="@dimen/_8sdp"
-
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="@dimen/_45sdp"
-                    android:layout_height="@dimen/_45sdp"
-                    android:background="@drawable/lavish_background"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/newlavishspendericon" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfproroundedbold"
-                    android:text="Lavish"
-                    android:textSize="@dimen/_20ssp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfproroundedregular"
-                    android:text="Total Products"
-                    android:textSize="@dimen/_10ssp" />
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="@dimen/_10sdp"
-            android:elevation="@dimen/_3sdp"
-            android:orientation="vertical"
             app:cardBackgroundColor="?attr/colorOnPrimary"
-            app:cardCornerRadius="@dimen/_8sdp"
-
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="@dimen/_45sdp"
-                    android:layout_height="@dimen/_45sdp"
-                    android:background="@drawable/lavish_background"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/newlavishspendericon" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfproroundedbold"
-                    android:text="Lavish"
-                    android:textSize="@dimen/_20ssp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfproroundedregular"
-                    android:text="Total Earnings"
-                    android:textSize="@dimen/_10ssp" />
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="@dimen/_10sdp"
-            android:elevation="@dimen/_3sdp"
-            android:orientation="vertical"
-            app:cardBackgroundColor="?attr/colorOnPrimary"
-            app:cardCornerRadius="@dimen/_8sdp"
 
             >
 
@@ -242,11 +107,109 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sfproroundedregular"
-                    android:text="Total Orders"
+                    android:text="Banned Users"
                     android:textSize="@dimen/_10ssp" />
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="@dimen/_10sdp"
+            android:elevation="@dimen/_3sdp"
+            android:orientation="vertical"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardBackgroundColor="?attr/colorOnPrimary"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:background="@drawable/likes_background"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/newlikedicon" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfproroundedbold"
+                    android:text="0"
+                    android:textSize="@dimen/_20ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfproroundedregular"
+                    android:text="Likes"
+                    android:textSize="@dimen/_10ssp" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="@dimen/_10sdp"
+            android:elevation="@dimen/_3sdp"
+            android:orientation="vertical"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardBackgroundColor="?attr/colorOnPrimary"
+
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:background="@drawable/posts_background"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/newposticon" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfproroundedbold"
+                    android:text="0"
+                    android:textSize="@dimen/_20ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/sfproroundedregular"
+                    android:text="Posts"
+                    android:textSize="@dimen/_10ssp" />
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
     </GridLayout>
+
 </RelativeLayout>

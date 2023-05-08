@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.finalproject.flavourfeed.Models.CartItemModel;
+import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,11 +74,11 @@ public class CartAdapter extends ListAdapter<CartItemModel, CartAdapter.CartView
                     if (task.isSuccessful()) {
                         DocumentSnapshot snapshot = task.getResult();
                         productName.setText(snapshot.getString("name"));
-                        productPrice.setText(Integer.toString(snapshot.getLong("price").intValue()));
                         Glide.with(itemView.getContext()).load(snapshot.getString("photoUrl")).into(productPicture);
                     }
                 }
             });
+            productPrice.setText(Integer.toString(cartItemModel.getPrice()));
             quantity.setText(Integer.toString(cartItemModel.getQuantity()));
             decrementQuantity.setOnClickListener(new View.OnClickListener() {
                 @Override

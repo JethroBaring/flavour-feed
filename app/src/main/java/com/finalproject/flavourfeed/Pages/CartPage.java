@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Pages;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.finalproject.flavourfeed.Models.CommentModel;
+import com.finalproject.flavourfeed.Adapters.CartAdapter;
+import com.finalproject.flavourfeed.Models.CartItemModel;
+import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,9 +59,14 @@ public class CartPage extends AppCompatActivity implements CartAdapter.CartCheck
         btnCheckOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ConfirmationPage.class);
-                intent.putExtra("orderList", toBeCheckOut);
-                startActivity(intent);
+                if(toBeCheckOut.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Please select an item/s for checkout.", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Intent intent = new Intent(getApplicationContext(), ConfirmationPage.class);
+                    intent.putExtra("orderList", toBeCheckOut);
+                    startActivity(intent);
+                }
             }
         });
     }

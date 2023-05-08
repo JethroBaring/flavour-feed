@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.finalproject.flavourfeed.ProductModel;
+import com.finalproject.flavourfeed.Models.ProductModel;
 import com.finalproject.flavourfeed.R;
 
 

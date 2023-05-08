@@ -14,24 +14,20 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Adapters.ProductAdapter;
-import com.finalproject.flavourfeed.CartPage;
-import com.finalproject.flavourfeed.MyProductAdapter;
-import com.finalproject.flavourfeed.MyStorePage;
-import com.finalproject.flavourfeed.ProductModel;
-import com.finalproject.flavourfeed.ProductPage;
+import com.finalproject.flavourfeed.Pages.CartPage;
+import com.finalproject.flavourfeed.Pages.MyStorePage;
+import com.finalproject.flavourfeed.Models.ProductModel;
+import com.finalproject.flavourfeed.Pages.ProductPage;
+import com.finalproject.flavourfeed.Pages.UserOrderPage;
 import com.finalproject.flavourfeed.R;
-import com.google.android.gms.common.data.DataBufferObserver;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -79,7 +75,7 @@ public class MarketplaceFragment extends Fragment implements ProductAdapter.Prod
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), UserOrderPage.class));
             }
         });
 

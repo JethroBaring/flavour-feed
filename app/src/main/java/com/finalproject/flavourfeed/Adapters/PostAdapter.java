@@ -55,7 +55,7 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
     @NonNull
     @Override
     public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card, parent, false));
+        return new PostViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.post_card2, parent, false));
     }
 
     class PostViewHolder extends RecyclerView.ViewHolder {
@@ -69,6 +69,8 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
 
         ImageView likeIcon;
 
+        ImageView btnDown;
+
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             postPhoto = itemView.findViewById(R.id.postPhoto);
@@ -78,9 +80,26 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
             caption = itemView.findViewById(R.id.caption);
             likeContainer = itemView.findViewById(R.id.likeContainer);
             likeIcon = itemView.findViewById(R.id.likeIcon);
+            btnDown = itemView.findViewById(R.id.btnDown);
         }
 
         public void bind(PostModel postModel) {
+
+            btnDown.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(btnDown.getId() == R.id.btnDown) {
+                        btnDown.setImageResource(R.drawable.newarrowupicon);
+                        btnDown.setId(R.id.btnUp);
+                        caption.setVisibility(View.VISIBLE);
+                    } else {
+                        btnDown.setImageResource(R.drawable.newarrowdownicon);
+                        btnDown.setId(R.id.btnDown);
+                        caption.setVisibility(View.GONE);
+                    }
+                }
+            });
+
             db = FirebaseFirestore.getInstance();
             user = FirebaseAuth.getInstance().getCurrentUser();
             DocumentReference documentReference = db.collection("userInformation").document(postModel.getUserId());

@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Models;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

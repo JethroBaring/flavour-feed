@@ -2,12 +2,7 @@ package com.finalproject.flavourfeed.Pages;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.finalproject.flavourfeed.AdminDashboardPage;
 import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Utitilies.PasswordToggle;
 import com.google.android.material.snackbar.Snackbar;
