@@ -38,7 +38,7 @@ public class MyProductAdapter extends ListAdapter<ProductModel, MyProductAdapter
 
         ImageView productPicture;
         TextView productName;
-        Button productPrice;
+        TextView productPrice;
         public MyProductViewHolder(@NonNull View itemView) {
             super(itemView);
             productPicture = itemView.findViewById(R.id.productPicture);

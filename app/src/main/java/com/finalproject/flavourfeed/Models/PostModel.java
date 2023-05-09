@@ -11,6 +11,7 @@ public class PostModel {
     public String userId;
     public String postId;
     public int likes;
+    public int comments;
 
     public int getLikes() {
         return likes;
@@ -20,14 +21,23 @@ public class PostModel {
         this.likes = likes;
     }
 
+    public int getComments() {
+        return comments;
+    }
+
+    public void setComments(int comments) {
+        this.comments = comments;
+    }
+
     public PostModel() {
     }
 
-    public PostModel(String photoUrl, String caption, String postId, String userId) {
+    public PostModel(String photoUrl, String caption, String postId, String userId, int comments) {
         this.photoUrl = photoUrl;
         this.caption = caption;
         this.userId = userId;
         this.postId = postId;
+        this.comments = comments;
     }
 
 
@@ -75,7 +85,7 @@ public class PostModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PostModel postModel = (PostModel) o;
-        return postId.equals(((PostModel) o).getPostId());
+        return postId.equals(postModel.getPostId());
     }
 
     public static DiffUtil.ItemCallback<PostModel> itemCallback = new DiffUtil.ItemCallback<PostModel>() {

@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -70,6 +73,8 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
         ImageView likeIcon;
 
         ImageView btnDown;
+        TextView numberOfLikes;
+        TextView numberOfComments;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,10 +86,13 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
             likeContainer = itemView.findViewById(R.id.likeContainer);
             likeIcon = itemView.findViewById(R.id.likeIcon);
             btnDown = itemView.findViewById(R.id.btnDown);
+            numberOfLikes = itemView.findViewById(R.id.numberOfLikes);
+            numberOfComments = itemView.findViewById(R.id.numberOfComments);
         }
 
         public void bind(PostModel postModel) {
-
+            db = FirebaseFirestore.getInstance();
+            user = FirebaseAuth.getInstance().getCurrentUser();
             btnDown.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -100,8 +108,9 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
                 }
             });
 
-            db = FirebaseFirestore.getInstance();
-            user = FirebaseAuth.getInstance().getCurrentUser();
+            numberOfLikes.setText(Integer.toString(postModel.getLikes()));
+            numberOfComments.setText(Integer.toString(postModel.getComments()));
+
             DocumentReference documentReference = db.collection("userInformation").document(postModel.getUserId());
             documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override

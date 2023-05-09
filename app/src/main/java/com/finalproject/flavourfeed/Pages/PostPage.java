@@ -35,13 +35,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PostPage extends AppCompatActivity{
+public class PostPage extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     RecyclerView commentRecyclerView;
     ArrayList<CommentModel> comments;
     CommentAdapter commentAdapter;
-
+    TextView numberOfComments;
+    TextView numberOfLikes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +60,10 @@ public class PostPage extends AppCompatActivity{
         commentRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentRecyclerView.setAdapter(commentAdapter);
         commentRecyclerView.setItemAnimator(new NoChangeAnimation());
-        TextView numberOfLikes = findViewById(R.id.numberOfLikes);
+        numberOfLikes = findViewById(R.id.numberOfLikes);
         TextView postDisplayName = findViewById(R.id.postDisplayName);
-        ImageView postPageLike = findViewById(R.id.postPageLike);
+        ImageView postPageLike = findViewById(R.id.likeIcon);
+        numberOfComments = findViewById(R.id.numberOfComments);
         String photoUrl;
         getAllData(postId);
         DocumentReference documentReference = db.collection("postInformation").document(postId);
@@ -73,7 +75,7 @@ public class PostPage extends AppCompatActivity{
                 db.collection("userInformation").document(documentSnapshot.getString("userId")).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        postDisplayName.setText(documentSnapshot.getString("displayName")+"'s post");
+                        postDisplayName.setText(documentSnapshot.getString("displayName") + "'s post");
                     }
                 });
             }
@@ -168,7 +170,13 @@ public class PostPage extends AppCompatActivity{
                         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
                     }
                 });
-
+                db.collection("postInformation").document(postId).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        int numOfComments = documentSnapshot.getLong("comments").intValue();
+                        db.collection("postInformation").document(postId).update("comments", numOfComments + 1);
+                    }
+                });
                 db.collection("postInformation").document(postId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -188,24 +196,33 @@ public class PostPage extends AppCompatActivity{
     }
 
     public void getAllData(String postId) {
-        db.collection("commentInformation")
-                .orderBy("timestamp")
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if (error == null) {
-                            List<CommentModel> data = value.toObjects(CommentModel.class);
-                            comments = new ArrayList<>();
-                            for (CommentModel comment : data) {
-                                if (comment.getPostId().equals(postId)) {
-                                    comments.add(comment);
-                                }
-                            }
-                            commentAdapter.submitList(comments);
-                            commentRecyclerView.scrollToPosition(commentAdapter.getItemCount() - 1);
+        db.collection("commentInformation").orderBy("timestamp").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (error == null) {
+                    List<CommentModel> data = value.toObjects(CommentModel.class);
+                    comments = new ArrayList<>();
+                    for (CommentModel comment : data) {
+                        if (comment.getPostId().equals(postId)) {
+                            comments.add(comment);
                         }
                     }
-                });
+                    commentAdapter.submitList(comments);
+                    commentRecyclerView.scrollToPosition(commentAdapter.getItemCount() - 1);
+                }
+            }
+        });
+
+        db.collection("postInformation").document(postId).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                int comments = value.getLong("comments").intValue();
+                int likes = value.getLong("likes").intValue();
+                numberOfComments.setText(Integer.toString(comments));
+                numberOfLikes.setText(Integer.toString(likes));
+            }
+        });
+
     }
 
 }

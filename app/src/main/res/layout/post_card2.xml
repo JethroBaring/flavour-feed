@@ -12,7 +12,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp">
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            >
 
 
             <LinearLayout
@@ -28,7 +32,9 @@
                     android:layout_height="@dimen/_30sdp"
                     android:scaleType="fitXY"
                     android:src="@color/black"
-
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/flutter_sky"
+                    android:padding="@dimen/_1sdp"
                     app:shapeAppearanceOverlay="@style/circular_image" />
 
                 <LinearLayout
@@ -81,15 +87,15 @@
             android:layout_height="@dimen/_200sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             android:src="@color/black"
             app:shapeAppearanceOverlay="@style/roundedcard" />
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
@@ -97,9 +103,8 @@
 
             <LinearLayout
                 android:id="@+id/likeContainer"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_weight="1"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -109,34 +114,34 @@
                     android:src="@drawable/newlikeicon" />
 
                 <TextView
+                    android:id="@+id/numberOfLikes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Like" />
+                    android:text="0" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_weight="1"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/newcommenticon" />
+                    android:src="@drawable/newcommenticon2" />
 
                 <TextView
+                    android:id="@+id/numberOfComments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Comment" />
+                    android:text="0" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_weight="1"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -148,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Report" />
+                    android:text="0" />
             </LinearLayout>
         </LinearLayout>
 

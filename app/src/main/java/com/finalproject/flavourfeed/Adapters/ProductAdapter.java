@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Models.ProductModel;
 import com.finalproject.flavourfeed.R;
 
+import org.w3c.dom.Text;
 
 
 public class ProductAdapter extends ListAdapter<ProductModel, ProductAdapter.ProductViewHolder> {
@@ -43,7 +45,7 @@ public class ProductAdapter extends ListAdapter<ProductModel, ProductAdapter.Pro
 
         ImageView productPicture;
         TextView productName;
-        Button productPrice;
+        TextView productPrice;
         RelativeLayout productCard;
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);

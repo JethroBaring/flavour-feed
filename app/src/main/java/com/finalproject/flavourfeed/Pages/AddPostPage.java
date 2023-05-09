@@ -134,6 +134,7 @@ public class AddPostPage extends AppCompatActivity {
                                     newPost.put("timestamp", FieldValue.serverTimestamp());
                                     newPost.put("userId", user.getUid());
                                     newPost.put("likes", 0);
+                                    newPost.put("comments", 0);
                                     db.collection("postInformation").add(newPost).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {

@@ -61,5 +61,8 @@ dependencies {
 
     //difutils
     implementation 'androidx.recyclerview:recyclerview:1.3.0'
+
+    //sticky tab
+    implementation 'com.github.amarjain07:StickyScrollView:1.0.2'
 }
 
