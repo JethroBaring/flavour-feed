@@ -59,6 +59,18 @@ public class MessagePage extends AppCompatActivity {
         messageRecyclerView.setItemAnimator(new NoChangeAnimation());
         getAllData(otherUserId);
 
+        TextView otherUserDisplayName = findViewById(R.id.txtDisplayName);
+
+        db.collection("userInformation").document(otherUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot snapshot = task.getResult();
+                    otherUserDisplayName.setText(snapshot.getString("displayName"));
+                }
+            }
+        });
+
         EditText message = findViewById(R.id.message);
         message.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -132,7 +144,6 @@ public class MessagePage extends AppCompatActivity {
                                                 String messageId = documentReference.getId();
                                                 db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).collection("messages").document(messageId).update("messageId", messageId);
                                                 db.collection("userInformation").document(otherUserId).collection("chatRoom").document(chatRoomId).update("lastModified", FieldValue.serverTimestamp());
-
                                             }
                                         }
                                     });

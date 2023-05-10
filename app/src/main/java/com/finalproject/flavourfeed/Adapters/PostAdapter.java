@@ -45,8 +45,11 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
     FirebaseUser user;
 
 
-    public PostAdapter(@NonNull DiffUtil.ItemCallback<PostModel> diffCallback) {
+    PostAdapterInterface postAdapterInterface;
+
+    public PostAdapter(@NonNull DiffUtil.ItemCallback<PostModel> diffCallback, PostAdapterInterface postAdapterInterface) {
         super(diffCallback);
+        this.postAdapterInterface = postAdapterInterface;
     }
 
     @Override
@@ -76,6 +79,7 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
         TextView numberOfLikes;
         TextView numberOfComments;
 
+        LinearLayout commentContainer;
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
             postPhoto = itemView.findViewById(R.id.postPhoto);
@@ -88,6 +92,7 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
             btnDown = itemView.findViewById(R.id.btnDown);
             numberOfLikes = itemView.findViewById(R.id.numberOfLikes);
             numberOfComments = itemView.findViewById(R.id.numberOfComments);
+            commentContainer = itemView.findViewById(R.id.commentContainer);
         }
 
         public void bind(PostModel postModel) {
@@ -105,6 +110,13 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
                         btnDown.setId(R.id.btnDown);
                         caption.setVisibility(View.GONE);
                     }
+                }
+            });
+
+            commentContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    postAdapterInterface.onCommentClick(postModel.getPostId());
                 }
             });
 
@@ -199,5 +211,9 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
                 }
             });
         }
+    }
+
+    public interface PostAdapterInterface {
+        public void onCommentClick(String postId);
     }
 }

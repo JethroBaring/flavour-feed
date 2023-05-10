@@ -5,33 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.NotificationFragment">
-    <com.google.android.material.card.MaterialCardView
+
+    <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_margin="@dimen/_5sdp"
-        app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="@dimen/_2sdp"
-        app:shapeAppearanceOverlay="@style/roundedcard"
-        app:cardBackgroundColor="?attr/colorOnPrimary"
+        android:layout_height="wrap_content">
 
-        >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Notification"
-                android:textSize="@dimen/_15ssp" />
-        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="Notifications"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_below="@id/topBar"
-    android:layout_margin="@dimen/_5sdp"
-    android:id="@+id/notificationRecyclerView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notificationRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topBar"
+        android:layout_margin="@dimen/_5sdp" />
 </RelativeLayout>

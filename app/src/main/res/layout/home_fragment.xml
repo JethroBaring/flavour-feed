@@ -28,6 +28,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:text="FlavourFeed"
                 android:textSize="@dimen/_15ssp" />
 
@@ -38,9 +40,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
+
                 android:src="@drawable/newmessageicon" />
         </RelativeLayout>
 
@@ -64,5 +66,5 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:backgroundTint="?attr/colorPrimary"
-        app:srcCompat="@drawable/addicon" />
+        app:srcCompat="@drawable/newplusicon" />
 </RelativeLayout>

@@ -18,6 +18,7 @@ import com.finalproject.flavourfeed.Pages.ChatRoomPage;
 import com.finalproject.flavourfeed.Pages.AddPostPage;
 import com.finalproject.flavourfeed.Models.PostModel;
 import com.finalproject.flavourfeed.Adapters.PostAdapter;
+import com.finalproject.flavourfeed.Pages.PostPage;
 import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,7 +33,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements PostAdapter.PostAdapterInterface {
 
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -55,7 +56,7 @@ public class HomeFragment extends Fragment {
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
 
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
-        postAdapter = new PostAdapter(PostModel.itemCallback);
+        postAdapter = new PostAdapter(PostModel.itemCallback, this);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setItemAnimator(new NoChangeAnimation());
@@ -92,6 +93,12 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+    }
 
+    @Override
+    public void onCommentClick(String postId) {
+        Intent intent = new Intent(getContext(), PostPage.class);
+        intent.putExtra("postId", postId);
+        startActivity(intent);
     }
 }

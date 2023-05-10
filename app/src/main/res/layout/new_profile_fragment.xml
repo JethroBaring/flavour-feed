@@ -57,9 +57,8 @@
         android:layout_below="@id/profileDisplayName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_5sdp"
-        android:text="Sample Bio"
         android:maxLength="100"
-        />
+        android:text="Sample Bio" />
 
     <LinearLayout
         android:id="@+id/profileInformation"
@@ -136,8 +135,7 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_margin="@dimen/_5sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
->
+            app:cardCornerRadius="@dimen/_10sdp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -156,8 +154,7 @@
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginEnd="@dimen/_5sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
->
+            app:cardCornerRadius="@dimen/_10sdp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -171,27 +168,30 @@
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/userOrderTabLayout"
         style="@style/CustomTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/editProfile"
-        app:tabIconTint="@color/flutter_sky"
+        app:tabIconTint="?attr/colorOnSecondary"
+        app:tabIndicatorColor="@color/black"
+
         >
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/userPending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pending" />
+            android:icon="@drawable/newgridicon"
+            />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/userInProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/newlikeicon"
-            />
+            android:icon="@drawable/newlikeicon" />
 
     </com.google.android.material.tabs.TabLayout>
 </RelativeLayout>
