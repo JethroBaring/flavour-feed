@@ -19,6 +19,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ConfirmationPage extends AppCompatActivity {
     FirebaseUser user;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,30 +49,28 @@ public class ConfirmationPage extends AppCompatActivity {
         int total = 0;
 
         for (CartItemModel cartItemModel : myList) {
-            total+=(cartItemModel.getPrice()*cartItemModel.getQuantity());
+            total += (cartItemModel.getPrice() * cartItemModel.getQuantity());
         }
         txtTotal.setText(Integer.toString(total));
 
-        btnPlaceOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Map<String, Object> newOrder = new HashMap<>();
-                newOrder.put("status", OrderModel.PENDING);
-                newOrder.put("buyerId", user.getUid());
-                newOrder.put("orderTotal", Integer.parseInt(txtTotal.getText().toString()));
-                newOrder.put("orderItems", myList);
-                newOrder.put("delivered", false);
-                db.collection("orderInformation").add(newOrder).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if(task.isSuccessful()) {
-                            DocumentReference documentReference = task.getResult();
-                            String orderId  = documentReference.getId();
-                            db.collection("orderInformation").document(orderId).update("orderId", orderId);
-                        }
+        btnPlaceOrder.setOnClickListener(view -> {
+            Map<String, Object> newOrder = new HashMap<>();
+            newOrder.put("status", OrderModel.PENDING);
+            newOrder.put("buyerId", user.getUid());
+            newOrder.put("orderTotal", Integer.parseInt(txtTotal.getText().toString()));
+            newOrder.put("orderItems", myList);
+            newOrder.put("delivered", false);
+            newOrder.put("timestamp", FieldValue.serverTimestamp());
+            db.collection("orderInformation").add(newOrder).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentReference> task) {
+                    if (task.isSuccessful()) {
+                        DocumentReference documentReference = task.getResult();
+                        String orderId = documentReference.getId();
+                        db.collection("orderInformation").document(orderId).update("orderId", orderId);
                     }
-                });
-            }
+                }
+            });
         });
 
 

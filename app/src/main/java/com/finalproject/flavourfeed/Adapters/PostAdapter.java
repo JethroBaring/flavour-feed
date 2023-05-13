@@ -31,10 +31,12 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -148,6 +150,19 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
                     view.getContext().startActivity(intent);
                 }
             });
+
+            db.collection("userInformation").document(user.getUid()).collection("likedPosts").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                    for (QueryDocumentSnapshot documentSnapshot : value) {
+                        if(documentSnapshot.getString("postId").equals(postModel.getPostId())){
+                            break;
+                        }
+                    }
+                    likeIcon.setImageResource(R.drawable.newlikeicon);
+                }
+            });
+
             likeContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -169,6 +184,7 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
                                             int likes = document.getLong("likes").intValue();
                                             // Document exists
                                             db.collection("postInformation").document(postModel.getPostId()).update("likes", likes - 1);
+                                            postAdapterInterface.onLikeClick(false);
                                         }
                                     }
                                 });
@@ -189,6 +205,7 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
                                             int likes = document.getLong("likes").intValue();
                                             // Document exists
                                             db.collection("postInformation").document(postModel.getPostId()).update("likes", likes + 1);
+                                            postAdapterInterface.onLikeClick(true);
                                         }
                                     }
                                 });
@@ -196,7 +213,9 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
                             }
                         }
                     });
+
                 }
+
             });
 
             CollectionReference collectionReference = db.collection("userInformation").document(user.getUid()).collection("likedPosts");
@@ -215,5 +234,6 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
 
     public interface PostAdapterInterface {
         public void onCommentClick(String postId);
+        public void onLikeClick(boolean like);
     }
 }

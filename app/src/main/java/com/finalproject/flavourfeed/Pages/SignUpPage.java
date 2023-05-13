@@ -28,6 +28,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.jetbrains.annotations.NotNull;
@@ -112,6 +113,12 @@ public class SignUpPage extends AppCompatActivity {
                                     newUser.put("displayName", user.getDisplayName());
                                     newUser.put("profileUrl", user.getPhotoUrl());
                                     newUser.put("userId", user.getUid());
+                                    newUser.put("active", true);
+                                    newUser.put("followers", 0);
+                                    newUser.put("followings", 0);
+                                    newUser.put("likes", 0);
+                                    newUser.put("balance", 10000);
+                                    newUser.put("timestamp", FieldValue.serverTimestamp());
                                     db.collection("userInformation").document(user.getUid()).set(newUser);
                                     Intent intent = new Intent(getApplicationContext(), MainPage.class);
                                     intent.putExtra("fromSignUp", true);

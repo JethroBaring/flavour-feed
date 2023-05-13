@@ -8,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class AdminDashboardFragment extends Fragment {
+public class BannedUsersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.admin_dashboard_fragment, container, false);
+        View view = inflater.inflate(R.layout.banned_users_fragment, container, false);
+        return view;
     }
 }

@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.finalproject.flavourfeed.Models.OrderModel;
+import com.finalproject.flavourfeed.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserOrderAdapter extends ListAdapter<OrderModel, UserOrderAdapter.UserPendingViewHolder> {

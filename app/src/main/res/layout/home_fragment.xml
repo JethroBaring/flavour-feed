@@ -5,46 +5,51 @@
     android:id="@+id/relativehome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorOnPrimary"
     android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
 
-        <RelativeLayout
-            android:id="@+id/topBar"
-            android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/homeProfilePicture"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:scaleType="fitXY"
+            android:src="@color/flutter_sky"
+            app:shapeAppearanceOverlay="@style/circular_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:text="FlavourFeed"
+            android:textSize="@dimen/_15ssp" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/buttoncontainer"
+            android:padding="@dimen/_3sdp"
             >
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/homeProfilePicture"
-                android:layout_centerVertical="true"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@color/flutter_sky"
-                android:layout_marginStart="@dimen/_10sdp"
-                app:shapeAppearanceOverlay="@style/circular_image"
-                android:scaleType="fitXY"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:text="FlavourFeed"
-                android:textSize="@dimen/_15ssp" />
-
             <ImageView
                 android:id="@+id/btnMessageRoom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-
-                android:layout_marginEnd="@dimen/_10sdp"
-
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:src="@drawable/newmessageicon" />
         </RelativeLayout>
+    </RelativeLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -67,4 +72,12 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:backgroundTint="?attr/colorPrimary"
         app:srcCompat="@drawable/newplusicon" />
+    <ImageView
+        android:id="@+id/heart"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:src="@drawable/newlikedicon"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        />
 </RelativeLayout>

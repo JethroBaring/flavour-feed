@@ -53,6 +53,7 @@ public class AddProductPage extends AppCompatActivity {
     EditText productPrice;
 
     Spinner productCategory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class AddProductPage extends AppCompatActivity {
         productName = findViewById(R.id.productName);
         productPrice = findViewById(R.id.productPrice);
         productCategory = findViewById(R.id.productCategory);
-        String [] categories = new String[]{"Main Dishes", "Salads","Desserts","Drinks"};
+        String[] categories = new String[]{"Main Dishes", "Salads", "Desserts", "Drinks"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
         productCategory.setAdapter(adapter);
 
@@ -105,7 +106,7 @@ public class AddProductPage extends AppCompatActivity {
             imageUri = data.getData();
             productPicture.setImageURI(imageUri);
             cameraIcon.setVisibility(View.INVISIBLE);
-        } else if(imageUri == null){
+        } else if (imageUri == null) {
             cameraIcon.setVisibility(View.VISIBLE);
         }
     }
@@ -121,42 +122,39 @@ public class AddProductPage extends AppCompatActivity {
         if (imageUri != null) {
             StorageReference fileReference = storageRef.child("product/" + UUID.randomUUID().toString());
 
-            fileReference.putFile(imageUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> downloadUrl = fileReference.getDownloadUrl();
+                    downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Task<Uri> downloadUrl = fileReference.getDownloadUrl();
-                            downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        public void onSuccess(Uri uri) {
+                            db = FirebaseFirestore.getInstance();
+                            Map<String, Object> newProduct = new HashMap<>();
+                            newProduct.put("photoUrl", uri.toString());
+                            newProduct.put("name", productName.getText().toString());
+                            newProduct.put("price", Integer.parseInt(productPrice.getText().toString()));
+                            newProduct.put("timestamp", FieldValue.serverTimestamp());
+                            newProduct.put("category", productCategory.getSelectedItem());
+                            newProduct.put("sellerId", user.getUid());
+                            db.collection("allProducts").add(newProduct).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
-                                public void onSuccess(Uri uri) {
-                                    db = FirebaseFirestore.getInstance();
-                                    Map<String, Object> newProduct = new HashMap<>();
-                                    newProduct.put("photoUrl", uri.toString());
-                                    newProduct.put("name", productName.getText().toString());
-                                    newProduct.put("price", Integer.parseInt(productPrice.getText().toString()));
-                                    newProduct.put("timestamp", FieldValue.serverTimestamp());
-                                    newProduct.put("category", productCategory.getSelectedItem());
-                                    newProduct.put("sellerId", user.getUid());
-                                    db.collection("allProducts").add(newProduct).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            String productId = documentReference.getId();
-                                            db.collection("allProducts").document(productId).update("productId",productId);
-                                            Snackbar.make(findViewById(android.R.id.content), "Success", Snackbar.LENGTH_LONG).show();
-                                            startActivity(new Intent(getApplicationContext(), MyStorePage.class));
-                                            newProduct.put("productId", productId);
-                                        }
-                                    });
+                                public void onSuccess(DocumentReference documentReference) {
+                                    String productId = documentReference.getId();
+                                    db.collection("allProducts").document(productId).update("productId", productId);
+                                    Snackbar.make(findViewById(android.R.id.content), "Success", Snackbar.LENGTH_LONG).show();
+                                    newProduct.put("productId", productId);
                                 }
                             });
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Snackbar.make(findViewById(android.R.id.content), "Error: " + e.getMessage(), Snackbar.LENGTH_LONG).show();
-                        }
                     });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Snackbar.make(findViewById(android.R.id.content), "Error: " + e.getMessage(), Snackbar.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }

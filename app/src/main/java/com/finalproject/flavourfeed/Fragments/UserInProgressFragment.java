@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Fragments;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.finalproject.flavourfeed.Models.OrderModel;
+import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.Adapters.UserOrderAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
@@ -22,39 +24,40 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class UserCompletedFragment extends Fragment {
+public class UserInProgressFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseFirestore db;
 
-    RecyclerView userCompletedRecyclerView;
+    RecyclerView userInProgressRecyclerView;
+    ArrayList<OrderModel> inprogress;
     UserOrderAdapter userOrderAdapter;
-    ArrayList<OrderModel> completedOrders;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.user_completed_fragment, container, false);
+        View view = inflater.inflate(R.layout.user_in_progress_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
-        userCompletedRecyclerView = view.findViewById(R.id.userCompletedRecyclerView);
-        userOrderAdapter = new UserOrderAdapter(OrderModel.itemCallback, false);
-        userCompletedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        userCompletedRecyclerView.setAdapter(userOrderAdapter);
+        userInProgressRecyclerView = view.findViewById(R.id.userInProgressRecyclerView);
+        userOrderAdapter = new UserOrderAdapter(OrderModel.itemCallback, true);
+        userInProgressRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        userInProgressRecyclerView.setAdapter(userOrderAdapter);
         getAllData();
         return view;
     }
 
     public void getAllData() {
-        db.collection("orderInformation").whereEqualTo("status",OrderModel.COMPLETED).whereEqualTo("buyerId",user.getUid()).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("orderInformation").whereEqualTo("status", OrderModel.IN_PROGRESS).whereEqualTo("buyerId", user.getUid()).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 List<OrderModel> data = value.toObjects(OrderModel.class);
-                completedOrders = new ArrayList<>();
-                completedOrders.addAll(data);
-                userOrderAdapter.submitList(completedOrders);
+                inprogress = new ArrayList<>();
+                inprogress.addAll(data);
+                userOrderAdapter.submitList(inprogress);
+
             }
         });
+
     }
 }

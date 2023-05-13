@@ -16,12 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.finalproject.flavourfeed.Adapters.ProductAdapter;
 import com.finalproject.flavourfeed.Pages.CartPage;
-import com.finalproject.flavourfeed.Pages.MyStorePage;
 import com.finalproject.flavourfeed.Models.ProductModel;
 import com.finalproject.flavourfeed.Pages.ProductPage;
 import com.finalproject.flavourfeed.Pages.UserOrderPage;
 import com.finalproject.flavourfeed.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
@@ -61,30 +59,14 @@ public class MarketplaceFragment extends Fragment implements ProductAdapter.Prod
         allProducts = new ArrayList<>();
         ImageView btnCart = view.findViewById(R.id.btnCart);
         ImageView btnOrder = view.findViewById(R.id.btnOrder);
-        FloatingActionButton btnMyStore = view.findViewById(R.id.btnMyStore);
+
         getAllData();
 
-        btnCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CartPage.class);
-                startActivity(intent);
-            }
+        btnCart.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), CartPage.class));
         });
-
-        btnOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), UserOrderPage.class));
-            }
-        });
-
-        btnMyStore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), MyStorePage.class);
-                startActivity(intent);
-            }
+        btnOrder.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), UserOrderPage.class));
         });
 
         return view;
@@ -95,7 +77,7 @@ public class MarketplaceFragment extends Fragment implements ProductAdapter.Prod
         db.collection("allProducts").orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if(error == null) {
+                if (error == null) {
                     List<ProductModel> data = value.toObjects(ProductModel.class);
                     allProducts.addAll(data);
                     productAdapter.submitList(allProducts);

@@ -40,7 +40,7 @@ public class ChatRoomAdapter extends ListAdapter<ChatRoomModel, ChatRoomAdapter.
     @NonNull
     @Override
     public ChatRoomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ChatRoomAdapter.ChatRoomViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_card, parent, false));
+        return new ChatRoomViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_card, parent, false));
 
     }
 

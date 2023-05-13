@@ -76,9 +76,7 @@ public class LogInPage extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             snackbar.setText("Logging in.");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            /*Intent intent = new Intent(getApplicationContext(), MainPage.class);
-                            startActivity(intent);*/
-                            if(user.getEmail().equals("admin@gmail.com")) {
+                            if (user.getEmail().equals("admin@gmail.com")) {
                                 Intent intent = new Intent(getApplicationContext(), AdminDashboardPage.class);
                                 startActivity(intent);
                             } else {
@@ -100,7 +98,12 @@ public class LogInPage extends AppCompatActivity {
         super.onStart();
         FirebaseUser user = mAuth.getCurrentUser();
         if (user != null) {
-            Intent intent = new Intent(getApplicationContext(), MainPage.class);
+            Intent intent;
+            if (user.getEmail().equals("admin@gmail.com")) {
+                intent = new Intent(getApplicationContext(), AdminDashboardPage.class);
+            } else {
+                intent = new Intent(getApplicationContext(), MainPage.class);
+            }
             startActivity(intent);
         }
     }

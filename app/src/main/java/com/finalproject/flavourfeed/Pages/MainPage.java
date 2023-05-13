@@ -11,7 +11,7 @@ import com.finalproject.flavourfeed.Fragments.HomeFragment;
 import com.finalproject.flavourfeed.Fragments.NotificationFragment;
 import com.finalproject.flavourfeed.Fragments.MarketplaceFragment;
 import com.finalproject.flavourfeed.Fragments.ProfileFragment;
-import com.finalproject.flavourfeed.NewProfileFragment;
+import com.finalproject.flavourfeed.Fragments.NewProfileFragment;
 import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

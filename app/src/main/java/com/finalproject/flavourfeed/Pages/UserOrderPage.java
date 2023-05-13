@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.finalproject.flavourfeed.R;
-import com.finalproject.flavourfeed.UserCompletedFragment;
-import com.finalproject.flavourfeed.UserInProgressFragment;
-import com.finalproject.flavourfeed.UserPendingFragment;
+import com.finalproject.flavourfeed.Fragments.UserCompletedFragment;
+import com.finalproject.flavourfeed.Fragments.UserInProgressFragment;
+import com.finalproject.flavourfeed.Fragments.UserPendingFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class UserOrderPage extends AppCompatActivity {
