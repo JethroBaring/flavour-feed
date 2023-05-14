@@ -195,7 +195,7 @@ public class PostAdapter extends ListAdapter<PostModel, PostAdapter.PostViewHold
                                 Map<String, Object> likedPost = new HashMap<>();
                                 likedPost.put("postId", postModel.getPostId());
                                 db.collection("userInformation").document(user.getUid()).collection("likedPosts").document(postModel.getPostId()).set(likedPost);
-                                likeIcon.setImageResource(R.drawable.newlikedicon);
+                                //likeIcon.setImageResource(R.drawable.newlikedicon);
                                 DocumentReference docRef = db.collection("postInformation").document(postModel.getPostId());
 
                                 docRef.get().addOnCompleteListener(task1 -> {

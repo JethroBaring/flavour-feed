@@ -1,5 +1,6 @@
 package com.finalproject.flavourfeed.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,18 @@ import com.finalproject.flavourfeed.R;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
 
-public class ProductAdapter extends ListAdapter<ProductModel, ProductAdapter.ProductViewHolder> {
+
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     ProductClickInterface productClickInterface;
-    public ProductAdapter(@NonNull DiffUtil.ItemCallback<ProductModel> diffCallback, ProductClickInterface productClickInterface) {
-        super(diffCallback);
+    List<ProductModel> products;
+    Context context;
+
+    public ProductAdapter(Context context, List<ProductModel> products, ProductClickInterface productClickInterface) {
+        this.context = context;
+        this.products = products;
         this.productClickInterface = productClickInterface;
     }
 
@@ -37,8 +44,13 @@ public class ProductAdapter extends ListAdapter<ProductModel, ProductAdapter.Pro
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        ProductModel productModel = getItem(position);
+        ProductModel productModel = products.get(position);
         holder.bind(productModel);
+    }
+
+    @Override
+    public int getItemCount() {
+        return products.size();
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
@@ -47,6 +59,7 @@ public class ProductAdapter extends ListAdapter<ProductModel, ProductAdapter.Pro
         TextView productName;
         TextView productPrice;
         RelativeLayout productCard;
+
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             productPicture = itemView.findViewById(R.id.productPicture);

@@ -56,8 +56,4 @@ public class ActiveUsersFragment extends Fragment implements BanUnbanAdapter.Ban
 
     }
 
-    @Override
-    public void OnBanUnbanClick(String userId, boolean ban) {
-        db.collection("userInformation").document(userId).update("ban",ban);
-    }
 }

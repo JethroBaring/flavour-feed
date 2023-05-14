@@ -21,7 +21,8 @@ public class AdminOrdersFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.admin_orders_fragment, container, false);
         TabLayout adminOrderTabLayout = view.findViewById(R.id.adminOrderTabLayout);
-        getChildFragmentManager().beginTransaction().replace(R.id.tabContainer,adminPendingFragment).commit();
+
+        changeFragment(adminPendingFragment);
 
         adminOrderTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -29,13 +30,13 @@ public class AdminOrdersFragment extends Fragment {
                 int position = tab.getPosition();
                 switch (position) {
                     case 0:
-                        getChildFragmentManager().beginTransaction().replace(R.id.tabContainer, adminPendingFragment).commit();
+                        changeFragment(adminPendingFragment);
                         break;
                     case 1:
-                        getChildFragmentManager().beginTransaction().replace(R.id.tabContainer, adminInProgressFragment).commit();
+                        changeFragment(adminInProgressFragment);
                         break;
                     case 2:
-                        getChildFragmentManager().beginTransaction().replace(R.id.tabContainer, adminCompletedFragment).commit();
+                        changeFragment(adminCompletedFragment);
                         break;
                 }
             }
@@ -47,5 +48,9 @@ public class AdminOrdersFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void changeFragment(Fragment fragment) {
+        getChildFragmentManager().beginTransaction().replace(R.id.tabContainer,fragment).commit();
     }
 }

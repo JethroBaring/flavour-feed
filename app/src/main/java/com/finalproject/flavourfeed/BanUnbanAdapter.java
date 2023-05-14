@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.finalproject.flavourfeed.Models.DashboardUserModel;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BanUnbanAdapter extends ListAdapter<DashboardUserModel, BanUnbanAdapter.BanUnbanViewHolder> {
     boolean ban;
     BanUnbanInterface banUnbanInterface;
+    FirebaseFirestore db;
 
     public BanUnbanAdapter(@NonNull DiffUtil.ItemCallback<DashboardUserModel> diffCallback, BanUnbanInterface banUnbanInterface, boolean ban) {
         super(diffCallback);
@@ -55,8 +57,9 @@ public class BanUnbanAdapter extends ListAdapter<DashboardUserModel, BanUnbanAda
         }
 
         public void bind(DashboardUserModel dashboardUserModel) {
+            db = FirebaseFirestore.getInstance();
             banUser.setOnClickListener(view -> {
-                banUnbanInterface.OnBanUnbanClick(dashboardUserModel.getUserId(),ban);
+                db.collection("userInformation").document(dashboardUserModel.getUserId()).update("ban", ban);
             });
         }
     }
@@ -65,6 +68,5 @@ public class BanUnbanAdapter extends ListAdapter<DashboardUserModel, BanUnbanAda
 
         public void OnViewInformationClick();
 
-        public void OnBanUnbanClick(String userId, boolean ban);
     }
 }

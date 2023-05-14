@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.finalproject.flavourfeed.Adapters.MyProductAdapter;
+import com.finalproject.flavourfeed.Adapters.AdminProductAdapter;
 import com.finalproject.flavourfeed.Models.ProductModel;
 import com.finalproject.flavourfeed.Pages.AddProductPage;
 import com.finalproject.flavourfeed.R;
@@ -32,7 +32,7 @@ import java.util.List;
 
 public class AdminProductsFragment extends Fragment {
     RecyclerView myProductsRecyclerView;
-    MyProductAdapter myProductAdapter;
+    AdminProductAdapter myProductAdapter;
 
     ArrayList<ProductModel> myProducts;
 
@@ -47,7 +47,7 @@ public class AdminProductsFragment extends Fragment {
         user = FirebaseAuth.getInstance().getCurrentUser();
         myProducts = new ArrayList<>();
         myProductsRecyclerView = view.findViewById(R.id.myProductsRecyclerView);
-        myProductAdapter = new MyProductAdapter(ProductModel.itemCallback);
+        myProductAdapter = new AdminProductAdapter(ProductModel.itemCallback);
         myProductsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
         myProductsRecyclerView.setAdapter(myProductAdapter);
         myProductsRecyclerView.setItemAnimator(new NoChangeAnimation());

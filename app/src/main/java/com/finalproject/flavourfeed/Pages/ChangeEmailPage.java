@@ -39,38 +39,35 @@ public class ChangeEmailPage extends AppCompatActivity {
         final EditText passwordEditText = passwordTextInputLayout.getEditText();
         PasswordToggle.changeToggleIcon(this, passwordTextInputLayout, passwordEditText);
 
-        btnChangeEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = txtInptEmail.getText().toString();
-                String newEmail = txtInptNewEmail.getText().toString();
-                String password = txtInptPassword.getText().toString();
-                if(TextUtils.isEmpty(email ) || TextUtils.isEmpty(newEmail) || TextUtils.isEmpty(password)) {
-                    Toast.makeText(ChangeEmailPage.this, "Field/s should not be empty.", Toast.LENGTH_SHORT).show();
-                } else {
-                    AuthCredential credential = EmailAuthProvider.getCredential(email, password);
-                    user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull @NotNull Task<Void> task) {
-                            if(task.isSuccessful()) {
-                                user.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                        if(task.isSuccessful()) {
-                                            Toast.makeText(ChangeEmailPage.this, "Email has been changed.", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(getApplicationContext(), MainPage.class);
-                                            intent.putExtra("fromUpdateProfile", true);
-                                            startActivity(intent);
-                                        }
+        btnChangeEmail.setOnClickListener(v -> {
+            String email = txtInptEmail.getText().toString();
+            String newEmail = txtInptNewEmail.getText().toString();
+            String password = txtInptPassword.getText().toString();
+            if(TextUtils.isEmpty(email ) || TextUtils.isEmpty(newEmail) || TextUtils.isEmpty(password)) {
+                Toast.makeText(ChangeEmailPage.this, "Field/s should not be empty.", Toast.LENGTH_SHORT).show();
+            } else {
+                AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+                user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            user.updateEmail(newEmail).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Toast.makeText(ChangeEmailPage.this, "Email has been changed.", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), MainPage.class);
+                                        intent.putExtra("fromUpdateProfile", true);
+                                        startActivity(intent);
                                     }
-                                });
-                            } else {
-                                Toast.makeText(ChangeEmailPage.this, "Incorrect email/password.", Toast.LENGTH_SHORT).show();
-                            }
+                                }
+                            });
+                        } else {
+                            Toast.makeText(ChangeEmailPage.this, "Incorrect email/password.", Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
+                });
 
-                }
             }
         });
     }

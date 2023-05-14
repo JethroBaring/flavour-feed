@@ -84,7 +84,7 @@ public class ProductModel {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         ProductModel productModel = (ProductModel) obj;
-        return Objects.equals(productId, productModel.productId);
+        return Objects.equals(productId, productModel.getProductId());
     }
 
     public static DiffUtil.ItemCallback<ProductModel> itemCallback = new DiffUtil.ItemCallback<ProductModel>() {

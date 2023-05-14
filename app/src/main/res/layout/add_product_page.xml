@@ -59,7 +59,8 @@
         android:id="@+id/productCategory"
         android:layout_below="@+id/productPictureContainer"
         android:layout_width="@dimen/_150sdp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        />
     <EditText
         android:id="@+id/productName"
         android:layout_width="match_parent"

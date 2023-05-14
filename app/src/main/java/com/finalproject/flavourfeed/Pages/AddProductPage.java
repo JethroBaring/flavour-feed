@@ -68,34 +68,18 @@ public class AddProductPage extends AppCompatActivity {
         productName = findViewById(R.id.productName);
         productPrice = findViewById(R.id.productPrice);
         productCategory = findViewById(R.id.productCategory);
-        String[] categories = new String[]{"Main Dishes", "Salads", "Desserts", "Drinks"};
+        String[] categories = new String[]{"Main", "Salads", "Desserts", "Drinks"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
         productCategory.setAdapter(adapter);
 
         ImageView btnClose = findViewById(R.id.btnClose);
 
-        productPictureContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openFileChooser();
-            }
-        });
+
+        productPictureContainer.setOnClickListener(v -> openFileChooser());
+        btnClose.setOnClickListener(v ->AddProductPage.super.onBackPressed());
+        btnAddProduct.setOnClickListener(v -> saveChanges());
 
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddProductPage.super.onBackPressed();
-            }
-        });
-
-
-        btnAddProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                saveChanges();
-            }
-        });
 
     }
 

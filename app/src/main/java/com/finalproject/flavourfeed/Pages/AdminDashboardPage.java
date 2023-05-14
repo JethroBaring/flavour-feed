@@ -3,6 +3,7 @@ package com.finalproject.flavourfeed.Pages;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,22 +45,13 @@ public class AdminDashboardPage extends AppCompatActivity {
         LinearLayout orders = findViewById(R.id.orders);
         LinearLayout logout = findViewById(R.id.logout);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.dashboardContainer, adminDashboardFragment).commit();
-        menu.setOnClickListener(View -> {
-            openDrawer(drawerLayout);
-        });
-        dashboard.setOnClickListener(view -> {
-            onClick(dashboard);
-        });
-        users.setOnClickListener(view -> {
-            onClick(users);
-        });
-        products.setOnClickListener(view -> {
-            onClick(products);
-        });
-        orders.setOnClickListener(view -> {
-            onClick(orders);
-        });
+        changeFragment(adminDashboardFragment);
+
+        menu.setOnClickListener(View -> openDrawer(drawerLayout));
+        dashboard.setOnClickListener(view -> onClick(dashboard));
+        users.setOnClickListener(view -> onClick(users));
+        products.setOnClickListener(view -> onClick(products));
+        orders.setOnClickListener(view -> onClick(orders));
         logout.setOnClickListener(view -> {
             mAuth.signOut();
             startActivity(new Intent(getApplicationContext(), LogInPage.class));
@@ -93,21 +85,22 @@ public class AdminDashboardPage extends AppCompatActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dashboard:
-                getSupportFragmentManager().beginTransaction().replace(R.id.dashboardContainer, adminDashboardFragment).commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                changeFragment(adminDashboardFragment);
                 break;
             case R.id.users:
-                getSupportFragmentManager().beginTransaction().replace(R.id.dashboardContainer, adminUsersFragment).commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                changeFragment(adminUsersFragment);
                 break;
             case R.id.products:
-                getSupportFragmentManager().beginTransaction().replace(R.id.dashboardContainer, adminProductsFragment).commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                changeFragment(adminProductsFragment);
                 break;
             case R.id.orders:
-                getSupportFragmentManager().beginTransaction().replace(R.id.dashboardContainer, adminOrdersFragment).commit();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                changeFragment(adminOrdersFragment);
                 break;
         }
+    }
+
+    public void changeFragment(Fragment fragment){
+        getSupportFragmentManager().beginTransaction().replace(R.id.dashboardContainer,fragment).commit();
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 }
