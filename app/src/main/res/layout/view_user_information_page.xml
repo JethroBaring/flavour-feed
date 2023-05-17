@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewUserInformationPage">
+
+
+    <ImageView
+        android:id="@+id/backgroundPicture"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:scaleType="fitXY"
+        android:src="@color/flutter_dark" />
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profilePicture"
+        android:layout_width="@dimen/_85sdp"
+        android:layout_height="@dimen/_85sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_110sdp"
+        android:padding="@dimen/_5sdp"
+        android:src="@color/flutter_dark"
+        app:shapeAppearanceOverlay="@style/circular_image"
+        app:strokeColor="@color/flutter_sky"
+        app:strokeWidth="@dimen/_3sdp" />
+
+    <TextView
+        android:id="@+id/profileDisplayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profilePicture"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/sfproroundedsemibold"
+        android:text="Display Name"
+        android:textSize="@dimen/_13ssp" />
+
+    <LinearLayout
+        android:id="@+id/profileInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileDisplayName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <LinearLayout
+            android:layout_width="@dimen/_65sdp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/numberOfFollowing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Following" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_65sdp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/numberOfFollowers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Followers" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/_65sdp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/numberOfLikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Likes" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/profileTabLayout"
+        style="@style/CustomTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profileInformation"
+        app:tabIconTint="?attr/colorOnSecondary"
+        app:tabIndicatorColor="@color/black"
+
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/userPending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/newgridicon" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/userInProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/newlikeicon" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profileRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/profileTabLayout"
+        android:layout_margin="@dimen/_5sdp" />
+
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:clickable="true"
+            android:src="@drawable/newbackicon" />
+
+        <TextView
+            android:id="@+id/txtDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sfproroundedmedium"
+            android:text="User Information"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
+</RelativeLayout>

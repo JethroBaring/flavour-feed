@@ -8,12 +8,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="you are banned"/>
-<ImageView
-    android:id="@+id/logout"
+        android:fontFamily="@font/sfproroundedbold"
+        android:textSize="@dimen/_15ssp"
+        android:layout_centerHorizontal="true"
+        android:text="You are banned!"/>
+<LinearLayout
+    android:layout_centerInParent="true"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/newlogouticon"
-    android:layout_centerInParent="true"
-    />
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sfproroundedregular"
+        android:text="Logout"/>
+    <ImageView
+        android:layout_marginTop="@dimen/_5sdp"
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/newlogouticon"
+        />
+</LinearLayout>
 </RelativeLayout>

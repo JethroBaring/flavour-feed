@@ -68,12 +68,14 @@ public class BanUnbanAdapter extends ListAdapter<DashboardUserModel, BanUnbanAda
                email.setText(documentSnapshot.getString("email"));
             });
             Glide.with(itemView.getContext()).load(dashboardUserModel.getProfileUrl()).into(profile);
+
+            viewInformation.setOnClickListener(v -> banUnbanInterface.OnViewInformationClick(dashboardUserModel.getUserId()));
         }
     }
 
     public interface BanUnbanInterface {
 
-        public void OnViewInformationClick();
+        public void OnViewInformationClick(String userId);
 
     }
 }

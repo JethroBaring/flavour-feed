@@ -15,6 +15,9 @@
         android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
+            android:name=".ViewUserInformationPage"
+            android:exported="false" />
+        <activity
             android:name=".Pages.UpgradeCardPage"
             android:exported="false" />
         <activity

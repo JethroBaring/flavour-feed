@@ -1,5 +1,6 @@
 package com.finalproject.flavourfeed.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import com.finalproject.flavourfeed.Adapters.BanUnbanAdapter;
 import com.finalproject.flavourfeed.Models.DashboardUserModel;
 import com.finalproject.flavourfeed.R;
+import com.finalproject.flavourfeed.ViewUserInformationPage;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -54,7 +56,9 @@ public class BannedUsersFragment extends Fragment implements BanUnbanAdapter.Ban
     }
 
     @Override
-    public void OnViewInformationClick() {
-
+    public void OnViewInformationClick(String userId) {
+        Intent intent = new Intent(getContext(), ViewUserInformationPage.class);
+        intent.putExtra("fromUserId",userId);
+        startActivity(intent);
     }
 }
