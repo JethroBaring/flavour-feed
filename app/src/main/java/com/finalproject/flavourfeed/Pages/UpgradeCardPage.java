@@ -14,7 +14,11 @@ import com.finalproject.flavourfeed.R;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpgradeCardPage extends AppCompatActivity {
     FirebaseUser user;
@@ -63,6 +67,16 @@ public class UpgradeCardPage extends AppCompatActivity {
                         db.collection("userInformation").document(user.getUid()).update("card", "black");
                         db.collection("userInformation").document(user.getUid()).update("balance", documentSnapshot.getLong("balance").intValue() - price[0]);
                     }
+
+                    Map<String, Object> newTransaction = new HashMap<>();
+                    newTransaction.put("userId", user.getUid());
+                    newTransaction.put("total", price[0]);
+                    newTransaction.put("timestamp", FieldValue.serverTimestamp());
+                    db.collection("allTransactions").add(newTransaction).addOnSuccessListener(documentReference -> {
+                       String id = documentReference.getId();
+                       db.collection("allTransactions").document(id).update("transactionId",id);
+                    });
+
                     Toast.makeText(getApplicationContext(),"Card upgraded",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(), MarketProfilePage.class));
                 } else {
