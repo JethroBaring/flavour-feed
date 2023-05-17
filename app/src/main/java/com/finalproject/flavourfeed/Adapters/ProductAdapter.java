@@ -27,7 +27,7 @@ public class ProductAdapter extends ListAdapter<ProductModel, ProductAdapter.Pro
         super(diffCallback);
         this.productClickInterface = productClickInterface;
     }
-
+    
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

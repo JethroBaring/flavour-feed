@@ -55,6 +55,8 @@ public class MarketProfilePage extends AppCompatActivity {
         TextView balance = findViewById(R.id.balance);
         TextView displayName = findViewById(R.id.displayName);
         ImageView card = findViewById(R.id.card);
+        ImageView btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> super.onBackPressed());
 
         getAllData();
 

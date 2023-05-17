@@ -81,7 +81,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String friendUserId = document.getString("userId");
                         if (friendUserId.equals(results.get(position).getUserId())) {
-                            // Current user and this result object have a friend relationship
                             holder.sendRequest.setImageResource(R.drawable.newfollowericon);
                             followed[0] = true;
                         }

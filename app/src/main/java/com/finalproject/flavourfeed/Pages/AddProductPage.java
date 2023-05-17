@@ -68,7 +68,7 @@ public class AddProductPage extends AppCompatActivity {
         productName = findViewById(R.id.productName);
         productPrice = findViewById(R.id.productPrice);
         productCategory = findViewById(R.id.productCategory);
-        String[] categories = new String[]{"Main", "Salads", "Desserts", "Drinks"};
+        String[] categories = new String[]{"Main", "Salads", "Desserts","Burgers", "Drinks"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
         productCategory.setAdapter(adapter);
 

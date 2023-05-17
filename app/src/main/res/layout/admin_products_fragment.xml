@@ -69,6 +69,8 @@
             android:gravity="center"
             >
             <TextView
+                android:textSize="@dimen/_10ssp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="All"
@@ -86,6 +88,8 @@
             android:gravity="center"
             >
             <TextView
+                android:textSize="@dimen/_10ssp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Main"
@@ -103,6 +107,8 @@
             android:gravity="center"
             >
             <TextView
+                android:textSize="@dimen/_10ssp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Salads"
@@ -120,6 +126,7 @@
             android:gravity="center"
             >
             <TextView
+                android:textSize="@dimen/_10ssp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Burgers"
@@ -137,6 +144,8 @@
             android:gravity="center"
             >
             <TextView
+                android:textSize="@dimen/_10ssp"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Drinks"

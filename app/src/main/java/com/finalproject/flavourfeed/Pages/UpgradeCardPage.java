@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -40,6 +41,8 @@ public class UpgradeCardPage extends AppCompatActivity {
         final int[] price = {5000};
         total.setText(String.format("%,d",5000));
         goldcard.setChecked(true);
+        ImageView btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> super.onBackPressed());
 
         goldcard.setOnClickListener(v -> {
             total.setText(String.format("%,d", 5000));

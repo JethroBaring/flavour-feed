@@ -10,14 +10,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Models.CartItemModel;
 import com.finalproject.flavourfeed.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class ConfirmationAdapter extends RecyclerView.Adapter<ConfirmationAdapter.ConfirmationViewholder> {
     Context context;
     ArrayList<CartItemModel> cartItemModels;
+    FirebaseFirestore db;
+
     public ConfirmationAdapter(Context context, ArrayList<CartItemModel> cartItemModels) {
         this.context = context;
         this.cartItemModels = cartItemModels;
@@ -34,7 +38,15 @@ public class ConfirmationAdapter extends RecyclerView.Adapter<ConfirmationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ConfirmationViewholder holder, int position) {
-    holder.productQuantity.setText(Integer.toString(cartItemModels.get(position).getQuantity()));
+        holder.productQuantity.setText(Integer.toString(cartItemModels.get(position).getQuantity()));
+        holder.productTotal.setText(Integer.toString(cartItemModels.get(position).getPrice() * cartItemModels.get(position).getQuantity()));
+        db = FirebaseFirestore.getInstance();
+        db.collection("allProducts").document(cartItemModels.get(position).getProductId()).get().addOnSuccessListener(documentSnapshot -> {
+            Glide.with(holder.itemView.getContext()).load(documentSnapshot.getString("photoUrl")).into(holder.productPicture);
+            holder.productName.setText(documentSnapshot.getString("name"));
+            holder.productPrice.setText(Integer.toString(documentSnapshot.getLong("price").intValue()));
+        });
+
     }
 
     @Override
@@ -48,6 +60,7 @@ public class ConfirmationAdapter extends RecyclerView.Adapter<ConfirmationAdapte
         TextView productPrice;
         TextView productQuantity;
         TextView productTotal;
+
         public ConfirmationViewholder(@NonNull View itemView) {
             super(itemView);
             productPicture = itemView.findViewById(R.id.productPicture);

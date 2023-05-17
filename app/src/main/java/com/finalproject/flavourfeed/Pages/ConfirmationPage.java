@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,8 @@ public class ConfirmationPage extends AppCompatActivity {
         orderRecyclerview.setAdapter(confirmationAdapter);
         TextView txtTotal = findViewById(R.id.overAllTotal);
         Button btnPlaceOrder = findViewById(R.id.btnPlaceOrder);
+        ImageView btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> super.onBackPressed());
 
         final int[] total = {0};
 
