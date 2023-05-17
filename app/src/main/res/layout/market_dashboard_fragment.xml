@@ -19,11 +19,29 @@
                 android:id="@+id/ordersChart"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:background="@drawable/simplesearch" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                >
+                <TextView
+                    android:id="@+id/orders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textSize="@dimen/_25ssp"
+                    android:fontFamily="@font/sfproroundedbold"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Orders"/>
+            </LinearLayout>
         </RelativeLayout>
         <RelativeLayout
             android:layout_marginEnd="@dimen/_10sdp"
@@ -37,11 +55,29 @@
                 android:id="@+id/earningsChart"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:background="@drawable/simplesearch" />
+            <LinearLayout
+                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginEnd="@dimen/_13sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                >
+                <TextView
+                    android:id="@+id/earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textSize="@dimen/_25ssp"
+                    android:fontFamily="@font/sfproroundedbold"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Earnings"/>
+            </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
     <RelativeLayout
@@ -57,47 +93,38 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/simplesearch" />
-        <LinearLayout
+        <TextView
+            android:textAlignment="center"
             android:layout_marginTop="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_50sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_alignParentEnd="true"
-            android:gravity="center"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="@dimen/_25ssp"
-                android:fontFamily="@font/sfproroundedbold"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Users"/>
-        </LinearLayout>
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:text="Sales \n Statistics"/>
     </RelativeLayout>
-    <LinearLayout
-        android:layout_below="@id/salesstatistics"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/market"
+        style="@style/CustomTabLayout2"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_below="@id/salesstatistics">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/topProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top products" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/topSpenders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top Spenders"
+            />
+    </com.google.android.material.tabs.TabLayout>
+    <FrameLayout
+        android:id="@+id/tabContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
-            android:layout_margin="@dimen/_5sdp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@color/flutter_sky"/>
-        <LinearLayout
-            android:layout_margin="@dimen/_5sdp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@color/flutter_sky"/>
-        <LinearLayout
-            android:layout_margin="@dimen/_5sdp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
-            android:background="@color/flutter_sky"/>
-    </LinearLayout>
+        android:layout_below="@id/market"/>
 </RelativeLayout>

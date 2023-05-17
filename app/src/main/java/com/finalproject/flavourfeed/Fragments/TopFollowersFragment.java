@@ -35,7 +35,7 @@ public class TopFollowersFragment extends Fragment {
         View view = inflater.inflate(R.layout.top_followers_fragment, container, false);
         db = FirebaseFirestore.getInstance();
         newUsersRecyclerView = view.findViewById(R.id.topFollowersRecyclerView);
-        dashboardUserAdapter = new DashboardUserAdapter(DashboardUserModel.itemCallback);
+        dashboardUserAdapter = new DashboardUserAdapter(DashboardUserModel.itemCallback,true);
         newUsersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         newUsersRecyclerView.setAdapter(dashboardUserAdapter);
         getAllData();

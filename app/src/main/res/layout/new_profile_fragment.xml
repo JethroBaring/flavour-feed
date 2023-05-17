@@ -11,25 +11,19 @@
         android:id="@+id/backgroundPicture"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
-        android:src="@color/flutter_dark" />
+        android:scaleType="fitXY"
+        android:src="@color/flutter_sky" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_margin="@dimen/_5sdp">
 
-        <ImageButton
-            android:id="@+id/icnSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/buttoncontainer"
-            android:padding="@dimen/_3sdp"
-            android:src="@drawable/newsettingsicon" />
-    </RelativeLayout>
+    <ImageView
+        android:id="@+id/icnSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/newsettingsicon" />
+
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profilePicture"
@@ -50,34 +44,27 @@
         android:layout_below="@id/profilePicture"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/sfproroundedsemibold"
+        android:textSize="@dimen/_13ssp"
         android:text="Display Name" />
-
-    <TextView
-        android:id="@+id/bio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/profileDisplayName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:maxLength="100"
-        android:text="Sample Bio" />
 
     <LinearLayout
         android:id="@+id/profileInformation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bio"
+        android:layout_below="@id/profileDisplayName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_5sdp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_65sdp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/numberOfFollowing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9" />
@@ -89,13 +76,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_65sdp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/numberOfFollowers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9" />
@@ -103,17 +91,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Following" />
+                android:text="Followers" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_65sdp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_5sdp"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/numberOfLikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9" />
@@ -121,7 +110,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Following" />
+                android:text="Likes" />
         </LinearLayout>
     </LinearLayout>
 
@@ -134,6 +123,7 @@
         android:gravity="center">
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnEditProfile"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_margin="@dimen/_5sdp"
@@ -144,6 +134,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:fontFamily="@font/sfproroundedregular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -153,6 +144,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btnMessageRoom"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginEnd="@dimen/_5sdp"
@@ -172,7 +164,7 @@
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/userOrderTabLayout"
+        android:id="@+id/profileTabLayout"
         style="@style/CustomTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -186,8 +178,7 @@
             android:id="@+id/userPending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:icon="@drawable/newgridicon"
-            />
+            android:icon="@drawable/newgridicon" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/userInProgress"
@@ -196,4 +187,11 @@
             android:icon="@drawable/newlikeicon" />
 
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profileRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/profileTabLayout"
+        android:layout_margin="@dimen/_5sdp" />
 </RelativeLayout>

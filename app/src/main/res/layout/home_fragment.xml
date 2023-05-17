@@ -22,33 +22,30 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:scaleType="fitXY"
             android:src="@color/flutter_sky"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/flutter_sky"
+            android:padding="@dimen/_1sdp"
             app:shapeAppearanceOverlay="@style/circular_image" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/sfproroundedmedium"
             android:text="FlavourFeed"
             android:textSize="@dimen/_15ssp" />
 
-        <RelativeLayout
+
+        <ImageView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btnMessageRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:src="@drawable/newcommenticon"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/buttoncontainer"
-            android:padding="@dimen/_3sdp"
-            >
-            <ImageView
-                android:id="@+id/btnMessageRoom"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/newmessageicon" />
-        </RelativeLayout>
+            android:scaleX="-1"
+            />
     </RelativeLayout>
 
 
@@ -72,12 +69,6 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:backgroundTint="?attr/colorPrimary"
         app:srcCompat="@drawable/newplusicon" />
-    <ImageView
-        android:id="@+id/heart"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
-        android:src="@drawable/newlikedicon"
-        android:layout_centerInParent="true"
-        android:visibility="invisible"
-        />
+
+
 </RelativeLayout>

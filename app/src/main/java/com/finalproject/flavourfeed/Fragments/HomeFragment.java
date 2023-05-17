@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Pages.ChatRoomPage;
@@ -25,6 +26,7 @@ import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Utitilies.NoChangeAnimation;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
@@ -47,12 +49,12 @@ public class HomeFragment extends Fragment implements PostAdapter.PostAdapterInt
     ArrayList<PostModel> posts;
     RecyclerView postRecyclerView;
     PostAdapter postAdapter;
-    ImageView imageView;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -67,9 +69,10 @@ public class HomeFragment extends Fragment implements PostAdapter.PostAdapterInt
         postRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         postRecyclerView.setAdapter(postAdapter);
         postRecyclerView.setItemAnimator(new NoChangeAnimation());
-        getAllData();
-        ImageView btnChat = view.findViewById(R.id.btnMessageRoom);
 
+        getAllData();
+
+        ImageView btnChat = view.findViewById(R.id.btnMessageRoom);
         Glide.with(this).load(user.getPhotoUrl()).into(homeProfileFragment);
 
         btnChat.setOnClickListener(new View.OnClickListener() {
@@ -85,60 +88,25 @@ public class HomeFragment extends Fragment implements PostAdapter.PostAdapterInt
                 startActivity(new Intent(getActivity(), AddPostPage.class));
             }
         });
-        imageView = view.findViewById(R.id.heart);
         return view;
     }
 
     public void getAllData() {
-
-        db.collection("postInformation").orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener(MetadataChanges.INCLUDE, new EventListener<QuerySnapshot>() {
+        db.collection("postInformation").orderBy("timestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error == null) {
-                    for (DocumentChange dc : value.getDocumentChanges()) {
-                        switch (dc.getType()) {
-                            case ADDED:
-                                // Handle new document
-                                PostModel post = dc.getDocument().toObject(PostModel.class);
-                                posts.add(0, post);
-                                postAdapter.notifyItemInserted(0);
-                                break;
-                            case MODIFIED:
-                                // Handle modified document
-                                PostModel po = dc.getDocument().toObject(PostModel.class);
-                                int position = getPosition(po);
-                                if (position != -1) {
-                                    posts.set(position, po);
-                                    postAdapter.notifyItemChanged(position);
-                                }
-                                break;
-                            case REMOVED:
-                                // Handle removed document
-                                PostModel pt = dc.getDocument().toObject(PostModel.class);
-                                int posin = getPosition(pt);
-                                if (posin != -1) {
-                                    posts.remove(posin);
-                                    postAdapter.notifyItemRemoved(posin);
-                                }
-                                break;
-                        }
-                    }
+                    List<PostModel> data = value.toObjects(PostModel.class);
+                    posts = new ArrayList<>();
+                    posts.addAll(data);
                     postAdapter.submitList(posts);
                 }
             }
         });
 
-
     }
 
-    private int getPosition(PostModel post) {
-        for (int i = 0; i < posts.size(); i++) {
-            if (posts.get(i).getPostId().equals(post.getPostId())) {
-                return i;
-            }
-        }
-        return -1;
-    }
+
 
     @Override
     public void onCommentClick(String postId) {
@@ -149,12 +117,6 @@ public class HomeFragment extends Fragment implements PostAdapter.PostAdapterInt
 
     @Override
     public void onLikeClick(boolean like) {
-        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.unlike);
-        if (like) {
-            anim = AnimationUtils.loadAnimation(getContext(), R.anim.like);
-        }
-        imageView.setVisibility(View.VISIBLE);
-        imageView.startAnimation(anim);
-        imageView.setVisibility(View.INVISIBLE);
+
     }
 }

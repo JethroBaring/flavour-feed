@@ -118,7 +118,10 @@ public class SignUpPage extends AppCompatActivity {
                                     newUser.put("followings", 0);
                                     newUser.put("likes", 0);
                                     newUser.put("balance", 10000);
+                                    newUser.put("card","blue");
+                                    newUser.put("ban", false);
                                     newUser.put("timestamp", FieldValue.serverTimestamp());
+                                    newUser.put("backgroundUrl", "https://firebasestorage.googleapis.com/v0/b/flavour-feed-39786.appspot.com/o/background%2F33ef8b9c0b902154a6cd4103a21275ef.jpg?alt=media&token=d87b015b-7e73-4d0c-8bd6-33d6706f6516");
                                     db.collection("userInformation").document(user.getUid()).set(newUser);
                                     Intent intent = new Intent(getApplicationContext(), MainPage.class);
                                     intent.putExtra("fromSignUp", true);

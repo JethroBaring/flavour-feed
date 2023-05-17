@@ -126,6 +126,7 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/theme"
             android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
@@ -139,12 +140,12 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/newordericon"
+                    android:src="@drawable/newthemeicon"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Customer Service"
+                    android:text="Theme"
                     android:textSize="@dimen/_15ssp"
                     android:layout_marginStart="@dimen/_10sdp"
                     />

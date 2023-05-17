@@ -2,25 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/notification"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_10sdp">
+    android:layout_marginStart="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_5sdp"
+    android:layout_marginBottom="@dimen/_10sdp">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
+        android:padding="@dimen/_5sdp"
+        android:gravity="center"
         >
-
-        <!-- Title, secondary and supporting text -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/notificationProfile"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
             android:scaleType="fitXY"
             android:src="@color/black"
-
+            app:strokeColor="@color/flutter_sky"
+            app:strokeWidth="@dimen/_1sdp"
+            android:padding="@dimen/_1sdp"
             app:shapeAppearanceOverlay="@style/circular_image" />
 
         <LinearLayout
@@ -33,70 +36,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                >
 
                 <TextView
                     android:id="@+id/notificationDisplayName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfprodisplaysemibold"
+                    android:fontFamily="@font/sfproroundedsemibold"
                     android:text="Display name"
                     android:textSize="@dimen/_12ssp" />
-
                 <TextView
                     android:id="@+id/notificationText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/sfprodisplayregular"
-                    android:text=" is following you."
-                    android:textSize="@dimen/_12ssp" />
+                    android:layout_marginTop="@dimen/_minus5sdp"
+                    android:fontFamily="@font/sfproroundedregular"
+                    android:text="is following you."
+                    android:textSize="@dimen/_11ssp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/requestButtons"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                >
-                <LinearLayout
-                    android:id="@+id/acceptRequest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    >
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/checkicon" />
-
-                    <TextView
-                        android:id="@+id/txtAccept"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:text="Accept" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/rejectRequest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    >
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/closeicon" />
-
-                    <TextView
-                        android:id="@+id/txtReject"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:text="Reject" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

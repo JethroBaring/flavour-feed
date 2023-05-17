@@ -3,6 +3,7 @@ package com.finalproject.flavourfeed.Adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,9 +16,9 @@ import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Models.ProductModel;
 import com.finalproject.flavourfeed.R;
 
-public class AdminProductAdapter extends ListAdapter<ProductModel, AdminProductAdapter.MyProductViewHolder> {
+public class MyProductAdapter extends ListAdapter<ProductModel, MyProductAdapter.MyProductViewHolder> {
 
-    public AdminProductAdapter(@NonNull DiffUtil.ItemCallback<ProductModel> diffCallback) {
+    public MyProductAdapter(@NonNull DiffUtil.ItemCallback<ProductModel> diffCallback) {
         super(diffCallback);
     }
 

@@ -6,71 +6,91 @@
     android:layout_height="match_parent"
     tools:context=".Pages.CartPage">
 
-    <com.google.android.material.card.MaterialCardView
+    <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_margin="@dimen/_5sdp"
-        app:cardBackgroundColor="?attr/colorOnPrimary"
-        app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="@dimen/_2sdp"
-        app:shapeAppearanceOverlay="@style/roundedcard"
+        android:layout_height="@dimen/_40sdp">
 
-        >
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Cart"
-                android:textSize="@dimen/_15ssp" />
-        </RelativeLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/txtDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sfproroundedmedium"
+            android:text="Cart"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/topBar"
-        android:layout_above="@id/btnCheckOut"
-        />
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_alignParentBottom="true"
-        android:id="@+id/btnCheckOut"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_above="@id/divider"
+        android:layout_below="@id/topBar" />
+    <com.google.android.material.divider.MaterialDivider
         android:layout_margin="@dimen/_5sdp"
-        android:layout_weight="@integer/material_motion_duration_long_1"
-        android:clickable="true"
-        app:cardBackgroundColor="?attr/colorOnPrimary"
-        app:cardCornerRadius="@dimen/_8sdp"
-        app:cardElevation="@dimen/_2sdp"
-        app:shapeAppearanceOverlay="@style/roundedcard">
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        app:dividerInsetStart="@dimen/_10sdp"
+        app:dividerInsetEnd="@dimen/_10sdp"
+        android:layout_above="@id/totalContainer"
+        />
+    <LinearLayout
+        android:id="@+id/totalContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_70sdp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sfproroundedregular"
+            android:text="Total"
+            android:textSize="@dimen/_15ssp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:src="@drawable/newcheckouticon" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="@integer/material_motion_duration_long_1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Check out"
+                android:fontFamily="@font/sfproroundedregular"
+                android:text="P"
                 android:textSize="@dimen/_15ssp" />
-        </RelativeLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sfproroundedregular"
+                android:text="0"
+                android:textSize="@dimen/_15ssp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCheckOut"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_43sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/roundeddefault"
+        android:fontFamily="@font/sfproroundedbold"
+        android:text="CHECKOUT"
+        android:textSize="@dimen/_12ssp"
+        app:backgroundTint="@null" />
+
 </RelativeLayout>

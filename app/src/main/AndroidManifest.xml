@@ -15,7 +15,19 @@
         android:theme="@style/Theme.FlavourFeed"
         tools:targetApi="31">
         <activity
-            android:name=".BannedPage"
+            android:name=".Pages.UpgradeCardPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.AddFundsPage"
+            android:exported="false" />
+        <activity
+            android:name=".AccountActionPage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.MarketProfilePage"
+            android:exported="false" />
+        <activity
+            android:name=".Pages.BannedPage"
             android:exported="false" />
         <activity
             android:name=".Pages.ConfirmationPage"

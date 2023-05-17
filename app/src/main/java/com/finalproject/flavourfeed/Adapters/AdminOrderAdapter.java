@@ -27,11 +27,11 @@ public class AdminOrderAdapter extends ListAdapter<OrderModel, AdminOrderAdapter
     @Override
     public AdminOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == OrderModel.IN_PROGRESS) {
-            return new AdminOrderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_in_progress_card, parent, false));
+            return new AdminOrderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_in_progress_card2, parent, false));
         } else if(viewType == OrderModel.PENDING) {
-            return new AdminOrderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_pending_card, parent, false));
+            return new AdminOrderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_pending_card2, parent, false));
         } else {
-            return new AdminOrderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_completed_card, parent, false));
+            return new AdminOrderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_completed_card2, parent, false));
         }
     }
 

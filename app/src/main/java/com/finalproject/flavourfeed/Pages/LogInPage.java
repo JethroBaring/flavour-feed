@@ -1,9 +1,7 @@
 package com.finalproject.flavourfeed.Pages;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -13,16 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.finalproject.flavourfeed.BannedPage;
 import com.finalproject.flavourfeed.R;
 import com.finalproject.flavourfeed.Utitilies.PasswordToggle;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LogInPage extends AppCompatActivity {

@@ -33,7 +33,7 @@ public class NotificationFragment extends Fragment implements NotificationAdapte
     FirebaseFirestore db;
     FirebaseUser user;
 
-    ViewUserProfileFragment viewUserProfileFragment = new ViewUserProfileFragment();
+    NewViewUserProfileFragment viewUserProfileFragment = new NewViewUserProfileFragment();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

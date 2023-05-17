@@ -73,33 +73,17 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
                 }
             }
         });
-        //check for sent friend request and friends in database
-        db.collection("userInformation").document(user.getUid()).collection("friends").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        final boolean[] followed = {false};
+        db.collection("userInformation").document(user.getUid()).collection("followings").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String friendUserId = document.getString("userId");
                         if (friendUserId.equals(results.get(position).getUserId())) {
                             // Current user and this result object have a friend relationship
-                            holder.sendRequest.setImageResource(R.drawable.checkicon);
-                            holder.sendRequest.setEnabled(false);
-                        }
-                    }
-                }
-            }
-        });
-
-        db.collection("userInformation").document(user.getUid()).collection("sentFriendRequest").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        String friendUserId = document.getString("userId");
-                        if (friendUserId.equals(results.get(position).getUserId())) {
-                            // Current user and this result object have a friend relationship
-                            holder.sendRequest.setImageResource(R.drawable.pendingicon);
-                            holder.sendRequest.setEnabled(false);
+                            holder.sendRequest.setImageResource(R.drawable.newfollowericon);
+                            followed[0] = true;
                         }
                     }
                 }
@@ -111,16 +95,19 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         holder.sendRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.sendRequest.setImageResource(R.drawable.pendingicon);
-                //add following to current user
-                FirebaseOperations.addFollow(user.getUid(), results.get(position).getUserId(), holder.searchDisplayName.getText().toString(), NotificationModel.FOLLOWINGS, db);
-
-                //add follower to receiver
-                FirebaseOperations.addFollow(results.get(position).getUserId(), user.getUid(), user.getDisplayName(), NotificationModel.FOLLOWERS, db);
-
-                //add follow notification to receiver
-                NotificationModel newNotification = new NotificationModel(results.get(position).getUserId(), user.getUid(), NotificationModel.FOLLOW_NOTIFICATION);
-                FirebaseOperations.addNotification(newNotification, db);
+                if (!followed[0]) {
+                    FirebaseOperations.addFollow(user.getUid(), results.get(position).getUserId(), holder.searchDisplayName.getText().toString(), NotificationModel.FOLLOWINGS, db);
+                    FirebaseOperations.addFollow(results.get(position).getUserId(), user.getUid(), user.getDisplayName(), NotificationModel.FOLLOWERS, db);
+                    holder.sendRequest.setImageResource(R.drawable.newfollowericon);
+                    NotificationModel newNotification = new NotificationModel(results.get(position).getUserId(), user.getUid(), NotificationModel.FOLLOW_NOTIFICATION);
+                    FirebaseOperations.addNotification(newNotification, db);
+                    followed[0] = true;
+                } else {
+                    FirebaseOperations.removeFollow(user.getUid(),results.get(position).getUserId(),NotificationModel.FOLLOWINGS,db);
+                    FirebaseOperations.removeFollow(results.get(position).getUserId(),user.getUid(),NotificationModel.FOLLOWERS,db);
+                    holder.sendRequest.setImageResource(R.drawable.newfollowicon);
+                    followed[0] = false;
+                }
             }
         });
 
@@ -144,6 +131,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         TextView searchEmail;
 
         RelativeLayout searchCard;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             searchProfile = itemView.findViewById(R.id.searchProfile);
@@ -154,7 +142,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         }
     }
 
-    public interface SearchResultClickInterface{
-       public void viewUserProfile(String fromUserId);
+    public interface SearchResultClickInterface {
+        public void viewUserProfile(String fromUserId);
     }
 }

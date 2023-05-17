@@ -53,25 +53,18 @@ public class NotificationAdapter extends ListAdapter<NotificationModel, Notifica
         ImageView notificationProfile;
         TextView notificationDisplayName;
         TextView notificationText;
-        LinearLayout requestButtons;
         RelativeLayout notificationLayout;
-        LinearLayout acceptRequest;
-        LinearLayout rejectRequest;
 
-        TextView txtAccept;
-        TextView txtReject;
+
+
 
         public NotificationViewHolder(@NonNull View itemView) {
             super(itemView);
             notificationProfile = itemView.findViewById(R.id.notificationProfile);
             notificationDisplayName = itemView.findViewById(R.id.notificationDisplayName);
             notificationText = itemView.findViewById(R.id.notificationText);
-            requestButtons = itemView.findViewById(R.id.requestButtons);
             notificationLayout = itemView.findViewById(R.id.notification);
-            acceptRequest = itemView.findViewById(R.id.acceptRequest);
-            rejectRequest = itemView.findViewById(R.id.rejectRequest);
-            txtAccept = itemView.findViewById(R.id.txtAccept);
-            txtReject = itemView.findViewById(R.id.txtReject);
+
         }
 
         public void bind(NotificationModel notification) {
@@ -90,61 +83,13 @@ public class NotificationAdapter extends ListAdapter<NotificationModel, Notifica
             });
 
             if (notification.getNotificationType() == NotificationModel.FOLLOW_NOTIFICATION) {
-                notificationText.setText(" is following you.");
+                notificationText.setText("Just started following you");
             } else if (notification.getNotificationType() == NotificationModel.COMMENT_NOTIFICATION) {
-                notificationText.setText(" commented on your post.");
-                requestButtons.setVisibility(View.INVISIBLE);
+                notificationText.setText("Just commented on your post");
             } else if (notification.getNotificationType() == NotificationModel.LIKE_NOTIFICATION) {
-                notificationText.setText("like your post");
-                requestButtons.setVisibility(View.INVISIBLE);
-            } else if (notification.getNotificationType() == NotificationModel.ACCEPTED_NOTIFICATION) {
-                rejectRequest.setVisibility(View.GONE);
-                txtAccept.setText("Followed");
-            } else if(notification.getNotificationType() == NotificationModel.REJECTED_NOTIFICATION){
-                acceptRequest.setVisibility(View.GONE);
-                txtReject.setText("Ignored");
-            } else {
-                notificationText.setText(" followed you back.");
-                acceptRequest.setVisibility(View.GONE);
-                rejectRequest.setVisibility(View.GONE);
+                notificationText.setText("Just liked your post");
             }
 
-            acceptRequest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot documentSnapshot = task.getResult();
-                                //update notification to accepted
-                                FirebaseOperations.updateNotification(notification.getNotificationId(), NotificationModel.ACCEPTED_NOTIFICATION, db);
-                                rejectRequest.setVisibility(View.GONE);
-                                txtAccept.setText("Followed");
-                                //add sender to current users following
-                                FirebaseOperations.addFollow(user.getUid(), notification.getFromUserId(), documentSnapshot.getString("displayName"), NotificationModel.FOLLOWINGS, db);
-                                //add current user to senders follower
-                                FirebaseOperations.addFollow(notification.getFromUserId(), user.getUid(), user.getDisplayName(), NotificationModel.FOLLOWERS, db);
-
-                                //add followed back notification to sender
-                                NotificationModel newNotification = new NotificationModel(notification.getFromUserId(), user.getUid(), NotificationModel.FOLLOWED_BACK_NOTIFICATION);
-                                FirebaseOperations.addNotification(newNotification,db);
-                            }
-                        }
-                    });
-
-                }
-            });
-
-            rejectRequest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //update notification to rejected
-                    FirebaseOperations.updateNotification(notification.getNotificationId(), NotificationModel.REJECTED_NOTIFICATION, db);
-                    acceptRequest.setVisibility(View.GONE);
-                    txtReject.setText("Ignored");
-                }
-            });
 
             notificationLayout.setOnClickListener(new View.OnClickListener() {
                 @Override

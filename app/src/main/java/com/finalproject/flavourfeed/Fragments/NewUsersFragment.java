@@ -35,7 +35,7 @@ public class NewUsersFragment extends Fragment {
         View view = inflater.inflate(R.layout.new_users_fragment, container, false);
         db = FirebaseFirestore.getInstance();
         newUsersRecyclerView = view.findViewById(R.id.newUsersRecyclerView);
-        dashboardUserAdapter = new DashboardUserAdapter(DashboardUserModel.itemCallback);
+        dashboardUserAdapter = new DashboardUserAdapter(DashboardUserModel.itemCallback,false);
         newUsersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         newUsersRecyclerView.setAdapter(dashboardUserAdapter);
         getAllData();

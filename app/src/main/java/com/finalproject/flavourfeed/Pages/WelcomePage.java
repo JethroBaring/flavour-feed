@@ -10,10 +10,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 
-import com.finalproject.flavourfeed.BannedPage;
 import com.finalproject.flavourfeed.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +29,7 @@ public class WelcomePage extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +57,7 @@ public class WelcomePage extends AppCompatActivity {
                         db.collection("userInformation").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                if(Boolean.TRUE.equals(documentSnapshot.getBoolean("ban"))) {
+                                if (Boolean.TRUE.equals(documentSnapshot.getBoolean("ban"))) {
                                     startActivity(new Intent(getApplicationContext(), BannedPage.class));
                                 } else {
                                     startActivity(new Intent(getApplicationContext(), MainPage.class));
@@ -66,6 +69,7 @@ public class WelcomePage extends AppCompatActivity {
                 } else {
                     startActivity(new Intent(getApplicationContext(), LogInPage.class));
                 }
+
             }
         }, 2000);
     }
@@ -73,5 +77,16 @@ public class WelcomePage extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        SharedPreferences sharedPreferences = getSharedPreferences("theme", MODE_PRIVATE);
+        if (sharedPreferences.getInt("theme", 1) == 1) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+    }
+
+    @Override
+    public void recreate() {
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

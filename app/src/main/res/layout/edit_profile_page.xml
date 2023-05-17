@@ -7,13 +7,16 @@
     tools:context=".Pages.EditProfilePage">
 
     <RelativeLayout
+        android:id="@+id/btnSelectBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/backgroundPicture"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
-            android:src="@color/flutter_dark" />
+            android:src="@color/flutter_dark"
+            android:scaleType="fitXY"
+            />
         <ImageView
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"

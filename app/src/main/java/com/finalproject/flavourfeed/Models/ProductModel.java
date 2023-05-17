@@ -14,6 +14,7 @@ public class ProductModel {
     public String name;
     public String category;
     public int price;
+    public int sold;
 
     public ProductModel() {
     }
@@ -24,6 +25,15 @@ public class ProductModel {
         this.name = name;
         this.category = category;
         this.price = price;
+    }
+
+
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
     }
 
     public String getSellerId() {
@@ -84,7 +94,7 @@ public class ProductModel {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         ProductModel productModel = (ProductModel) obj;
-        return Objects.equals(productId, productModel.getProductId());
+        return Objects.equals(productId, productModel.productId);
     }
 
     public static DiffUtil.ItemCallback<ProductModel> itemCallback = new DiffUtil.ItemCallback<ProductModel>() {

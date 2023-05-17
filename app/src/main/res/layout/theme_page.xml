@@ -6,81 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".Pages.ThemePage">
 
-    <ImageView
-        android:id="@+id/icnSettingsBack"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/backicon"
-        android:layout_marginStart="@dimen/_10sdp" />
-
-    <TextView
-        android:id="@+id/txtTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:text="Theme"
-        android:fontFamily="@font/sfprodisplaymedium"
-        android:textSize="@dimen/_15ssp"
-        android:layout_centerHorizontal="true" />
-
-    <ScrollView
+    <RelativeLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/txtTheme"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp">
+        android:layout_height="@dimen/_40sdp">
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checkedButton="@+id/radio_button_1">
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:clickable="true"
+            android:src="@drawable/newbackicon" />
 
-            <RadioButton
-                android:id="@+id/lightTheme"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/sfprodisplayregular"
-                android:text="Light"
-                android:textColor="@color/lightgray"
-                android:textSize="@dimen/_14ssp" />
+        <TextView
+            android:id="@+id/txtDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sfproroundedmedium"
+            android:text="Theme"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
 
-            <RadioButton
-                android:id="@+id/darkTheme"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/sfprodisplayregular"
-                android:text="Dark"
-                android:textColor="@color/lightgray"
-                android:textSize="@dimen/_14ssp" />
 
-            <RadioButton
-                android:id="@+id/tokyoNightTheme"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/sfprodisplayregular"
-                android:text="Tokyo Night"
-                android:textColor="@color/lightgray"
-                android:textSize="@dimen/_14ssp" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topBar"
+        android:layout_margin="@dimen/_10sdp"
+        android:checkedButton="@+id/radio_button_1">
 
-            <RadioButton
-                android:id="@+id/synthWaveTheme"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/sfprodisplayregular"
-                android:text="Synthwave"
-                android:textColor="@color/lightgray"
-                android:textSize="@dimen/_14ssp" />
+        <RadioButton
+            android:id="@+id/lightTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/sfprodisplayregular"
+            android:text="Light"
+            android:textColor="@color/lightgray"
+            android:textSize="@dimen/_14ssp" />
 
-            <RadioButton
-                android:id="@+id/deepOceanTheme"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/sfprodisplayregular"
-                android:text="Deep Ocean"
-                android:textColor="@color/lightgray"
-                android:textSize="@dimen/_14ssp" />
-        </RadioGroup>
-    </ScrollView>
+        <RadioButton
+            android:id="@+id/darkTheme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/sfprodisplayregular"
+            android:text="Dark"
+            android:textColor="@color/lightgray"
+            android:textSize="@dimen/_14ssp" />
+    </RadioGroup>
+
 </RelativeLayout>

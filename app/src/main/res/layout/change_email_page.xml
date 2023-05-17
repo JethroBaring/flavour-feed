@@ -6,21 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Pages.ChangeEmailPage">
 
-    <ImageView
-        android:id="@+id/icnSettingsBack"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:src="@drawable/backicon" />
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp">
+        <ImageView
+            android:id="@+id/btnClosePost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/newbackicon" />
 
-    <TextView
-        android:id="@+id/txtTheme"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/sfprodisplaymedium"
-        android:text="Change Email"
-        android:textSize="@dimen/_15ssp" />
+        <TextView
+            android:id="@+id/postDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sfproroundedmedium"
+            android:text="Change Email"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -37,6 +43,8 @@
             android:src="@drawable/logoblue" />
 
         <TextView
+            android:fontFamily="@font/sfproroundedregular"
+            android:textSize="@dimen/_12ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fill in to continue" />
@@ -66,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -90,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -124,7 +132,7 @@
     <Button
         android:id="@+id/btnChangeEmail"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="@dimen/_43sdp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/_100sdp"

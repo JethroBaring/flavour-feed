@@ -22,6 +22,7 @@
                 android:gravity="center"
                 >
                 <TextView
+                    android:id="@+id/usersToday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10"
@@ -50,6 +51,7 @@
                 android:gravity="center"
                 >
                 <TextView
+                    android:id="@+id/totalPosts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10"
@@ -59,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Active users"/>
+                    android:text="Total posts"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
@@ -86,6 +88,7 @@
             android:gravity="center"
             >
             <TextView
+                android:id="@+id/totalUsers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10"

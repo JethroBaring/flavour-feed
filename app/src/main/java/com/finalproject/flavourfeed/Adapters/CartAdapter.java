@@ -37,7 +37,7 @@ public class CartAdapter extends ListAdapter<CartItemModel, CartAdapter.CartView
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new CartViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_card, parent, false));
+        return new CartViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_card2, parent, false));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class CartAdapter extends ListAdapter<CartItemModel, CartAdapter.CartView
                     }
                 }
             });
-            productPrice.setText(Integer.toString(cartItemModel.getPrice()));
+            productPrice.setText(String.format("%,d",cartItemModel.getPrice()));
             quantity.setText(Integer.toString(cartItemModel.getQuantity()));
             decrementQuantity.setOnClickListener(new View.OnClickListener() {
                 @Override

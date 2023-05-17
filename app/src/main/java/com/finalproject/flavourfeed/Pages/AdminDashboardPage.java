@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.finalproject.flavourfeed.Fragments.AdminThemeFragment;
 import com.finalproject.flavourfeed.Fragments.AdminDashboardFragment;
 import com.finalproject.flavourfeed.Fragments.AdminOrdersFragment;
 import com.finalproject.flavourfeed.Fragments.AdminProductsFragment;
@@ -29,6 +30,7 @@ public class AdminDashboardPage extends AppCompatActivity {
     AdminUsersFragment adminUsersFragment = new AdminUsersFragment();
     AdminProductsFragment adminProductsFragment = new AdminProductsFragment();
     AdminOrdersFragment adminOrdersFragment = new AdminOrdersFragment();
+    AdminThemeFragment adminTheme = new AdminThemeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +46,16 @@ public class AdminDashboardPage extends AppCompatActivity {
         LinearLayout products = findViewById(R.id.products);
         LinearLayout orders = findViewById(R.id.orders);
         LinearLayout logout = findViewById(R.id.logout);
+        LinearLayout theme = findViewById(R.id.theme);
 
         changeFragment(adminDashboardFragment);
 
         menu.setOnClickListener(View -> openDrawer(drawerLayout));
-        dashboard.setOnClickListener(view -> onClick(dashboard));
-        users.setOnClickListener(view -> onClick(users));
-        products.setOnClickListener(view -> onClick(products));
-        orders.setOnClickListener(view -> onClick(orders));
+        dashboard.setOnClickListener(this::onClick);
+        users.setOnClickListener(this::onClick);
+        products.setOnClickListener(this::onClick);
+        orders.setOnClickListener(this::onClick);
+        theme.setOnClickListener(this::onClick);
         logout.setOnClickListener(view -> {
             mAuth.signOut();
             startActivity(new Intent(getApplicationContext(), LogInPage.class));
@@ -96,6 +100,10 @@ public class AdminDashboardPage extends AppCompatActivity {
             case R.id.orders:
                 changeFragment(adminOrdersFragment);
                 break;
+            case R.id.theme:
+                changeFragment(adminTheme);
+                break;
+
         }
     }
 

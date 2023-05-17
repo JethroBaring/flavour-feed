@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.finalproject.flavourfeed.ActiveUsersFragment;
-import com.finalproject.flavourfeed.BannedUsersFragment;
 import com.finalproject.flavourfeed.R;
 import com.google.android.material.tabs.TabLayout;
 

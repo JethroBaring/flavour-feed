@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,12 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -43,7 +40,10 @@ public class EditProfilePage extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 
     Uri imageUri;
+
+    Uri backgroundUri;
     ImageView profileImage;
+    ImageView backgroundImage;
     TextInputEditText txtInptNewDisplayName;
     FirebaseStorage storage;
     StorageReference storageRef;
@@ -53,7 +53,8 @@ public class EditProfilePage extends AppCompatActivity {
     FirebaseFirestore db;
     DocumentReference userRef;
     String imageUrl;
-
+    String backgroundUrl;
+    boolean isProfile;
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class EditProfilePage extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference();
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
@@ -71,31 +73,28 @@ public class EditProfilePage extends AppCompatActivity {
         Glide.with(this)
                 .load(user.getPhotoUrl())
                 .into(profileImage);
-        findViewById(R.id.btnSelectPicture).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFileChooser();
-            }
+        ImageView btnClose = findViewById(R.id.btnClose);
+        ImageView btnSave = findViewById(R.id.btnSave);
+        backgroundImage = findViewById(R.id.backgroundPicture);
+        RelativeLayout btnSelectPicture = findViewById(R.id.btnSelectPicture);
+        RelativeLayout btnSelectBackground = findViewById(R.id.btnSelectBackground);
+        db.collection("userInformation").document(user.getUid()).get().addOnSuccessListener(documentSnapshot -> {
+            Glide.with(this).load(documentSnapshot.getString("backgroundUrl")).into(backgroundImage);
         });
+        btnSelectPicture.setOnClickListener(v -> openFileChooser(true));
+        btnSelectBackground.setOnClickListener(v -> openFileChooser(false));
+        btnClose.setOnClickListener(v -> EditProfilePage.super.onBackPressed());
+        btnSave.setOnClickListener(v -> {
+            saveProfileImage();
+            saveBackgroundImage();
 
-        findViewById(R.id.btnClose).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditProfilePage.super.onBackPressed();
-            }
-        });
-
-        findViewById(R.id.btnSave).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveChanges();
-            }
         });
 
 
     }
 
-    private void openFileChooser() {
+    private void openFileChooser(boolean x) {
+        isProfile = x;
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -107,12 +106,17 @@ public class EditProfilePage extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            profileImage.setImageURI(imageUri);
+            if(isProfile) {
+                imageUri = data.getData();
+                profileImage.setImageURI(imageUri);
+            } else {
+                backgroundUri = data.getData();
+                backgroundImage.setImageURI(backgroundUri);
+            }
         }
     }
 
-    private void saveChanges() {
+    private void saveProfileImage() {
         if (imageUri != null) {
             StorageReference fileReference = storageRef.child("images/" + UUID.randomUUID().toString());
 
@@ -179,6 +183,27 @@ public class EditProfilePage extends AppCompatActivity {
                     }
                 }
             });
+        }
+    }
+
+    public void saveBackgroundImage() {
+        if (backgroundUri != null) {
+            StorageReference fileReference = storageRef.child("background/" + UUID.randomUUID().toString());
+
+            fileReference.putFile(backgroundUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Task<Uri> downloadUrl = fileReference.getDownloadUrl();
+                            downloadUrl.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    backgroundUrl = uri.toString();
+                                    db.collection("userInformation").document(user.getUid()).update("backgroundUrl",backgroundUrl);
+                                }
+                            });
+                        }
+                    });
         }
     }
 }

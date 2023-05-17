@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Fragments;
 
 import android.os.Bundle;
 
@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.finalproject.flavourfeed.Adapters.BanUnbanAdapter;
 import com.finalproject.flavourfeed.Models.DashboardUserModel;
+import com.finalproject.flavourfeed.R;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -20,27 +22,27 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BannedUsersFragment extends Fragment implements BanUnbanAdapter.BanUnbanInterface {
+
+public class ActiveUsersFragment extends Fragment implements BanUnbanAdapter.BanUnbanInterface {
     FirebaseFirestore db;
-    RecyclerView bannedUsersRecyclerView;
+    RecyclerView activeUsersRecyclerView;
     BanUnbanAdapter banUnbanAdapter;
     ArrayList<DashboardUserModel> users;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.banned_users_fragment, container, false);
+        View view = inflater.inflate(R.layout.active_users_fragment, container, false);
         db = FirebaseFirestore.getInstance();
-        bannedUsersRecyclerView = view.findViewById(R.id.bannedUsersRecyclerView);
-        banUnbanAdapter = new BanUnbanAdapter(DashboardUserModel.itemCallback, this, false);
-        bannedUsersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        bannedUsersRecyclerView.setAdapter(banUnbanAdapter);
+        activeUsersRecyclerView = view.findViewById(R.id.activeUsersRecyclerView);
+        banUnbanAdapter = new BanUnbanAdapter(DashboardUserModel.itemCallback, this,true);
+        activeUsersRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        activeUsersRecyclerView.setAdapter(banUnbanAdapter);
         getAllData();
         return view;
     }
 
     public void getAllData() {
-        db.collection("userInformation").whereEqualTo("ban", true).addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("userInformation").whereEqualTo("ban",false).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 List<DashboardUserModel> data = value.toObjects(DashboardUserModel.class);
@@ -55,4 +57,5 @@ public class BannedUsersFragment extends Fragment implements BanUnbanAdapter.Ban
     public void OnViewInformationClick() {
 
     }
+
 }

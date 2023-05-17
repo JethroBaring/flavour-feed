@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,15 +55,13 @@ public class ChatRoomAdapter extends ListAdapter<ChatRoomModel, ChatRoomAdapter.
     class ChatRoomViewHolder extends RecyclerView.ViewHolder {
         ImageView chatRoomProfile;
         TextView chatRoomDisplayName;
-        TextView lastModified;
         TextView lastMessage;
 
-        CardView chatRoom;
+        LinearLayout chatRoom;
         public ChatRoomViewHolder(@NonNull View itemView) {
             super(itemView);
             chatRoomProfile = itemView.findViewById(R.id.chatRoomProfile);
             chatRoomDisplayName = itemView.findViewById(R.id.chatRoomDisplayName);
-            lastModified = itemView.findViewById(R.id.lastModified);
             lastMessage = itemView.findViewById(R.id.lastMessage);
             chatRoom = itemView.findViewById(R.id.chatRoom);
         }
@@ -90,18 +89,6 @@ public class ChatRoomAdapter extends ListAdapter<ChatRoomModel, ChatRoomAdapter.
                         DocumentSnapshot snapshot = task.getResult();
                         Glide.with(itemView.getContext()).load(snapshot.getString("profileUrl")).into(chatRoomProfile);
                         chatRoomDisplayName.setText(snapshot.getString("displayName"));
-                    }
-                }
-            });
-
-            db.collection("userInformation").document(user.getUid()).collection("chatRoom").document(chatRoomId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot snapshot = task.getResult();
-                        ChatRoomModel chatRoom = snapshot.toObject(ChatRoomModel.class);
-                        SimpleDateFormat formatter = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss a");
-                        lastModified.setText(formatter.format(chatRoom.getLastModified()));
                     }
                 }
             });

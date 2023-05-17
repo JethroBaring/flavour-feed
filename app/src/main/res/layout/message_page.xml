@@ -6,23 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".Pages.MessagePage">
 
-    <ImageView
-        android:id="@+id/icnSettingsBack"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/backicon"
-        android:layout_marginStart="@dimen/_10sdp" />
-    <TextView
-        android:id="@+id/txtDisplayName"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:text="Display Name"
-        android:fontFamily="@font/sfprodisplaymedium"
-        android:textSize="@dimen/_15ssp"
-        android:layout_centerHorizontal="true" />
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp">
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/newbackicon" />
+
+        <TextView
+            android:id="@+id/txtDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sfproroundedmedium"
+            android:text="Display name's post"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/txtDisplayName"
+        android:layout_below="@id/topBar"
         android:id="@+id/messageRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,6 +44,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:gravity="center"
         android:orientation="horizontal">
 

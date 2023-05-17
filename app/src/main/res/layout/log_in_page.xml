@@ -27,10 +27,12 @@
             android:layout_height="wrap_content"
             android:text="WELCOME BACK!"
             android:textAlignment="center"
-            android:fontFamily="@font/sfprodisplayblack"
-            android:textSize="@dimen/_20ssp"
+            android:fontFamily="@font/sfproroundedblack"
+            android:textSize="@dimen/_22ssp"
             />
         <TextView
+            android:fontFamily="@font/sfproroundedregular"
+            android:textSize="@dimen/_12ssp"
             android:layout_marginTop="@dimen/_minus10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -87,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:fontFamily="@font/sfprodisplayblack"
+                android:fontFamily="@font/sfproroundedblack"
                 android:text="Forgot password?"
                 android:textColor="@color/flutter_sky"
                 />
@@ -112,11 +114,11 @@
     <Button
         android:id="@+id/btnLogIn"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_46sdp"
+        android:layout_height="@dimen/_43sdp"
         android:background="@drawable/roundeddefault"
-        android:fontFamily="@font/sfprodisplaybold"
+        android:fontFamily="@font/sfproroundedbold"
         android:text="LOGIN"
-        android:textSize="@dimen/_15ssp"
+        android:textSize="@dimen/_12ssp"
         app:backgroundTint="@null"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_100sdp"
@@ -136,16 +138,18 @@
         android:layout_centerHorizontal="true">
 
         <TextView
+            android:textSize="@dimen/_12ssp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sfprodisplayregular"
+            android:fontFamily="@font/sfproroundedregular"
             android:text="New user? " />
 
         <TextView
+            android:textSize="@dimen/_12ssp"
             android:id="@+id/lnkSignUpPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sfprodisplayblack"
+            android:fontFamily="@font/sfproroundedblack"
             android:text="Sign up"
             android:textColor="@color/flutter_sky"
             />

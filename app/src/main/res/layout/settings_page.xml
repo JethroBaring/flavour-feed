@@ -5,21 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Pages.SettingsPage">
-    <ImageView
-        android:id="@+id/icnSettingsBack"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/backicon"
-        android:layout_marginStart="@dimen/_10sdp"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:text="Settings"
-        android:fontFamily="@font/sfprodisplaymedium"
-        android:textSize="@dimen/_15ssp"
-        android:layout_centerHorizontal="true"
-        />
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/newbackicon" />
+
+        <TextView
+            android:id="@+id/postDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sfproroundedmedium"
+            android:text="Settings"
+            android:textSize="@dimen/_15ssp" />
+    </RelativeLayout>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -47,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/sfprodisplaymedium"
+            android:fontFamily="@font/sfproroundedmedium"
             android:gravity="center"
             android:text="Change Email"
             android:textSize="@dimen/_15ssp" />
@@ -70,7 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/sfprodisplaymedium"
+            android:fontFamily="@font/sfproroundedmedium"
             android:gravity="center"
             android:text="Change Password"
             android:textSize="@dimen/_15ssp" />
@@ -89,13 +95,13 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/_5sdp"
-            android:src="@drawable/deleteicon" />
+            android:src="@drawable/newtrashicon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/sfprodisplaymedium"
+            android:fontFamily="@font/sfproroundedmedium"
             android:gravity="center"
             android:text="Delete Account"
             android:textSize="@dimen/_15ssp" />
@@ -118,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/sfprodisplaymedium"
+            android:fontFamily="@font/sfproroundedmedium"
             android:gravity="center"
             android:text="Theme"
             android:textSize="@dimen/_15ssp" />
@@ -141,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/sfprodisplaymedium"
+            android:fontFamily="@font/sfproroundedmedium"
             android:gravity="center"
             android:text="Log Out"
             android:textSize="@dimen/_15ssp" />

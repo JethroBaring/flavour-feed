@@ -1,12 +1,11 @@
 package com.finalproject.flavourfeed.Adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -19,20 +18,13 @@ import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Models.ProductModel;
 import com.finalproject.flavourfeed.R;
 
-import org.w3c.dom.Text;
 
-import java.util.List;
-
-
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class ProductAdapter extends ListAdapter<ProductModel, ProductAdapter.ProductViewHolder> {
 
     ProductClickInterface productClickInterface;
-    List<ProductModel> products;
-    Context context;
 
-    public ProductAdapter(Context context, List<ProductModel> products, ProductClickInterface productClickInterface) {
-        this.context = context;
-        this.products = products;
+    public ProductAdapter(@NonNull DiffUtil.ItemCallback<ProductModel> diffCallback, ProductClickInterface productClickInterface) {
+        super(diffCallback);
         this.productClickInterface = productClickInterface;
     }
 
@@ -44,13 +36,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        ProductModel productModel = products.get(position);
+        ProductModel productModel = getItem(position);
         holder.bind(productModel);
-    }
-
-    @Override
-    public int getItemCount() {
-        return products.size();
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder {

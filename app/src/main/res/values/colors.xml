@@ -6,18 +6,19 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#1D1D1F</color>
-    <color name="white">#F5F5F7</color>
+    <color name="white">#FFFFFF</color>
     <color name="red">#FF3131</color>
     <color name="pink">#FF5EC1</color>
     <color name="light_blue_400">#FF29B6F6</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="lightgray">#757575</color>
     <color name="flutter_sky">#027DFD</color>
-    <color name="flutter_dark">#1F2233</color>
+    <color name="flutter_dark">#0c0a2f</color>
     <color name="lightestgray">#F0F0F0</color>
     <color name="bronze">#CD7F32</color>
     <color name="silver">#C0C0C0</color>
     <color name="gold">#FFD700</color>
     <color name="hotpink">#FF69B4</color>
-    <color name="purewhite">#FFFFFF</color>
+    <color name="light">#f1f3f8</color>
+    <color name="lightfordark">#1c1c3e</color>
 </resources>

@@ -22,6 +22,10 @@ public class FirebaseOperations {
         firebaseFirestore.collection("userInformation").document(toUserId).collection(type).document(fromUserId).set(newFriendRequest);
     }
 
+    public static void removeFollow(String userId, String toBeRemovedId,String type, FirebaseFirestore firebaseFirestore) {
+        firebaseFirestore.collection("userInformation").document(userId).collection(type).document(toBeRemovedId).delete();
+    }
+
     public static void addNotification(NotificationModel notification, FirebaseFirestore firebaseFirestore) {
         Map<String, Object> newNotification = new HashMap<>();
         newNotification.put("toUserId", notification.getToUserId());

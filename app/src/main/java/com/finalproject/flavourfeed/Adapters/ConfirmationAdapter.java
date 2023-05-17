@@ -28,7 +28,7 @@ public class ConfirmationAdapter extends RecyclerView.Adapter<ConfirmationAdapte
     @Override
     public ConfirmationViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.confirmation_card, parent, false);
+        View view = inflater.inflate(R.layout.confirmation_card2, parent, false);
         return new ConfirmationAdapter.ConfirmationViewholder(view);
     }
 

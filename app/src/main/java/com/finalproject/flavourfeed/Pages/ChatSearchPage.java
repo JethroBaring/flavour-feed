@@ -49,7 +49,7 @@ public class ChatSearchPage extends AppCompatActivity {
         results = new ArrayList<>();
         CollectionReference usersRef = db.collection("userInformation");
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-
+        search.requestFocus();
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {

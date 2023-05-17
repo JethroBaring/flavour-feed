@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.finalproject.flavourfeed.Adapters.MessageAdapter;
@@ -52,6 +53,7 @@ public class MessagePage extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         user = mAuth.getCurrentUser();
         String otherUserId = getIntent().getStringExtra("otherUserId");
+        ImageView btnBack = findViewById(R.id.btnBack);
         messageRecyclerView = findViewById(R.id.messageRecyclerView);
         messageAdapter = new MessageAdapter(MessageModel.itemCallback);
         messageRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -60,7 +62,7 @@ public class MessagePage extends AppCompatActivity {
         getAllData(otherUserId);
 
         TextView otherUserDisplayName = findViewById(R.id.txtDisplayName);
-
+        btnBack.setOnClickListener(v -> super.onBackPressed());
         db.collection("userInformation").document(otherUserId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {

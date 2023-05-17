@@ -9,17 +9,18 @@
     <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/_40sdp">
 
         <TextView
+            android:id="@+id/txtDisplayName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/sfproroundedmedium"
             android:text="Dashboard"
             android:textSize="@dimen/_15ssp" />
     </RelativeLayout>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/adminDashboardLayout"
         style="@style/CustomTabLayout"
@@ -39,10 +40,11 @@
             android:layout_height="wrap_content"
             android:text="Marketplace" />
     </com.google.android.material.tabs.TabLayout>
+
     <FrameLayout
         android:id="@+id/tabContainer"
-        android:layout_below="@id/adminDashboardLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/adminDashboardLayout" />
 
 </RelativeLayout>

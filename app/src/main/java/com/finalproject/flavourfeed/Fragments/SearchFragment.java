@@ -33,15 +33,15 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchFragment extends Fragment{
+public class SearchFragment extends Fragment {
     FirebaseFirestore db;
     List<ResultModel> results;
     FirebaseUser user;
 
-    ViewUserProfileFragment viewUserProfileFragment = new ViewUserProfileFragment();
+    NewViewUserProfileFragment viewUserProfileFragment = new NewViewUserProfileFragment();
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.search_fragment, container, false);
         EditText search = view.findViewById(R.id.search);
         RecyclerView searchRecyclerView = view.findViewById(R.id.searchRecyclerView);
@@ -51,14 +51,14 @@ public class SearchFragment extends Fragment{
         results = new ArrayList<>();
         CollectionReference usersRef = db.collection("userInformation");
         InputMethodManager inputMethodManager = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-
+        search.requestFocus();
         search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_SEARCH  || keyEvent.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
+                if (i == EditorInfo.IME_ACTION_SEARCH || keyEvent.getKeyCode() == KeyEvent.KEYCODE_SEARCH) {
                     inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
                     String toBeSearch = search.getText().toString();
-                    if(!toBeSearch.isEmpty()) {
+                    if (!toBeSearch.isEmpty()) {
 
                         Query query = usersRef.orderBy("displayName").startAt(toBeSearch).endAt(toBeSearch + "\uf8ff").limit(10);
                         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -68,7 +68,7 @@ public class SearchFragment extends Fragment{
                                     results.clear();
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         String userId = document.getString("userId");
-                                        if(!userId.equals(user.getUid()))
+                                        if (!userId.equals(user.getUid()))
                                             results.add(new ResultModel(userId));
                                     }
                                     search.setText("");
@@ -77,7 +77,7 @@ public class SearchFragment extends Fragment{
                                         @Override
                                         public void viewUserProfile(String fromUserId) {
                                             Bundle bundle = new Bundle();
-                                            bundle.putString("fromUserId",fromUserId);
+                                            bundle.putString("fromUserId", fromUserId);
                                             viewUserProfileFragment.setArguments(bundle);
                                             getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, viewUserProfileFragment).commit();
                                         }

@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Models.DashboardUserModel;
+import com.finalproject.flavourfeed.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BanUnbanAdapter extends ListAdapter<DashboardUserModel, BanUnbanAdapter.BanUnbanViewHolder> {
@@ -61,6 +63,11 @@ public class BanUnbanAdapter extends ListAdapter<DashboardUserModel, BanUnbanAda
             banUser.setOnClickListener(view -> {
                 db.collection("userInformation").document(dashboardUserModel.getUserId()).update("ban", ban);
             });
+            displayName.setText(dashboardUserModel.getDisplayName());
+            db.collection("userInformation").document(dashboardUserModel.getUserId()).get().addOnSuccessListener(documentSnapshot ->  {
+               email.setText(documentSnapshot.getString("email"));
+            });
+            Glide.with(itemView.getContext()).load(dashboardUserModel.getProfileUrl()).into(profile);
         }
     }
 

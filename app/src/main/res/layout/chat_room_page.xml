@@ -6,40 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".Pages.ChatRoomPage">
 
-    <ImageView
-        android:id="@+id/icnSettingsBack"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/backicon"
-        android:layout_marginStart="@dimen/_10sdp" />
-    <ImageView
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:id="@+id/icnSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:src="@drawable/newsearchicon"
-        android:layout_alignParentEnd="true"
-        />
-    <LinearLayout
-        android:id="@+id/txtChats"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        >
-        <TextView
+    <RelativeLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp">
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chats"
-            android:fontFamily="@font/sfprodisplayregular"
-            android:textSize="@dimen/_18ssp"
-            android:layout_centerHorizontal="true"
-            />
-    </LinearLayout>
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/newbackicon" />
+
+        <TextView
+            android:id="@+id/txtDisplayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/sfproroundedmedium"
+            android:text="Messages"
+            android:textSize="@dimen/_15ssp" />
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/icnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/newsearchiconsmall" />
+    </RelativeLayout>
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@id/txtChats"
+        android:layout_below="@id/topBar"
         android:id="@+id/chatListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

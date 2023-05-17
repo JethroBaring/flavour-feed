@@ -26,10 +26,12 @@
             android:layout_height="wrap_content"
             android:text="WELCOME!"
             android:textAlignment="center"
-            android:fontFamily="@font/sfprodisplayblack"
-            android:textSize="@dimen/_20ssp"
+            android:fontFamily="@font/sfproroundedblack"
+            android:textSize="@dimen/_22ssp"
             />
         <TextView
+            android:fontFamily="@font/sfproroundedregular"
+            android:textSize="@dimen/_12ssp"
             android:layout_marginTop="@dimen/_minus10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -84,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:textSize="@dimen/_15ssp"
+                android:textSize="@dimen/_13ssp"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -117,7 +119,7 @@
     <Button
         android:id="@+id/btnSignUp"
         android:layout_width="@dimen/_250sdp"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="@dimen/_43sdp"
         android:background="@drawable/roundeddefault"
         android:fontFamily="@font/sfprodisplaybold"
         android:text="SIGNUP"
@@ -139,14 +141,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sfprodisplayregular"
+            android:fontFamily="@font/sfproroundedregular"
+            android:textSize="@dimen/_12ssp"
             android:text="Already have account? " />
 
         <TextView
             android:id="@+id/lnkLogInPage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/sfprodisplayblack"
+            android:fontFamily="@font/sfproroundedblack"
+            android:textSize="@dimen/_12ssp"
             android:text="Login"
             android:textColor="@color/flutter_sky"
             />

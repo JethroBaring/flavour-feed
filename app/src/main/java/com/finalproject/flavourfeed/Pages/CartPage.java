@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.finalproject.flavourfeed.Adapters.CartAdapter;
@@ -39,7 +41,7 @@ public class CartPage extends AppCompatActivity implements CartAdapter.CartCheck
     CartAdapter cartAdapter;
 
     ArrayList<CartItemModel> toBeCheckOut;
-
+    TextView total;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +54,8 @@ public class CartPage extends AppCompatActivity implements CartAdapter.CartCheck
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         cartRecyclerView.setAdapter(cartAdapter);
         cartRecyclerView.setItemAnimator(new NoChangeAnimation());
-        MaterialCardView btnCheckOut = findViewById(R.id.btnCheckOut);
+        Button btnCheckOut = findViewById(R.id.btnCheckOut);
+        total = findViewById(R.id.total);
         toBeCheckOut = new ArrayList<>();
         getAllData();
 
@@ -62,7 +65,6 @@ public class CartPage extends AppCompatActivity implements CartAdapter.CartCheck
                 if(toBeCheckOut.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please select an item/s for checkout.", Toast.LENGTH_SHORT).show();
                 } else {
-
                     Intent intent = new Intent(getApplicationContext(), ConfirmationPage.class);
                     intent.putExtra("orderList", toBeCheckOut);
                     startActivity(intent);
@@ -96,6 +98,11 @@ public class CartPage extends AppCompatActivity implements CartAdapter.CartCheck
                 } else {
                     toBeCheckOut.remove(cartItemModel);
                 }
+                int t = 0;
+                for(CartItemModel a: toBeCheckOut) {
+                    t+=(a.getPrice()*a.getQuantity());
+                }
+                total.setText(String.format("%,d",t));
             }
         });
     }

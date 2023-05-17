@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,13 +41,11 @@ public class ProductPage extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
         ImageView productPicture = findViewById(R.id.productPicture);
-        ImageView sellerProfile = findViewById(R.id.sellerProfile);
-        TextView storeName = findViewById(R.id.storeName);
         TextView productName = findViewById(R.id.productName);
         TextView productPrice = findViewById(R.id.productPrice);
         TextView productCategory = findViewById(R.id.productCategory);
         EditText quantity = findViewById(R.id.quantity);
-        MaterialCardView btnAddToCart = findViewById(R.id.btnAddToCart);
+        Button btnAddToCart = findViewById(R.id.btnAddToCart);
         String productId = getIntent().getStringExtra("productId");
         String sellerId = getIntent().getStringExtra("sellerId");
         ImageView decrementQuantity = findViewById(R.id.decrementQuantity);
@@ -109,22 +108,13 @@ public class ProductPage extends AppCompatActivity {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     Glide.with(getApplicationContext()).load(documentSnapshot.getString("photoUrl")).into(productPicture);
                     productName.setText(documentSnapshot.getString("name"));
-                    productPrice.setText(Integer.toString(documentSnapshot.getLong("price").intValue()));
+                    productPrice.setText(String.format("%,d",documentSnapshot.getLong("price").intValue()));
                     productCategory.setText(documentSnapshot.getString("category"));
                 }
             }
         });
 
-        db.collection("userInformation").document(sellerId).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    Glide.with(getApplicationContext()).load(documentSnapshot.getString("profileUrl")).into(sellerProfile);
-                    storeName.setText(documentSnapshot.getString("displayName"));
-                }
-            }
-        });
+
 
     }
 }
