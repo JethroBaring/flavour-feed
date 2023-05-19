@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.finalproject.flavourfeed.R;
-import com.finalproject.flavourfeed.TopProductsFragment;
-import com.finalproject.flavourfeed.TopSpenderFragment;
 import com.finalproject.flavourfeed.Utitilies.CreateChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.tabs.TabLayout;

@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import com.finalproject.flavourfeed.Adapters.BanUnbanAdapter;
 import com.finalproject.flavourfeed.Models.DashboardUserModel;
 import com.finalproject.flavourfeed.R;
-import com.finalproject.flavourfeed.ViewUserInformationPage;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;

@@ -70,7 +70,7 @@ public class MarketplaceFragment extends Fragment implements ProductAdapter.Prod
         productRecyclerView = view.findViewById(R.id.productRecyclerView);
         productAdapter = new ProductAdapter(ProductModel.itemCallback, this);
         productRecyclerView.setAdapter(productAdapter);
-        productRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false));
+        productRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL, false));
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();

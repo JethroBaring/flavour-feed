@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Fragments;
 
 import android.os.Bundle;
 
@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.finalproject.flavourfeed.Adapters.TopProductsAdapter;
 import com.finalproject.flavourfeed.Models.ProductModel;
+import com.finalproject.flavourfeed.R;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;

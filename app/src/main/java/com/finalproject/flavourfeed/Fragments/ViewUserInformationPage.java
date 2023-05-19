@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Fragments;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Adapters.AllPostLikedAdapter;
 import com.finalproject.flavourfeed.Models.PostModel;
 import com.finalproject.flavourfeed.Pages.PostPage;
+import com.finalproject.flavourfeed.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

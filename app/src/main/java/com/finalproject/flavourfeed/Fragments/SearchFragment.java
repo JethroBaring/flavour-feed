@@ -33,7 +33,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements SearchAdapter.SearchResultClickInterface {
     FirebaseFirestore db;
     List<ResultModel> results;
     FirebaseUser user;
@@ -76,12 +76,11 @@ public class SearchFragment extends Fragment {
                                     searchRecyclerView.setAdapter(new SearchAdapter(getContext(), results, new SearchAdapter.SearchResultClickInterface() {
                                         @Override
                                         public void viewUserProfile(String fromUserId) {
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString("fromUserId", fromUserId);
-                                            viewUserProfileFragment.setArguments(bundle);
-                                            getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, viewUserProfileFragment).commit();
+
                                         }
                                     }));
+
+
                                 } else {
                                     notFound.setVisibility(View.VISIBLE);
                                 }
@@ -93,5 +92,13 @@ public class SearchFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void viewUserProfile(String fromUserId) {
+        Bundle bundle = new Bundle();
+        bundle.putString("fromUserId", fromUserId);
+        viewUserProfileFragment.setArguments(bundle);
+        getParentFragmentManager().beginTransaction().replace(R.id.fragmentContainer, viewUserProfileFragment).commit();
     }
 }

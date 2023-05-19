@@ -1,6 +1,5 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Adapters;
 
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.finalproject.flavourfeed.Models.ProductModel;
-
-import org.w3c.dom.Text;
+import com.finalproject.flavourfeed.R;
 
 public class TopProductsAdapter extends ListAdapter<ProductModel, TopProductsAdapter.TopProductsViewHolder> {
     public TopProductsAdapter(@NonNull DiffUtil.ItemCallback<ProductModel> diffCallback) {

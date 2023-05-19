@@ -1,4 +1,4 @@
-package com.finalproject.flavourfeed;
+package com.finalproject.flavourfeed.Fragments;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.finalproject.flavourfeed.Adapters.TopSpenderAdapter;
 import com.finalproject.flavourfeed.Models.TopSpenderModel;
 import com.finalproject.flavourfeed.Models.TransactionModel;
+import com.finalproject.flavourfeed.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
